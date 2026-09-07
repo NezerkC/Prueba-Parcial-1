@@ -53,6 +53,132 @@
             </div>
 
     </header>
+    <main class="container page-content">
+
+        <!-- -----------------
+         NOMBRE:       Hero Banner de Bienvenida y Propuesta de Valor
+         AFECTA A:     <section class="hero-section">
+         QUÉ HACE:     Comunica los 11 años de trayectoria en Viña del Mar e invita al catálogo
+         CÓMO LO HACE: Tag informativo, encabezado h1 enfocado en conversión y enlaces de llamada a la acción
+         ----- -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-tag">Viña del Mar • 11 Años de Trayectoria</div>
+                <h1 class="hero-title">Tu Sonido, Tu Pasión, <span>En Vivo</span>.</h1>
+                <p class="hero-subtitle">
+                    Equipamos a bandas, estudiantes y productores de la V Región y todo Chile con las mejores marcas
+                    mundiales: Fender, Yamaha, Roland, Marshall, Shure y más.
+                </p>
+                <div class="hero-actions">
+                    <a href="pages/productos.html" class="btn btn-primary">Explorar Catálogo Oficial</a>
+                    <a href="pages/nosotros.html" class="btn btn-outline">Conocé Nuestra Tienda</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- -----------------
+         NOMBRE:       Bloque de Beneficios y Garantías Institucionales
+         AFECTA A:     <section class="benefits-section">
+         QUÉ HACE:     Detalla despacho a todo Chile, servicio técnico oficial y asesoría de músicos
+         CÓMO LO HACE: Grilla responsiva de 3 artículos <article> con indicadores numéricos
+         ---- -->
+        <section class="benefits-section" aria-label="Ventajas de comprar en Sonido Vivo">
+            <div class="benefits-grid">
+                <article class="benefit-card">
+                    <span class="benefit-indicator">01</span>
+                    <h3>Despacho a Todo Chile</h3>
+                    <p>Envíos rápidos y asegurados a Viña del Mar, Valparaíso y todas las regiones del país.</p>
+                </article>
+                <article class="benefit-card">
+                    <span class="benefit-indicator">02</span>
+                    <h3>Garantía y Servicio Oficial</h3>
+                    <p>Todos nuestros instrumentos cuentan con garantía técnica y servicio de calibración profesional.
+                    </p>
+                </article>
+                <article class="benefit-card">
+                    <span class="benefit-indicator">03</span>
+                    <h3>Asesoría por Músicos</h3>
+                    <p>Nuestro equipo está integrado por músicos experimentados que te orientarán según tu estilo.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ---------------------
+         NOMBRE:       Muestrario de Instrumentos Destacados
+         AFECTA A:     <section class="featured-section"> (#grid-destacados)
+         QUÉ HACE:     Despliega los 6 instrumentos principales con renderizado dinámico
+         CÓMO LO HACE: Contenedor objetivo ID grid-destacados poblado reactivamente desde catalogo.js
+        ---- -->
+        <section class="featured-section" aria-labelledby="featured-title">
+            <header class="section-header"
+                style="display: flex; justify-content: space-between; align-items: flex-end; flex-direction: row; flex-wrap: wrap;">
+                <div>
+                    <h2 id="featured-title">Instrumentos Destacados</h2>
+                    <p>Una selección de los favoritos de nuestros clientes en stock inmediato.</p>
+                </div>
+                <a href="pages/productos.html" class="btn btn-secondary btn-sm">Ver Todo el Catálogo (51) &rarr;</a>
+            </header>
+
+            <!-- Grilla interactiva poblada por catalogo.js -->
+            <div id="grid-destacados" class="product-grid">
+                <!-- Renderizado dinámico con JS -->
+            </div>
+        </section>
+
+        <!-- =======
+         SECCIÓN PARA OBJETOS DEL USUARIO / PROGRAMADOR
+         ======== -->
+        <section class="custom-objects-section" id="seccion-objetos-propios">
+            <header class="section-header">
+                <h2>Objetos Creados por el Usuario</h2>
+                <p>Espacio normalizado para que el desarrollador inserte sus propios componentes, modelos o colecciones.
+                </p>
+            </header>
+
+            <div class="custom-objects-grid" id="grid-objetos-propios">
+                <article class="custom-card">
+                    <span class="product-code-tag">OBJ-001</span>
+                    <h4>Objeto Base de Demostración</h4>
+                    <p style="color: var(--color-text-muted); font-size: 0.85rem;">Instancia de ejemplo inicial para
+                        verificar la estructura normalizada en el DOM.</p>
+                    <div
+                        style="margin-top: auto; padding-top: 10px; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 700;">$0</span>
+                        <span class="badge">Activo</span>
+                    </div>
+                </article>
+
+                <article class="custom-card placeholder">
+                    <span>+ Espacio disponible para tu siguiente objeto</span>
+                </article>
+            </div>
+        </section>
+
+        <!-- Banner Promocional Academia / Tienda -->
+        <section
+            style="background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 36px 24px; margin: 48px 0; display: flex; flex-direction: column; gap: 16px;">
+            <span class="badge badge-free" style="align-self: flex-start;">Descuento Estudiantes Duoc UC</span>
+            <h2 style="font-size: 1.6rem;">¿Estudiás con nosotros en la V Región?</h2>
+            <p style="color: var(--color-text-muted); max-width: 650px;">
+                Registrate con tu correo <strong>@duoc.cl</strong> o <strong>@profesor.duoc.cl</strong> y accedé a
+                calibraciones gratuitas y precios especiales en accesorios y cuerdas durante todo el semestre académico.
+            </p>
+            <div>
+                <a href="pages/registro.html" class="btn btn-primary">Registrar mi Cuenta</a>
+            </div>
+        </section>
+
+    </main>
+
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>
