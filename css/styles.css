@@ -1,0 +1,93 @@
+:root {
+    /* Lienzo y Superficies */
+    --color-bg: #ffffff;
+    --color-dark: #ffffff;
+    --color-surface: #ffffff;
+    --color-secondary: #fff;
+    --color-surface-hover: #f8fafc;
+
+    /* Sistema de Líneas y Bordes Tenues */
+    --color-border: #e2e8f0;
+    --color-border-subtle: #f1f5f9;
+    --color-border-focus: #0f172a;
+
+    /* Tipografía y Textos Neutros */
+    --color-text-main: #0f172a;
+    --color-text-muted: #64748b;
+    --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    /* Componentes y Acciones Neutras */
+    --color-primary: #0f172a;
+    --color-primary-hover: #334155;
+    --color-secondary: #ffffff;
+    --color-secondary-hover: #f8fafc;
+
+    /* Indicadores de Estado Convencionales */
+    --color-success: #15803d;
+    --color-danger: #b91c1c;
+    --color-warning: #b45309;
+    --color-free: #475569;
+
+    /* Estructura y Espaciado */
+    --max-width: 1200px;
+    /* Ancho de lectura y grilla */
+    --radius-sm: 4px;
+    /* Bordes sutilmente redondeados */
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --shadow-sm: none;
+    /* Eliminación de sombras artificiales */
+    --shadow-card: none;
+    --shadow-hover: none;
+    --transition: all 0.15s ease-in-out;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background-color: var(--color-bg);
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 1rem;
+}
