@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo completo de instrumentos musicales y audio en Sonido Vivo Viña del Mar. Guitarras, bajos, baterías, micrófonos y pedales.">
+  <title>Sonido Vivo | Catálogo Oficial de Instrumentos</title>
+  
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <!-- Cabecera Principal -->
+  <header class="main-header">
+    <div class="container header-content">
+      <a href="../index.html" class="logo" aria-label="Ir a página de inicio">
+        <img src="../assets/img/logo.svg" alt="Sonido Vivo - Instrumentos Musicales">
+      </a>
+
+      <button type="button" class="menu-toggle" aria-label="Abrir menú de navegación">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="productos.html" class="active">Catálogo</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Ingresar</a>
+        <a href="carrito.html" class="cart-btn" aria-label="Ver carrito de compras">
+          <svg class="cart-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="container page-content">
+    
+    <header class="section-header">
+      <h1>Catálogo de Instrumentos &amp; Audio</h1>
+      <p id="catalogo-contador">Explorá nuestras referencias oficiales con garantía y stock en Viña del Mar.</p>
+    </header>
+
+    <div class="catalog-layout">
+      
+      <!-- Barra lateral de filtros y búsqueda -->
+      <aside class="catalog-sidebar" aria-label="Filtros del catálogo">
+        
+        <!-- Buscador en tiempo real -->
+        <div class="filter-group">
+          <label for="buscar-producto">Buscar Instrumento:</label>
+          <input type="text" id="buscar-producto" class="search-input" placeholder="Ej: Fender, Yamaha, Strat, SM58..." autocomplete="off">
+        </div>
+
+        <!-- Filtro por Categorías -->
+        <div class="filter-group">
+          <label>Filtrar por Familia:</label>
+          <div class="category-chips">
+            <button type="button" class="chip active" data-categoria="TODAS">Todas</button>
+            <button type="button" class="chip" data-categoria="Guitarras Acústicas">🎸 Acústicas</button>
+            <button type="button" class="chip" data-categoria="Guitarras Eléctricas">⚡ Eléctricas</button>
+            <button type="button" class="chip" data-categoria="Bajos Eléctricos">🎸 Bajos</button>
+            <button type="button" class="chip" data-categoria="Baterías">🥁 Baterías</button>
+            <button type="button" class="chip" data-categoria="Teclados y Pianos">🎹 Teclados</button>
+            <button type="button" class="chip" data-categoria="Amplificadores">🔊 Amplis</button>
+            <button type="button" class="chip" data-categoria="Micrófonos">🎙️ Micrófonos</button>
+            <button type="button" class="chip" data-categoria="Pedales de Efectos">🎛️ Pedales</button>
+            <button type="button" class="chip" data-categoria="Accesorios">🎼 Accesorios</button>
+            <button type="button" class="chip" data-categoria="Estudio y Grabación">🎧 Estudio</button>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--color-border);">
+          <small style="color: var(--color-text-muted); display: block;">
+            💡 <strong>Consejo del Luthier:</strong> Todos los instrumentos de cuerda salen de tienda con calibración y afinación certificada.
+          </small>
+        </div>
+      </aside>
+
+      <!-- Grilla de Productos Principal -->
+      <section aria-label="Listado de productos">
+        <div id="grid-productos" class="product-grid">
+          <!-- Renderizado dinámico desde catalogo.js -->
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Pie de Página -->
+  <footer class="main-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Sonido Vivo Instrumentos Musicales — Viña del Mar, Chile. Proyecto Parcial 1 (DSY1104).</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/catalogo.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script src="../js/validaciones.js"></script>
+</body>
+</html>
