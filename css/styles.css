@@ -91,3 +91,88 @@ textarea {
     font-family: inherit;
     font-size: 1rem;
 }
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.page-content {
+    flex: 1 0 auto;
+    padding: 32px 16px 48px;
+}
+
+.main-header {
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+}
+
+.logo img {
+    height: 38px;
+    width: auto;
+}
+
+/* Botón menú hamburguesa (visible en móvil) */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1010;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--color-text-main);
+    border-radius: 1px;
+    transition: var(--transition);
+}
+
+.menu-toggle.is-active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.is-active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Navegación móvil colapsable */
+.main-nav {
+    display: none;
+    width: 100%;
+}
+
+.main-nav.is-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 20px 24px;
+}
