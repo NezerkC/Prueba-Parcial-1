@@ -15,12 +15,15 @@
 </head>
 
 <body>
+
+
     <header class="main-header">
         <div class="container header-content">
             <!-- Logotipo Oficial -->
-            <a href="index.html" class="logo">
-                <img src="assets/logo-sonido-vivo.png" alt="Logo Sonido Vivo - Instrumentos Musicales y Audio">
+            <a href="index.html" class="logo" aria-label="Ir a página de inicio de Sonido Vivo">
+                <img src="assets/img/logo.svg" alt="Sonido Vivo - Instrumentos Musicales y Audio">
             </a>
+
             <!-- Botón Menú Hamburguesa para Móviles -->
             <button type="button" class="menu-toggle" aria-label="Abrir menú de navegación">
                 <span></span>
@@ -38,6 +41,7 @@
                     <li><a href="pages/contacto.html">Contacto</a></li>
                 </ul>
             </nav>
+
             <!-- Acciones de Usuario y Carrito -->
             <div class="header-actions">
                 <a href="pages/login.html" class="btn btn-secondary btn-sm">Ingresar</a>
@@ -46,21 +50,20 @@
                         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                         <line x1="3" y1="6" x2="21" y2="6" />
-                        <path d="M16 10a4 4 0 0     1-8 0" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
                     </svg>
                     <span id="cart-count" class="cart-badge">0</span>
                 </a>
             </div>
-
+        </div>
     </header>
+
+    <!-- ========================================================================
+       CONTENIDO PRINCIPAL (MAIN)
+       ======================================================================== -->
     <main class="container page-content">
 
-        <!-- -----------------
-         NOMBRE:       Hero Banner de Bienvenida y Propuesta de Valor
-         AFECTA A:     <section class="hero-section">
-         QUÉ HACE:     Comunica los 11 años de trayectoria en Viña del Mar e invita al catálogo
-         CÓMO LO HACE: Tag informativo, encabezado h1 enfocado en conversión y enlaces de llamada a la acción
-         ----- -->
+
         <section class="hero-section">
             <div class="hero-content">
                 <div class="hero-tag">Viña del Mar • 11 Años de Trayectoria</div>
@@ -76,12 +79,7 @@
             </div>
         </section>
 
-        <!-- -----------------
-         NOMBRE:       Bloque de Beneficios y Garantías Institucionales
-         AFECTA A:     <section class="benefits-section">
-         QUÉ HACE:     Detalla despacho a todo Chile, servicio técnico oficial y asesoría de músicos
-         CÓMO LO HACE: Grilla responsiva de 3 artículos <article> con indicadores numéricos
-         ---- -->
+
         <section class="benefits-section" aria-label="Ventajas de comprar en Sonido Vivo">
             <div class="benefits-grid">
                 <article class="benefit-card">
@@ -103,12 +101,7 @@
             </div>
         </section>
 
-        <!-- ---------------------
-         NOMBRE:       Muestrario de Instrumentos Destacados
-         AFECTA A:     <section class="featured-section"> (#grid-destacados)
-         QUÉ HACE:     Despliega los 6 instrumentos principales con renderizado dinámico
-         CÓMO LO HACE: Contenedor objetivo ID grid-destacados poblado reactivamente desde catalogo.js
-        ---- -->
+
         <section class="featured-section" aria-labelledby="featured-title">
             <header class="section-header"
                 style="display: flex; justify-content: space-between; align-items: flex-end; flex-direction: row; flex-wrap: wrap;">
@@ -125,9 +118,9 @@
             </div>
         </section>
 
-        <!-- =======
+        <!-- ========================================================================
          SECCIÓN PARA OBJETOS DEL USUARIO / PROGRAMADOR
-         ======== -->
+         ======================================================================== -->
         <section class="custom-objects-section" id="seccion-objetos-propios">
             <header class="section-header">
                 <h2>Objetos Creados por el Usuario</h2>
@@ -171,14 +164,53 @@
     </main>
 
 
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Sonido Vivo</h4>
+                <p>Tienda líder de instrumentos musicales, amplificación y microfonía en Viña del Mar.</p>
+                <p>Dirección: Calle Valparaíso 740, Local 12, Viña del Mar, Chile.</p>
+                <p>Tel: +56 32 268 9000 | Email: contacto@sonidovivo.cl</p>
+            </div>
 
+            <div class="footer-col">
+                <h4>Explorar</h4>
+                <ul>
+                    <li><a href="pages/productos.html">Catálogo Completo</a></li>
+                    <li><a href="pages/nosotros.html">Quiénes Somos</a></li>
+                    <li><a href="pages/blogs.html">Blogs de Música</a></li>
+                    <li><a href="pages/contacto.html">Contacto y Ubicación</a></li>
+                </ul>
+            </div>
 
+            <div class="footer-col">
+                <h4>Atención al Cliente</h4>
+                <ul>
+                    <li><a href="pages/login.html">Iniciar Sesión</a></li>
+                    <li><a href="pages/registro.html">Crear Cuenta</a></li>
+                    <li><a href="pages/carrito.html">Mi Carrito de Compras</a></li>
+                    <li><a href="pages/admin/home.html">Acceso Administrativo</a></li>
+                </ul>
+            </div>
 
+            <div class="footer-col">
+                <h4>Horarios de Tienda</h4>
+                <p>Lunes a Viernes: 10:00 - 19:30 hrs.</p>
+                <p>Sábados: 10:30 - 14:30 hrs.</p>
+                <p>Domingos y Feriados: Tienda online 24/7.</p>
+            </div>
+        </div>
 
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Sonido Vivo Instrumentos Musicales — Proyecto DSY1104 FullStack II (Forma B). Desarrollado
+                para Duoc UC.</p>
+        </div>
+    </footer>
 
-
-
-
+    <!-- Scripts JavaScript -->
+    <script src="js/catalogo.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/validaciones.js"></script>
 </body>
 
 </html>
