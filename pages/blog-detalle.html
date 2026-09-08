@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Artículo completo de luthería y audio profesional de Sonido Vivo Viña del Mar.">
   <title>Sonido Vivo | Lectura de Blog</title>
-
+  
   <link rel="stylesheet" href="../css/styles.css">
 </head>
-
 <body>
 
-  <!-- Cabecera Principal -->
+  <!-- --------------------------------------------------------------------------
+       NOMBRE:       Cabecera de Navegación de Lectura Editorial
+       AFECTA A:     <header class="main-header">
+       QUÉ HACE:     Mantiene la navegación activa e identidad corporativa en artículos
+       CÓMO LO HACE: Header semántico común con enlaces institucionales
+       -------------------------------------------------------------------------- -->
   <header class="main-header">
     <div class="container header-content">
-      <a href="../index.html" class="logo" aria-label="Ir a inicio">
+      <a href="../index.html" class="logo" aria-label="Ir al inicio">
         <img src="../assets/img/logo.svg" alt="Sonido Vivo">
       </a>
 
@@ -48,36 +51,92 @@
   <!-- Contenido Principal -->
   <main class="container page-content">
     
-    <nav class="breadcrumb" aria-label="Miga de pan" style="margin-bottom: 24px;">
-      <a href="../index.html">Inicio</a> &gt; 
-      <a href="blogs.html">Blogs</a> &gt; 
-      <span>Detalle del Artículo</span>
+    <nav aria-label="Migas de pan" style="margin-bottom: 24px;">
+      <p style="font-size: 0.85rem; color: var(--color-text-muted);">
+        <a href="../index.html">Inicio</a> &gt; <a href="blogs.html">Blogs</a> &gt; <span style="color: var(--color-primary);" id="blog-breadcrumb">Lectura de Artículo</span>
+      </p>
     </nav>
 
-    <article class="blog-detail-wrapper" style="max-width: 800px; margin: 0 auto; background: var(--color-surface, #ffffff); padding: 32px; border-radius: 8px; border: 1px solid var(--color-border, #e2e8f0);">
-      <header style="margin-bottom: 24px; border-bottom: 1px solid var(--color-border, #e2e8f0); padding-bottom: 16px;">
-        <div class="badge badge-category" style="margin-bottom: 12px; display: inline-block;">LUTHERÍA &amp; MANTENIMIENTO</div>
-        <h1 style="font-size: 1.85rem; line-height: 1.3; margin-bottom: 8px;">Cómo Proteger tu Guitarra de la Humedad y Salinidad en Viña del Mar</h1>
-        <p style="color: var(--color-text-muted, #64748b); font-size: 0.9rem;">Publicado el 5 de Septiembre, 2026 • Por Equipo Técnico Sonido Vivo</p>
-      </header>
-
-      <div class="article-content" style="line-height: 1.8; color: var(--color-text, #1e293b);">
-        <p>Vivir cerca del océano tiene una magia única para componer, pero el aire marino y la humedad costera de la V Región pueden oxidar trastes y descalibrar el mástil en semanas si no tomás precauciones.</p>
-
-        <h2 style="font-size: 1.35rem; margin-top: 24px; margin-bottom: 12px;">1. Usá fundas acolchadas o estuches rígidos con desecantes</h2>
-        <p>Nunca dejes tu instrumento expuesto sobre un soporte de pared o suelo si la habitación tiene ventilación directa marina. Guardalo en su funda con sobres de gel de sílice renovados periódicamente.</p>
-
-        <h2 style="font-size: 1.35rem; margin-top: 24px; margin-bottom: 12px;">2. Limpieza de cuerdas y diapasón post-ensayo</h2>
-        <p>La combinación de sudor y salinidad ambiental corroe las cuerdas a una velocidad alarmante. Pasá un paño de microfibra seco después de cada toque y aplicá aceite de limón al diapasón 2 o 3 veces por año.</p>
-
-        <h2 style="font-size: 1.35rem; margin-top: 24px; margin-bottom: 12px;">3. Control de temperatura y calibración estacional</h2>
-        <p>Los cambios bruscos de temperatura entre el día y la noche en la costa afectan la curvatura del alma (truss rod). Traé tu instrumento a nuestro taller en Viña del Mar ante cualquier trasteo fuera de lo normal.</p>
+    <!-- --------------------------------------------------------------------------
+         NOMBRE:       Cuerpo de Artículo Técnico Especializado
+         AFECTA A:     article.blog-detail-article (#articulo-1, #articulo-2)
+         QUÉ HACE:     Renderiza el texto completo de la guía según el parámetro URL 'id'
+         CÓMO LO HACE: Contenedor semántico <article> con max-width centrado y metadatos editoriales
+         -------------------------------------------------------------------------- -->
+    <!-- Artículo 1: Humedad y Guitarras en Viña del Mar -->
+    <article id="articulo-1" class="blog-detail-article" style="display: none;">
+      <span class="badge badge-category" style="margin-bottom: 12px;">Luthería y Cuidados</span>
+      <h1>Cómo Proteger tu Guitarra de la Humedad y Salinidad en Viña del Mar</h1>
+      
+      <div class="blog-detail-meta">
+        <span>✍️ Por Rodrigo Tapia (Luthier Jefe Sonido Vivo)</span>
+        <span>📅 5 de Septiembre, 2026</span>
+        <span>⏱️ 4 min de lectura</span>
       </div>
 
-      <footer style="margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--color-border, #e2e8f0); display: flex; justify-content: space-between; align-items: center;">
-        <a href="blogs.html" class="btn btn-secondary btn-sm">&larr; Volver a Todos los Artículos</a>
-        <a href="contacto.html" class="btn btn-primary btn-sm">Consultar con Nuestro Luthier</a>
-      </footer>
+      <div class="blog-detail-content">
+        <p>
+          En ciudades costeras como <strong>Viña del Mar, Valparaíso y Concón</strong>, la humedad relativa del aire suele superar habitualmente el 75% o incluso 85% durante las mañanas de vaguada costera. Para las maderas de instrumentos acústicos y eléctricos, esto representa un desafío mayúsculo que puede arruinar una guitarra si no se toman medidas a tiempo.
+        </p>
+        
+        <h3 style="margin: 24px 0 12px; color: var(--color-primary);">1. El Alma del Mástil (Truss Rod) y la Curvatura</h3>
+        <p>
+          La madera absorbe la humedad ambiental expandiéndose. En guitarras con diapasón de palisandro o arce, esto provoca que el mástil tienda a arquearse hacia adelante (bow), elevando la acción de las cuerdas y volviendo el instrumento duro y desafinado en los trastes agudos. Recomendamos chequear la curvatura una vez por mes con una regla de precisión y llave Allen adecuada.
+        </p>
+
+        <h3 style="margin: 24px 0 12px; color: var(--color-primary);">2. Oxidación Rápida de Trastes de Níquel y Cuerdas</h3>
+        <p>
+          La salinidad arrastrada por la brisa marina acelera la corrosión galvánica de las cuerdas de acero niquelado. Al terminar de tocar, <em>siempre pasá un paño de microfibra seco</em> por cada cuerda y aplicá un limpiador de diapasón a base de aceite de limón para sellar los poros de la madera.
+        </p>
+
+        <h3 style="margin: 24px 0 12px; color: var(--color-primary);">3. El Secreto del Silica Gel dentro de la Funda</h3>
+        <p>
+          Nunca dejes tu guitarra colgada de la pared expuesta a ventanas durante la noche. Guardala siempre en su estuche rígido o funda acolchada con al menos <strong>2 bolsitas de gel de sílice (Silica Gel)</strong> renovadas cada trimestre. Esto absorbe el exceso de condensación y mantiene el microclima entre el 45% y 55% de humedad relativa, el rango ideal de calibración de fábrica.
+        </p>
+      </div>
+
+      <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <a href="blogs.html" class="btn btn-secondary btn-sm">&larr; Volver al Listado de Blogs</a>
+        <a href="blog-detalle.html?id=2" class="btn btn-outline btn-sm">Siguiente: Shure SM58 vs SM57 &rarr;</a>
+      </div>
+    </article>
+
+    <!-- Artículo 2: Shure SM58 vs SM57 -->
+    <article id="articulo-2" class="blog-detail-article" style="display: none;">
+      <span class="badge badge-category" style="margin-bottom: 12px;">Audio Profesional</span>
+      <h1>Shure SM58 vs SM57: ¿Cuál es el Micrófono Definitivo para tu Banda?</h1>
+      
+      <div class="blog-detail-meta">
+        <span>✍️ Por Andrés Silva (Ingeniero de Sonido Sonido Vivo)</span>
+        <span>📅 28 de Agosto, 2026</span>
+        <span>⏱️ 5 min de lectura</span>
+      </div>
+
+      <div class="blog-detail-content">
+        <p>
+          Desde su lanzamiento en la década de 1960 por la firma estadounidense <strong>Shure</strong>, el <strong>SM58</strong> y el <strong>SM57</strong> se han convertido en los micrófonos dinámicos cardioides más vendidos y utilizados en la historia de la música grabada y el sonido en vivo. Aunque comparten casi la misma cápsula interna (el transductor Unidyne III), su diseño acústico exterior genera diferencias que debés conocer antes de invertir tu presupuesto.
+        </p>
+        
+        <h3 style="margin: 24px 0 12px; color: var(--color-primary);">1. La Rejilla Esférica y el Filtro Antipop del SM58</h3>
+        <p>
+          El <strong>Shure SM58</strong> posee una rejilla esférica de acero reforzado que aloja un filtro de espuma interior. Esto está diseñado específicamente para dispersar las consonantes oclusivas ('P', 'B', 'T') que producen golpes de aire violentos sobre el diafragma al cantar de cerca. Es la elección indiscutible para vocalistas principales y coros en escenarios en vivo.
+        </p>
+
+        <h3 style="margin: 24px 0 12px; color: var(--color-primary);">2. La Respuesta en Frecuencia y Proximidad del SM57</h3>
+        <p>
+          El <strong>Shure SM57</strong> prescinde de la bola protectora y utiliza una rejilla cilíndrica más compacta. Esto permite acercar el elemento transductor a apenas milímetros de la fuente sonora, aprovechando al máximo el <em>efecto de proximidad</em>. Es el estándar de oro para microfonear la caja (redoblante) de una batería, amplificadores de guitarra eléctrica (como un Marshall o Fender Frontman) y metales como trompetas y saxofones.
+        </p>
+
+        <h3 style="margin: 24px 0 12px; color: var(--color-primary);">3. El Veredicto de Sonido Vivo</h3>
+        <p>
+          Si sos vocalista, tu primera compra obligatoria debe ser el <strong>SM58</strong>. Si tenés una banda o estás montando tu home studio en Viña del Mar y necesitás capturar instrumentos con punch y definición, el <strong>SM57</strong> es el micrófono más versátil del planeta. Disponemos de ambos modelos con entrega inmediata en nuestra tienda.
+        </p>
+      </div>
+
+      <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <a href="blog-detalle.html?id=1" class="btn btn-outline btn-sm">&larr; Anterior: Guitarras y Humedad</a>
+        <a href="blogs.html" class="btn btn-secondary btn-sm">Volver al Listado de Blogs &rarr;</a>
+      </div>
     </article>
 
   </main>
@@ -89,9 +148,28 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Script de lectura dinámica del artículo -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id') || '1';
+
+      const art1 = document.getElementById('articulo-1');
+      const art2 = document.getElementById('articulo-2');
+      const breadcrumb = document.getElementById('blog-breadcrumb');
+
+      if (id === '2') {
+        if (art2) art2.style.display = 'block';
+        if (breadcrumb) breadcrumb.textContent = 'Shure SM58 vs SM57';
+        document.title = 'Sonido Vivo | Shure SM58 vs SM57';
+      } else {
+        if (art1) art1.style.display = 'block';
+        if (breadcrumb) breadcrumb.textContent = 'Guitarras y Humedad en Viña del Mar';
+        document.title = 'Sonido Vivo | Cuidado de Guitarras y Humedad';
+      }
+    });
+  </script>
   <script src="../js/carrito.js"></script>
   <script src="../js/validaciones.js"></script>
 </body>
-
 </html>
