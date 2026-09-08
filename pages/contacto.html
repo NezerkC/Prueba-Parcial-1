@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contactá a Sonido Vivo Viña del Mar. Envianos tus dudas sobre instrumentos, pedidos o cotizaciones especiales.">
+  <title>Sonido Vivo | Contacto &amp; Ubicación en Viña del Mar</title>
+  
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <!-- Cabecera Principal -->
+  <header class="main-header">
+    <div class="container header-content">
+      <a href="../index.html" class="logo" aria-label="Ir al inicio">
+        <img src="../assets/img/logo.svg" alt="Sonido Vivo">
+      </a>
+
+      <button type="button" class="menu-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" aria-label="Navegación">
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="productos.html">Catálogo</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html" class="active">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Ingresar</a>
+        <a href="carrito.html" class="cart-btn" aria-label="Ver carrito">
+          <svg class="cart-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="container page-content">
+    
+    <header class="section-header" style="text-align: center;">
+      <h1>Contactate con Sonido Vivo</h1>
+      <p>Estamos a pasos de la Plaza Vergara en pleno centro de Viña del Mar. Respondemos tus consultas en el día.</p>
+    </header>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-top: 24px;">
+      
+      <!-- Columna 1: Formulario con Validación JS -->
+      <div class="form-card" style="margin: 0; max-width: 100%;">
+        <h2 style="font-size: 1.3rem; margin-bottom: 16px;">Envianos un Mensaje Directo</h2>
+        
+        <form id="form-contacto" novalidate>
+          
+          <!-- Nombre Completo -->
+          <div class="form-group">
+            <label for="contacto-nombre">Nombre Completo:</label>
+            <input type="text" id="contacto-nombre" name="nombre" placeholder="Tu nombre" maxlength="100" required>
+            <small class="error-msg" id="error-contacto-nombre">El nombre es obligatorio (máximo 100 caracteres).</small>
+          </div>
+
+          <!-- Correo Electrónico Institucional/Gmail -->
+          <div class="form-group">
+            <label for="contacto-correo">Correo Electrónico:</label>
+            <input type="email" id="contacto-correo" name="correo" placeholder="ejemplo@duoc.cl o ejemplo@gmail.com" maxlength="100" required>
+            <small class="error-msg" id="error-contacto-correo">Solo correos @duoc.cl, @profesor.duoc.cl o @gmail.com.</small>
+          </div>
+
+          <!-- Comentario con Contador de Caracteres -->
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label for="contacto-mensaje" style="margin-bottom: 0;">Consulta o Comentario:</label>
+              <span id="char-count" style="font-size: 0.8rem; color: var(--color-text-muted);">0/500</span>
+            </div>
+            <textarea id="contacto-mensaje" name="comentario" rows="5" placeholder="Escribí aquí tu duda sobre instrumentos, stock o cotizaciones para bandas..." maxlength="500" required></textarea>
+            <small class="error-msg" id="error-contacto-mensaje">El comentario es requerido (máximo 500 caracteres).</small>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">
+            📨 Enviar Mensaje a Tienda
+          </button>
+        </form>
+      </div>
+
+      <!-- Columna 2: Datos Físicos, Horarios y Mapa -->
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        
+        <article class="benefit-card" style="text-align: left;">
+          <h3 style="color: var(--color-primary); margin-bottom: 12px;">Tienda Física Viña del Mar</h3>
+          <p style="color: var(--color-text-main); margin-bottom: 8px;">
+            <strong>Dirección:</strong> Calle Valparaíso 740, Galería Cristal, Local 12, Viña del Mar, Región de Valparaíso.
+          </p>
+          <p style="color: var(--color-text-main); margin-bottom: 8px;">
+            <strong>Teléfono Ventas:</strong> +56 32 268 9000
+          </p>
+          <p style="color: var(--color-text-main); margin-bottom: 8px;">
+            <strong>WhatsApp Consultas:</strong> +56 9 8765 4321
+          </p>
+          <p style="color: var(--color-text-main);">
+            <strong>Email:</strong> contacto@sonidovivo.cl
+          </p>
+        </article>
+
+        <article class="benefit-card" style="text-align: left;">
+          <h3 style="color: var(--color-primary); margin-bottom: 12px;">Horarios de Atención Presencial</h3>
+          <ul style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.8;">
+            <li>• <strong>Lunes a Viernes:</strong> 10:00 a 19:30 hrs continuo.</li>
+            <li>• <strong>Sábados:</strong> 10:30 a 14:30 hrs.</li>
+            <li>• <strong>Domingos y Festivos:</strong> Cerrado (ventas web activas).</li>
+          </ul>
+        </article>
+
+        <!-- Representación visual de mapa / ubicación -->
+        <div style="background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 24px; text-align: center;">
+          <span style="font-family: monospace; font-size: 0.85rem; font-weight: 600; color: var(--color-text-muted); display: block; margin-bottom: 8px;">[ MAPA DE UBICACIÓN ]</span>
+          <h4>Ubicación Céntrica en Viña</h4>
+          <p style="color: var(--color-text-muted); font-size: 0.85rem; margin-top: 6px;">
+            A 2 cuadras de Estación Viña del Mar (Metro Valparaíso / EFE). Fácil acceso y estacionamiento cercano.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Pie de Página -->
+  <footer class="main-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Sonido Vivo Instrumentos Musicales — Viña del Mar, Chile.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/carrito.js"></script>
+  <script src="../js/validaciones.js"></script>
+</body>
+</html>
