@@ -54,7 +54,16 @@ function obtenerInventarioAdmin() {
     const guardado = localStorage.getItem(STORAGE_INVENTARIO);
     if (guardado) {
         try {
-            return JSON.parse(guardado);
+            const list = JSON.parse(guardado);
+            if (Array.isArray(list) && list.length > 0) {
+                return list.map(item => {
+                    if (!item.imagen) {
+                        const maestro = (typeof PRODUCTOS_SONIDO_VIVO !== 'undefined') ? PRODUCTOS_SONIDO_VIVO.find(m => m.codigo === item.codigo) : null;
+                        item.imagen = (maestro && maestro.imagen) ? maestro.imagen : `${item.codigo}.jpg`;
+                    }
+                    return item;
+                });
+            }
         } catch (e) {
             console.error('Error al parsear inventario:', e);
         }
@@ -173,9 +182,21 @@ function inicializarDashboardAdmin() {
         } else {
             tbodyCriticos.innerHTML = prodsCriticos.slice(0, 5).map(p => {
                 const ev = evaluarNivelStock(p.stock, p.stockCritico || 3);
+                const thumb = (typeof generarImgProductoHtml === 'function')
+                    ? generarImgProductoHtml(p, {
+                        style: 'width: 28px; height: 28px; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: #fff;',
+                        fallbackSize: '1.2rem'
+                      })
+                    : `<img src="../../assets/img/${p.imagen || p.codigo + '.jpg'}" alt="${p.codigo}" style="width: 28px; height: 28px; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: #fff;" onerror="this.style.display='none';">`;
+
                 return `
           <tr>
-            <td><strong>${p.codigo}</strong></td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                ${thumb}
+                <strong>${p.codigo}</strong>
+              </div>
+            </td>
             <td>${p.nombre}</td>
             <td>${p.stock} un.</td>
             <td>${p.stockCritico || 3} un.</td>
@@ -207,10 +228,21 @@ function inicializarMantenedorProductos() {
         tbody.innerHTML = productos.map(p => {
             const ev = evaluarNivelStock(p.stock, p.stockCritico || 3);
             const precioStr = Number(p.precio) === 0 ? 'FREE' : '$' + Number(p.precio).toLocaleString('es-CL');
+            const thumb = (typeof generarImgProductoHtml === 'function')
+                ? generarImgProductoHtml(p, {
+                    style: 'width: 28px; height: 28px; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: #fff;',
+                    fallbackSize: '1.2rem'
+                  })
+                : `<img src="../../assets/img/${p.imagen || p.codigo + '.jpg'}" alt="${p.codigo}" style="width: 28px; height: 28px; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: #fff;" onerror="this.style.display='none';">`;
 
             return `
         <tr>
-          <td><strong>${p.codigo}</strong></td>
+          <td>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              ${thumb}
+              <strong>${p.codigo}</strong>
+            </div>
+          </td>
           <td>${p.nombre}</td>
           <td><span class="badge badge-category">${p.categoria}</span></td>
           <td>${precioStr}</td>
@@ -278,6 +310,7 @@ function inicializarMantenedorProductos() {
                 productos.unshift({
                     codigo: codigo,
                     nombre: nombre,
+                    imagen: `${codigo}.jpg`,
                     marca: 'Sonido Vivo',
                     modelo: 'Estándar',
                     categoria: categoria,

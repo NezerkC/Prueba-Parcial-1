@@ -9,6 +9,7 @@
 const PRODUCTOS_SONIDO_VIVO = [
     {
         "codigo": "GA001",
+        "imagen": "GA001.jpg",
         "categoria": "Guitarras Acústicas",
         "nombre": "Guitarra Acústica Folk",
         "marca": "Yamaha",
@@ -21,6 +22,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "GA002",
+        "imagen": "GA002.jpg",
         "categoria": "Guitarras Acústicas",
         "nombre": "Guitarra Acústica Dreadnought",
         "marca": "Fender",
@@ -33,6 +35,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "GA003",
+        "imagen": "GA003.jpg",
         "categoria": "Guitarras Acústicas",
         "nombre": "Guitarra Acústica Clásica 4/4",
         "marca": "Yamaha",
@@ -45,6 +48,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "GA004",
+        "imagen": "GA004.jpg",
         "categoria": "Guitarras Acústicas",
         "nombre": "Guitarra Electroacústica",
         "marca": "Takamine",
@@ -57,6 +61,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "GA005",
+        "imagen": "GA005.jpg",
         "categoria": "Guitarras Acústicas",
         "nombre": "Guitarra 3/4 Niños",
         "marca": "Yamaha",
@@ -69,6 +74,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "GE001",
+        "imagen": "GE001.jpg",
         "categoria": "Guitarras Eléctricas",
         "nombre": "Guitarra Eléctrica Stratocaster",
         "marca": "Squier",
@@ -81,6 +87,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "GE002",
+        "imagen": "GE002.jpg",
         "categoria": "Guitarras Eléctricas",
         "nombre": "Guitarra Eléctrica Les Paul",
         "marca": "Epiphone",
@@ -93,6 +100,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "GE003",
+        "imagen": "GE003.jpg",
         "categoria": "Guitarras Eléctricas",
         "nombre": "Guitarra Eléctrica SG",
         "marca": "Epiphone",
@@ -105,6 +113,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "GE004",
+        "imagen": "GE004.jpg",
         "categoria": "Guitarras Eléctricas",
         "nombre": "Guitarra Eléctrica Telecaster",
         "marca": "Squier",
@@ -117,6 +126,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "GE005",
+        "imagen": "GE005.jpg",
         "categoria": "Guitarras Eléctricas",
         "nombre": "Guitarra Eléctrica Semi-hollow",
         "marca": "Epiphone",
@@ -129,6 +139,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "BA001",
+        "imagen": "BA001.jpg",
         "categoria": "Bajos Eléctricos",
         "nombre": "Bajo Eléctrico 4 Cuerdas",
         "marca": "Squier",
@@ -141,6 +152,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "BA002",
+        "imagen": "BA002.jpg",
         "categoria": "Bajos Eléctricos",
         "nombre": "Bajo Eléctrico Jazz Bass",
         "marca": "Fender",
@@ -153,6 +165,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "BA003",
+        "imagen": "BA003.jpg",
         "categoria": "Bajos Eléctricos",
         "nombre": "Bajo Acústico 4 Cuerdas",
         "marca": "Yamaha",
@@ -165,6 +178,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "BT001",
+        "imagen": "BT001.jpg",
         "categoria": "Baterías",
         "nombre": "Batería Acústica 5 piezas",
         "marca": "Pearl",
@@ -177,6 +191,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "BT002",
+        "imagen": "BT002.jpg",
         "categoria": "Baterías",
         "nombre": "Batería Electrónica 8 pads",
         "marca": "Roland",
@@ -189,6 +204,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "BT003",
+        "imagen": "BT003.jpg",
         "categoria": "Baterías",
         "nombre": "Caja Snare 14\"",
         "marca": "Pearl",
@@ -201,6 +217,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "BT004",
+        "imagen": "BT004.jpg",
         "categoria": "Baterías",
         "nombre": "Platillo Hi-Hat 14\"",
         "marca": "Zildjian",
@@ -213,6 +230,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "BT005",
+        "imagen": "BT005.jpg",
         "categoria": "Baterías",
         "nombre": "Platillo Crash 16\"",
         "marca": "Zildjian",
@@ -225,6 +243,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "TC001",
+        "imagen": "TC001.jpg",
         "categoria": "Teclados y Pianos",
         "nombre": "Teclado Digital 61 teclas",
         "marca": "Yamaha",
@@ -237,6 +256,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "TC002",
+        "imagen": "TC002.jpg",
         "categoria": "Teclados y Pianos",
         "nombre": "Piano Digital 88 teclas",
         "marca": "Yamaha",
@@ -249,6 +269,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "TC003",
+        "imagen": "TC003.jpg",
         "categoria": "Teclados y Pianos",
         "nombre": "Sintetizador 49 teclas",
         "marca": "Arturia",
@@ -261,6 +282,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "TC004",
+        "imagen": "TC004.jpg",
         "categoria": "Teclados y Pianos",
         "nombre": "Teclado MIDI 88 teclas",
         "marca": "M-Audio",
@@ -273,6 +295,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AM001",
+        "imagen": "AM001.jpg",
         "categoria": "Amplificadores",
         "nombre": "Amplificador Guitarra 15W",
         "marca": "Fender",
@@ -285,6 +308,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AM002",
+        "imagen": "AM002.jpg",
         "categoria": "Amplificadores",
         "nombre": "Amplificador Guitarra 40W",
         "marca": "Marshall",
@@ -297,6 +321,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AM003",
+        "imagen": "AM003.jpg",
         "categoria": "Amplificadores",
         "nombre": "Amplificador Bajo 100W",
         "marca": "Hartke",
@@ -309,6 +334,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AM004",
+        "imagen": "AM004.jpg",
         "categoria": "Amplificadores",
         "nombre": "Amplificador Acústico 40W",
         "marca": "Fishman",
@@ -321,6 +347,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "MI001",
+        "imagen": "MI001.jpg",
         "categoria": "Micrófonos",
         "nombre": "Micrófono Dinámico Cardioide",
         "marca": "Shure",
@@ -333,6 +360,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "MI002",
+        "imagen": "MI002.jpg",
         "categoria": "Micrófonos",
         "nombre": "Micrófono Dinámico Instrumento",
         "marca": "Shure",
@@ -345,6 +373,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "MI003",
+        "imagen": "MI003.jpg",
         "categoria": "Micrófonos",
         "nombre": "Micrófono Condensador",
         "marca": "Audio-Tech.",
@@ -357,6 +386,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "MI004",
+        "imagen": "MI004.jpg",
         "categoria": "Micrófonos",
         "nombre": "Micrófono USB de Condensador",
         "marca": "Blue",
@@ -369,6 +399,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "PE001",
+        "imagen": "PE001.jpg",
         "categoria": "Pedales de Efectos",
         "nombre": "Pedal Distorsión",
         "marca": "Boss",
@@ -381,6 +412,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "PE002",
+        "imagen": "PE002.jpg",
         "categoria": "Pedales de Efectos",
         "nombre": "Pedal Reverb",
         "marca": "Boss",
@@ -393,6 +425,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "PE003",
+        "imagen": "PE003.jpg",
         "categoria": "Pedales de Efectos",
         "nombre": "Pedal Multi-efectos",
         "marca": "Boss",
@@ -405,6 +438,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "PE004",
+        "imagen": "PE004.jpg",
         "categoria": "Pedales de Efectos",
         "nombre": "Pedal Tuner Cromático",
         "marca": "Boss",
@@ -417,6 +451,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "PE005",
+        "imagen": "PE005.jpg",
         "categoria": "Pedales de Efectos",
         "nombre": "Pedal Delay",
         "marca": "MXR",
@@ -429,6 +464,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "PE006",
+        "imagen": "PE006.jpg",
         "categoria": "Pedales de Efectos",
         "nombre": "Pedal Overdrive",
         "marca": "Ibanez",
@@ -441,6 +477,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC001",
+        "imagen": "AC001.jpg",
         "categoria": "Accesorios",
         "nombre": "Cuerdas Guitarra Eléctrica 09-42",
         "marca": "Ernie Ball",
@@ -453,6 +490,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC002",
+        "imagen": "AC002.jpg",
         "categoria": "Accesorios",
         "nombre": "Cuerdas Guitarra Acústica 12-53",
         "marca": "Ernie Ball",
@@ -465,6 +503,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC003",
+        "imagen": "AC003.jpg",
         "categoria": "Accesorios",
         "nombre": "Cuerdas Bajo 45-105",
         "marca": "Ernie Ball",
@@ -477,6 +516,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC004",
+        "imagen": "AC004.jpg",
         "categoria": "Accesorios",
         "nombre": "Púas de Guitarra x10 (0.73mm)",
         "marca": "Fender",
@@ -489,6 +529,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC005",
+        "imagen": "AC005.jpg",
         "categoria": "Accesorios",
         "nombre": "Capotraste Guitarra",
         "marca": "Dunlop",
@@ -501,6 +542,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC006",
+        "imagen": "AC006.jpg",
         "categoria": "Accesorios",
         "nombre": "Afinador de Clip",
         "marca": "Snark",
@@ -513,6 +555,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC007",
+        "imagen": "AC007.jpg",
         "categoria": "Accesorios",
         "nombre": "Cable Instrumento 3m",
         "marca": "Monster",
@@ -525,6 +568,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC008",
+        "imagen": "AC008.jpg",
         "categoria": "Accesorios",
         "nombre": "Cable Instrumento 6m",
         "marca": "Monster",
@@ -537,6 +581,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC009",
+        "imagen": "AC009.jpg",
         "categoria": "Accesorios",
         "nombre": "Soporte Guitarra de Piso",
         "marca": "Hercules",
@@ -549,6 +594,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "AC010",
+        "imagen": "AC010.jpg",
         "categoria": "Accesorios",
         "nombre": "Soporte Guitarra de Pared",
         "marca": "Hercules",
@@ -561,6 +607,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "ES001",
+        "imagen": "ES001.jpg",
         "categoria": "Estudio y Grabación",
         "nombre": "Interfaz de Audio 2x2 USB",
         "marca": "Focusrite",
@@ -573,6 +620,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "ES002",
+        "imagen": "ES002.jpg",
         "categoria": "Estudio y Grabación",
         "nombre": "Auriculares de Estudio",
         "marca": "Audio-Tech.",
@@ -585,6 +633,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "ES003",
+        "imagen": "ES003.jpg",
         "categoria": "Estudio y Grabación",
         "nombre": "Auriculares de Estudio Pro",
         "marca": "Audio-Tech.",
@@ -597,6 +646,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "ES004",
+        "imagen": "ES004.jpg",
         "categoria": "Estudio y Grabación",
         "nombre": "Monitor de Estudio 5\"",
         "marca": "Yamaha",
@@ -609,6 +659,7 @@ const PRODUCTOS_SONIDO_VIVO = [
     },
     {
         "codigo": "ES005",
+        "imagen": "ES005.jpg",
         "categoria": "Estudio y Grabación",
         "nombre": "Pop Filter para Micrófono",
         "marca": "Sennheiser",
@@ -649,7 +700,16 @@ function obtenerCatalogoActivo() {
     const guardados = localStorage.getItem('sonido_vivo_inventario_v1');
     if (guardados) {
         try {
-            return JSON.parse(guardados);
+            const list = JSON.parse(guardados);
+            if (Array.isArray(list) && list.length > 0) {
+                return list.map(item => {
+                    if (!item.imagen) {
+                        const maestro = PRODUCTOS_SONIDO_VIVO.find(m => m.codigo === item.codigo);
+                        item.imagen = (maestro && maestro.imagen) ? maestro.imagen : `${item.codigo}.jpg`;
+                    }
+                    return item;
+                });
+            }
         } catch (e) {
             console.error('Error al parsear inventario de LocalStorage:', e);
         }
@@ -665,6 +725,57 @@ function obtenerCatalogoActivo() {
  * CÓMO LO HACE: Array.map() generando HTML dinámico con eventos 'click' delegados a btn-add-cart
  * --------------------------------------------------------------------------
  */
+/**
+ * --------------------------------------------------------------------------
+ * NOMBRE:       Base de Assets e Helper Universal de Ruta de Imagen
+ * AFECTA A:     Todas las vistas (index, catálogo, detalle, carrito, admin)
+ * QUÉ HACE:     Calcula la ruta relativa hacia assets/img/ según la profundidad del archivo en el árbol
+ * CÓMO LO HACE: Inspecciona window.location.pathname (/admin/ -> ../../, /pages/ -> ../, root -> assets/)
+ * --------------------------------------------------------------------------
+ */
+function baseAssetsImg() {
+    const p = (window.location.pathname || '').replace(/\\/g, '/');
+    if (p.includes('/admin/')) return '../../assets/img/';
+    if (p.includes('/pages/')) return '../assets/img/';
+    return 'assets/img/';
+}
+
+function rutaImagen(prod) {
+    if (!prod) return '';
+    const archivo = typeof prod === 'string'
+        ? prod
+        : (prod.imagen || (prod.codigo ? `${prod.codigo}.jpg` : ''));
+    if (!archivo) return '';
+    if (/^(https?:|data:|\/\/)/i.test(archivo)) return archivo;
+    return baseAssetsImg() + archivo;
+}
+
+/**
+ * --------------------------------------------------------------------------
+ * NOMBRE:       Generador de Etiquetas de Imagen con Fallback Universal
+ * QUÉ HACE:     Genera el HTML <img> con lazy-loading, alt descriptivo y fallback elegante al ícono
+ * CÓMO LO HACE: Si la imagen no carga, oculta el tag <img> y activa el ícono semántico del producto
+ * --------------------------------------------------------------------------
+ */
+function generarImgProductoHtml(prod, opciones = {}) {
+    const src = rutaImagen(prod);
+    const alt = (prod && prod.nombre) ? `${prod.nombre} (${prod.marca || ''} ${prod.modelo || ''})` : (prod.codigo || 'Instrumento');
+    const icono = (prod && prod.icono) ? prod.icono : '🎵';
+    const extraClass = opciones.className || '';
+    const style = opciones.style || '';
+    const fallbackSize = opciones.fallbackSize || '2.5rem';
+
+    if (!src) {
+        return `<div class="product-thumb-fallback ${extraClass}" style="font-size: ${fallbackSize};">${icono}</div>`;
+    }
+
+    return `
+      <img src="${src}" alt="${alt}" loading="lazy" class="${extraClass}" style="${style}"
+           onerror="this.onerror=null; this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+      <div class="product-thumb-fallback" style="display:none; font-size: ${fallbackSize}; align-items: center; justify-content: center;">${icono}</div>
+    `.trim();
+}
+
 function renderizarProductosEnGrilla(productos, contenedorId = 'grid-productos') {
     const contenedor = document.getElementById(contenedorId);
     if (!contenedor) return;
@@ -690,6 +801,7 @@ function renderizarProductosEnGrilla(productos, contenedorId = 'grid-productos')
         return `
       <article class="product-card" data-codigo="${p.codigo}" data-categoria="${p.categoria}">
         <div class="product-thumb">
+          ${generarImgProductoHtml(p, { fallbackSize: '2.5rem' })}
           <span class="product-thumb-indicator">${p.categoria.toUpperCase()}</span>
           <span class="product-code-tag">CÓD: ${p.codigo}</span>
         </div>
@@ -728,7 +840,8 @@ function renderizarProductosEnGrilla(productos, contenedorId = 'grid-productos')
                     nombre: prod.nombre,
                     precio: prod.precio,
                     categoria: prod.categoria,
-                    icono: prod.icono || '🎵'
+                    icono: prod.icono || '🎵',
+                    imagen: prod.imagen || `${prod.codigo}.jpg`
                 });
             }
         });
@@ -825,7 +938,12 @@ function inicializarDetalleProducto() {
     document.title = `Sonido Vivo | ${p.nombre} (${p.marca} ${p.modelo})`;
 
     const elemIcono = document.getElementById('det-icono');
-    if (elemIcono) elemIcono.textContent = `[ ${p.categoria} ]`;
+    if (elemIcono) {
+        elemIcono.innerHTML = generarImgProductoHtml(p, {
+            style: 'max-height: 250px; max-width: 100%; object-fit: contain; display: block; margin: 0 auto; transition: transform 0.3s ease;',
+            fallbackSize: '3.5rem'
+        });
+    }
 
     const elemTitulo = document.getElementById('det-nombre');
     if (elemTitulo) elemTitulo.textContent = p.nombre;
@@ -863,7 +981,8 @@ function inicializarDetalleProducto() {
                         nombre: p.nombre,
                         precio: p.precio,
                         categoria: p.categoria,
-                        icono: '🎵'
+                        icono: p.icono || '🎵',
+                        imagen: p.imagen || `${p.codigo}.jpg`
                     });
                 }
             }
