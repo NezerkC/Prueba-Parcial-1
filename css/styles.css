@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
 :root {
     /* Lienzo y Superficies */
     --color-bg: #f8fafc;
@@ -65,7 +63,7 @@ body {
     font-family: var(--font-family);
     background-color: var(--color-bg);
     background-image: radial-gradient(circle at top right, rgba(37, 99, 235, 0.04), transparent 400px),
-                      radial-gradient(circle at bottom left, rgba(239, 68, 68, 0.03), transparent 400px);
+        radial-gradient(circle at bottom left, rgba(239, 68, 68, 0.03), transparent 400px);
     background-attachment: fixed;
     background-size: cover;
     color: var(--color-text-main);
@@ -76,7 +74,12 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-heading);
     letter-spacing: -0.015em;
 }
@@ -93,11 +96,15 @@ img {
     display: block;
 }
 
-ul, ol {
+ul,
+ol {
     list-style: none;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
     font-family: inherit;
     font-size: 1rem;
 }
@@ -164,9 +171,11 @@ button, input, select, textarea {
 .menu-toggle.is-active span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
 }
+
 .menu-toggle.is-active span:nth-child(2) {
     opacity: 0;
 }
+
 .menu-toggle.is-active span:nth-child(3) {
     transform: translateY(-9px) rotate(-45deg);
 }
@@ -252,10 +261,12 @@ button, input, select, textarea {
     .menu-toggle {
         display: none;
     }
+
     .main-nav {
         display: flex;
         width: auto;
     }
+
     .main-nav ul {
         flex-direction: row;
         gap: 28px;
@@ -291,6 +302,7 @@ button, input, select, textarea {
     color: #ffffff;
     border-color: var(--color-primary);
 }
+
 .btn-primary:hover {
     background-color: var(--color-primary-hover);
     border-color: var(--color-primary-hover);
@@ -302,6 +314,7 @@ button, input, select, textarea {
     color: var(--color-text-main);
     border-color: var(--color-border);
 }
+
 .btn-secondary:hover {
     background-color: var(--color-surface-hover);
     border-color: #cbd5e1;
@@ -312,6 +325,7 @@ button, input, select, textarea {
     color: var(--color-accent);
     border-color: var(--color-accent);
 }
+
 .btn-outline:hover {
     background-color: var(--color-accent);
     color: #ffffff;
@@ -322,6 +336,7 @@ button, input, select, textarea {
     color: #ffffff;
     border-color: var(--color-danger);
 }
+
 .btn-danger:hover {
     background-color: #991b1b;
 }
@@ -346,6 +361,7 @@ button, input, select, textarea {
     transition: var(--transition);
     width: 100%;
 }
+
 .btn-add-cart:hover {
     background-color: var(--color-accent-hover);
 }
@@ -383,10 +399,12 @@ button, input, select, textarea {
         box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6);
         transform: scale(1);
     }
+
     50% {
         box-shadow: 0 0 0 6px rgba(245, 158, 11, 0);
         transform: scale(1.03);
     }
+
     100% {
         box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
         transform: scale(1);
@@ -415,7 +433,7 @@ button, input, select, textarea {
    ========================================================================== */
 .hero-section {
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.94) 0%, rgba(30, 41, 59, 0.94) 100%),
-                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.2) 0%, transparent 50%);
+        radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.2) 0%, transparent 50%);
     background-size: cover;
     background-attachment: fixed;
     color: #ffffff;
@@ -864,6 +882,7 @@ button, input, select, textarea {
     align-items: center;
     justify-content: center;
 }
+
 .qty-btn:hover {
     background: var(--color-surface-hover);
 }
