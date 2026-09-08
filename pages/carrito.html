@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+
       <!-- Cabecera Principal -->
   <header class="main-header">
     <div class="container header-content">
@@ -41,6 +42,10 @@
       </div>
     </div>
   </header>
+
+    <!-- Contenido Principal -->
+  <main class="container page-content">
+    
   <header class="section-header">
       <h1>Tu Carrito de Compras</h1>
       <p>Los artículos se mantienen guardados en tu navegador de forma segura.</p>
@@ -53,9 +58,93 @@
       <p style="color: var(--color-text-muted); margin: 12px 0 24px;">
         Aún no has agregado ningún instrumento o equipo de audio a tu orden.
       </p>
+      <a href="productos.html" class="btn btn-primary">Ver Catálogo de Instrumentos</a>
     </div>
 
     <!-- Layout con Tabla de Artículos y Resumen Financiero -->
-    <div class="cart-layout">    
+    <div class="cart-layout">
+        
+        <!-- Columna Izquierda: Tabla de Artículos -->
+      <section id="cart-table-wrapper" class="cart-items-card" aria-label="Productos en el carrito">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3>Instrumentos Seleccionados</h3>
+          <button type="button" id="btn-vaciar-carrito" class="btn btn-outline btn-sm">
+            🗑️ Vaciar Carro
+          </button>
+        </div>
+
+        <div class="cart-table-wrapper">
+          <table class="cart-table" aria-label="Listado de ítems para comprar">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="cart-table-body">
+              <!-- Renderizado dinámico desde carrito.js -->
+            </tbody>
+          </table>
+        </div>
+
+         <div style="margin-top: 20px;">
+          <a href="productos.html" class="btn btn-secondary btn-sm">&larr; Seguir Comprando en el Catálogo</a>
+        </div>
+      </section>
+
+      <!-- Columna Derecha: Resumen de Totales e Impuestos -->
+      <aside id="cart-summary-card" class="cart-summary-card" aria-label="Resumen de pago">
+        <h3 style="margin-bottom: 20px;">Resumen de la Orden</h3>
+
+        <div class="summary-row">
+          <span>Subtotal Neto:</span>
+          <strong id="cart-subtotal">$0</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>IVA Estimado (19%):</span>
+          <strong id="cart-iva">$0</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Despacho a Domicilio:</span>
+          <span style="color: var(--color-success); font-weight: 700;">¡GRATIS Viña / Valparaíso!</span>
+        </div>
+
+        <div class="summary-row total">
+          <span>Total a Pagar (CLP):</span>
+          <span id="cart-total" style="color: var(--color-primary);">$0</span>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <button type="button" id="btn-checkout" class="btn btn-primary btn-block">
+            💳 Finalizar Compra
+          </button>
+        </div>
+
+        <div style="margin-top: 16px; text-align: center;">
+          <small style="color: var(--color-text-muted);">
+            🔒 Transacción simulada mediante Web Storage local para la evaluación DSY1104.
+          </small>
+        </div>
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- Pie de Página -->
+  <footer class="main-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Sonido Vivo Instrumentos Musicales — Viña del Mar, Chile.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/carrito.js"></script>
+  <script src="../js/validaciones.js"></script>
 </body>
 </html>
