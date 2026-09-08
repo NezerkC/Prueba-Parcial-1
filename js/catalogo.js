@@ -1,3 +1,11 @@
+/**
+ * --------------------------------------------------------------------------
+ * NOMBRE:       Catálogo Maestro de Instrumentos y Equipos de Audio (Forma B)
+ * AFECTA A:     Estructura global de datos PRODUCTOS_SONIDO_VIVO (51 items)
+ * QUÉ HACE:     Almacena especificaciones, categorías, precios y umbrales de stock base
+ * CÓMO LO HACE: Arreglo inmutable de objetos JavaScript con claves normalizadas (código, marca, etc.)
+ * --------------------------------------------------------------------------
+ */
 const PRODUCTOS_SONIDO_VIVO = [
     {
         "codigo": "GA001",
@@ -613,7 +621,14 @@ const PRODUCTOS_SONIDO_VIVO = [
     }
 ];
 
-
+/**
+ * --------------------------------------------------------------------------
+ * NOMBRE:       Formateador de Moneda Local (Pesos Chilenos - CLP)
+ * AFECTA A:     Etiquetas de precio en catálogo, ficha técnica y tablas
+ * QUÉ HACE:     Convierte números en formato monetario chileno ($XXX.XXX) o '¡GRATIS!' si es 0
+ * CÓMO LO HACE: toLocaleString('es-CL') con validación de valor cero
+ * --------------------------------------------------------------------------
+ */
 function formatearPrecioCLP(precio) {
     const num = Number(precio);
     if (num === 0) {
@@ -622,7 +637,14 @@ function formatearPrecioCLP(precio) {
     return '$' + num.toLocaleString('es-CL');
 }
 
-
+/**
+ * --------------------------------------------------------------------------
+ * NOMBRE:       Selector de Catálogo Activo y Persistente
+ * AFECTA A:     Todas las vistas de catálogo y home
+ * QUÉ HACE:     Carga inventario modificado desde LocalStorage o recurre al catálogo maestro
+ * CÓMO LO HACE: localStorage.getItem('sonido_vivo_inventario_v1') con fallback transparente
+ * --------------------------------------------------------------------------
+ */
 function obtenerCatalogoActivo() {
     const guardados = localStorage.getItem('sonido_vivo_inventario_v1');
     if (guardados) {
@@ -635,7 +657,14 @@ function obtenerCatalogoActivo() {
     return PRODUCTOS_SONIDO_VIVO;
 }
 
-
+/**
+ * --------------------------------------------------------------------------
+ * NOMBRE:       Renderizador Universal de Grillas de Productos
+ * AFECTA A:     #grid-productos, #grid-destacados
+ * QUÉ HACE:     Inyecta tarjetas semánticas <article> con badges, precios y botones de compra
+ * CÓMO LO HACE: Array.map() generando HTML dinámico con eventos 'click' delegados a btn-add-cart
+ * --------------------------------------------------------------------------
+ */
 function renderizarProductosEnGrilla(productos, contenedorId = 'grid-productos') {
     const contenedor = document.getElementById(contenedorId);
     if (!contenedor) return;
@@ -720,7 +749,14 @@ function inicializarDestacadosHome() {
     renderizarProductosEnGrilla(destacados.length > 0 ? destacados : catalogo.slice(0, 6), 'grid-destacados');
 }
 
-
+/**
+ * --------------------------------------------------------------------------
+ * NOMBRE:       Motor de Filtros y Búsqueda en Vivo del Catálogo
+ * AFECTA A:     input#buscar-producto, .category-chips, #grid-productos, #catalogo-contador
+ * QUÉ HACE:     Filtra en tiempo real por texto (nombre/marca/código) y categoría seleccionada
+ * CÓMO LO HACE: Eventos 'input' y 'click', filtrado reactivo con Array.filter() y actualización de contador
+ * --------------------------------------------------------------------------
+ */
 function inicializarPaginaCatalogo() {
     const contenedor = document.getElementById('grid-productos');
     if (!contenedor) return;
@@ -836,6 +872,9 @@ function inicializarDetalleProducto() {
 }
 
 /**
+ * ============================================================================
+ * SECCIÓN DE OBJETOS PROPIOS CREADOS POR EL PROGRAMADOR
+ * ============================================================================
  * El desarrollador puede registrar aquí sus propios objetos o modelos.
  */
 const OBJETOS_CREADOS_POR_PROGRAMADOR = [
