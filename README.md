@@ -6,7 +6,7 @@ Documento de referencia para el equipo de desarrollo. Define la arquitectura del
 
 ## 1. Estructura del Repositorio
 
-El proyecto utiliza una arquitectura modular basada en tecnologías web estándar (HTML5 semántico, Vanilla CSS3 y Vanilla JavaScript ES6+), sin dependencias externas pesadas.
+El proyecto utiliza una arquitectura modular basada en tecnologías web estándar (HTML5 semántico, Vanilla CSS3 y Vanilla JavaScript ES6+). Usa fuentes de Google Fonts cargadas desde CDN, pero no requiere dependencias de JavaScript ni un proceso de compilación.
 
 ```text
 Prueba-Parcial-1/
@@ -98,7 +98,7 @@ $$\text{tipo}/\text{alcance}$$
    ```
 2. Descargar los cambios más recientes del remoto:
    ```bash
-   git pull origin main
+   git pull --ff-only origin main
    ```
 
 ---
@@ -183,7 +183,7 @@ La integración entre ramas debe seguir un orden estricto para proteger la estab
 2. Cambia a `main` y descarga la última versión del repositorio:
    ```bash
    git switch main
-   git pull origin main
+   git pull --ff-only origin main
    ```
 3. Regresa a tu rama de trabajo:
    ```bash
@@ -224,7 +224,7 @@ La integración entre ramas debe seguir un orden estricto para proteger la estab
    ```
 2. Asegura tener `main` al día:
    ```bash
-   git pull origin main
+   git pull --ff-only origin main
    ```
 3. Fusiona tu rama de trabajo en `main`:
    ```bash
@@ -250,7 +250,7 @@ La integración entre ramas debe seguir un orden estricto para proteger la estab
 # === INICIO DE TAREA ===
 # 1. Asegurar tener el código más reciente de main
 git switch main
-git pull origin main
+git pull --ff-only origin main
 
 # 2. Elegir o crear la rama de trabajo adecuada
 git switch -c style/catalogo
@@ -269,14 +269,14 @@ git push -u origin style/catalogo
 
 # === ACTUALIZAR RAMA CON MAIN (CASO A) ===
 git switch main
-git pull origin main
+git pull --ff-only origin main
 git switch style/catalogo
 git merge main
 git push origin style/catalogo
 
 # === FINALIZAR E INTEGRAR EN MAIN (CASO B) ===
 git switch main
-git pull origin main
+git pull --ff-only origin main
 git merge style/catalogo
 git push origin main
 ```
