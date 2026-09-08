@@ -1,158 +1,184 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dashboard administrativo de la tienda Sonido Vivo Viña del Mar. Gestión de inventario, ventas y alertas.">
-  <title>Sonido Vivo | Panel Administrador - Dashboard</title>
-  
-  <link rel="stylesheet" href="../../css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Dashboard administrativo de la tienda Sonido Vivo Viña del Mar. Gestión de inventario, ventas y alertas.">
+    <title>Sonido Vivo | Panel Administrador - Dashboard</title>
+
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
+
 <body>
 
-  <!-- Cabecera Superior del Administrador -->
-  <header class="main-header" style="background: #0f172a; border-bottom: 2px solid #581c87;">
-    <div class="container header-content">
-      <a href="home.html" class="logo" style="display: flex; align-items: center; gap: 12px;">
-        <img src="../../assets/img/logo.svg" alt="Sonido Vivo Admin">
-        <span class="badge" style="background: #581c87; color: #d8b4fe;">PANEL ADMIN</span>
-      </a>
+    <!-- --------------------------------------------------------------------------
+       NOMBRE:       Cabecera Superior del Administrador
+       AFECTA A:     <header class="main-header">
+       QUÉ HACE:     Identifica la sesión de gestión con badge administrativo y botón de cierre
+       CÓMO LO HACE: Header semántico con .badge-admin, indicador de usuario y navegación hacia tienda
+       -------------------------------------------------------------------------- -->
+    <header class="main-header" style="background: #0f172a; border-bottom: 2px solid #581c87;">
+        <div class="container header-content">
+            <a href="home.html" class="logo" style="display: flex; align-items: center; gap: 12px;">
+                <img src="../../assets/img/logo.svg" alt="Sonido Vivo Admin">
+                <span class="badge badge-admin">PANEL ADMIN</span>
+            </a>
 
-      <div class="header-actions">
-        <span style="font-size: 0.85rem; color: var(--color-text-muted); display: none; @media(min-width:768px){display:inline;}">
-          👤 Martín Gómez (Admin)
-        </span>
-        <a href="../../index.html" class="btn btn-secondary btn-sm">Ir a Tienda Pública &rarr;</a>
-        <a href="../login.html" class="btn btn-danger btn-sm">Cerrar Sesión</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Contenido Principal con Layout Multi-columna (Sidebar + Dashboard) -->
-  <main class="container page-content">
-    
-    <div class="admin-layout">
-      
-      <!-- Menú Lateral / Sidebar -->
-      <aside class="admin-sidebar" aria-label="Navegación del panel de gestión">
-        <div class="admin-sidebar-header">
-          <h3>Menú de Gestión</h3>
-          <small style="color: var(--color-text-muted);">Administración General</small>
-        </div>
-
-        <nav class="admin-nav">
-          <ul>
-            <li>
-              <a href="home.html" class="active">Dashboard General</a>
-            </li>
-            <li>
-              <a href="productos.html">Mantenedor Productos</a>
-            </li>
-            <li>
-              <a href="usuarios.html">Mantenedor Usuarios</a>
-            </li>
-            <li>
-              <a href="../../index.html">Ver Tienda Pública</a>
-            </li>
-          </ul>
-        </nav>
-
-        <div style="margin-top: 32px; padding: 16px; background: #ffffff; border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
-          <small style="color: var(--color-text-muted); display: block; margin-bottom: 6px;">
-            <strong>Sucursal:</strong>
-          </small>
-          <span style="font-size: 0.85rem; color: var(--color-text-main);">Viña del Mar Central (Casa Matriz)</span>
-        </div>
-      </aside>
-
-      <!-- Área de Contenido del Dashboard -->
-      <section class="admin-main" aria-label="Métricas y estadísticas generales">
-        
-        <header class="section-header">
-          <h1>Resumen Operativo del Negocio</h1>
-          <p>Supervisión en vivo de stock, catálogo comercial y usuarios registrados.</p>
-        </header>
-
-        <!-- Grilla de Tarjetas de Métricas -->
-        <div class="stats-grid">
-          
-          <div class="stat-card">
-            <div class="stat-icon">PROD</div>
-            <div class="stat-info">
-              <h4>Instrumentos</h4>
-              <div id="stat-total-productos" class="stat-number">51</div>
+            <div class="header-actions">
+                <span class="admin-user-tag">
+                    👤 Martín Gómez (Admin)
+                </span>
+                <a href="../../index.html" class="btn btn-secondary btn-sm">Ir a Tienda Pública &rarr;</a>
+                <a href="../login.html" class="btn btn-danger btn-sm">Cerrar Sesión</a>
             </div>
-          </div>
+        </div>
+    </header>
 
-          <div class="stat-card">
-            <div class="stat-icon">CRIT</div>
-            <div class="stat-info">
-              <h4>Stock Crítico</h4>
-              <div id="stat-stock-critico" class="stat-number">0</div>
-            </div>
-          </div>
+    <!-- Contenido Principal con Layout Multi-columna (Sidebar + Dashboard) -->
+    <main class="container page-content">
 
-          <div class="stat-card">
-            <div class="stat-icon">USER</div>
-            <div class="stat-info">
-              <h4>Usuarios</h4>
-              <div id="stat-total-usuarios" class="stat-number">3</div>
-            </div>
-          </div>
+        <div class="admin-layout">
+
+            <!-- --------------------------------------------------------------------------
+           NOMBRE:       Barra Lateral de Navegación del Panel de Gestión
+           AFECTA A:     <aside class="admin-sidebar">
+           QUÉ HACE:     Enlaza al dashboard, mantenedor de productos, mantenedor de usuarios y tienda
+           CÓMO LO HACE: Aside semántico con lista de navegación <nav class="admin-nav"> y estado .active
+           -------------------------------------------------------------------------- -->
+            <!-- Menú Lateral / Sidebar -->
+            <aside class="admin-sidebar" aria-label="Navegación del panel de gestión">
+                <div class="admin-sidebar-header">
+                    <h3>Menú de Gestión</h3>
+                    <small style="color: var(--color-text-muted);">Administración General</small>
+                </div>
+
+                <nav class="admin-nav">
+                    <ul>
+                        <li>
+                            <a href="home.html" class="active">Dashboard General</a>
+                        </li>
+                        <li>
+                            <a href="productos.html">Mantenedor Productos</a>
+                        </li>
+                        <li>
+                            <a href="usuarios.html">Mantenedor Usuarios</a>
+                        </li>
+                        <li>
+                            <a href="../../index.html">Ver Tienda Pública</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="admin-sidebar-info">
+                    <small style="color: var(--color-text-muted); display: block; margin-bottom: 6px;">
+                        <strong>Sucursal:</strong>
+                    </small>
+                    <span style="font-size: 0.85rem; color: var(--color-text-main);">Viña del Mar Central (Casa
+                        Matriz)</span>
+                </div>
+            </aside>
+
+            <!-- --------------------------------------------------------------------------
+           NOMBRE:       Área de Métricas Operativas y Alertas de Stock
+           AFECTA A:     <section class="admin-main">
+           QUÉ HACE:     Supervisa en vivo el valor de inventario, stock crítico y total de usuarios
+           CÓMO LO HACE: Section semántica con .stats-grid, .admin-valuation-card y tabla reactiva
+           -------------------------------------------------------------------------- -->
+            <!-- Área de Contenido del Dashboard -->
+            <section class="admin-main" aria-label="Métricas y estadísticas generales">
+
+                <header class="section-header">
+                    <h1>Resumen Operativo del Negocio</h1>
+                    <p>Supervisión en vivo de stock, catálogo comercial y usuarios registrados.</p>
+                </header>
+
+                <!-- Grilla de Tarjetas de Métricas -->
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon">PROD</div>
+                        <div class="stat-info">
+                            <h4>Instrumentos</h4>
+                            <div id="stat-total-productos" class="stat-number">51</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">CRIT</div>
+                        <div class="stat-info">
+                            <h4>Stock Crítico</h4>
+                            <div id="stat-stock-critico" class="stat-number">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">USER</div>
+                        <div class="stat-info">
+                            <h4>Usuarios</h4>
+                            <div id="stat-total-usuarios" class="stat-number">3</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Valoración de Inventario -->
+                <div class="admin-valuation-card">
+                    <div>
+                        <h3 style="font-size: 1.1rem; color: var(--color-text-main);">Valor Total de Bodega (CLP):</h3>
+                        <p style="color: var(--color-text-muted); font-size: 0.85rem;">Suma del costo comercial
+                            multiplicado por el
+                            stock disponible.</p>
+                    </div>
+                    <div id="stat-valor-inventario"
+                        style="font-size: 2rem; font-weight: 900; color: var(--color-primary);">
+                        $0
+                    </div>
+                </div>
+
+                <!-- Tabla de Alertas de Stock Crítico -->
+                <section aria-label="Alertas de reposición urgente">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h2 style="font-size: 1.3rem;">Instrumentos que Requieren Reposición Urgente</h2>
+                        <a href="productos.html" class="btn btn-secondary btn-sm">Ir al Mantenedor &rarr;</a>
+                    </div>
+
+                    <div class="data-table-wrapper">
+                        <table class="data-table" aria-label="Tabla de stock crítico">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Producto</th>
+                                    <th>Stock Actual</th>
+                                    <th>Umbral Crítico</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-admin-criticos">
+                                <!-- Renderizado dinámico desde admin.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </section>
 
         </div>
 
-        <!-- Valoración de Inventario -->
-        <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-          <div>
-            <h3 style="font-size: 1.1rem; color: var(--color-text-main);">Valor Total de Bodega (CLP):</h3>
-            <p style="color: var(--color-text-muted); font-size: 0.85rem;">Suma del costo comercial multiplicado por el stock disponible.</p>
-          </div>
-          <div id="stat-valor-inventario" style="font-size: 2rem; font-weight: 900; color: var(--color-primary);">
-            $0
-          </div>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="main-footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Sonido Vivo — Panel de Gestión Administrativo. DSY1104 Duoc UC.</p>
         </div>
+    </footer>
 
-        <!-- Tabla de Alertas de Stock Crítico -->
-        <section aria-label="Alertas de reposición urgente">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <h2 style="font-size: 1.3rem;">Instrumentos que Requieren Reposición Urgente</h2>
-            <a href="productos.html" class="btn btn-secondary btn-sm">Ir al Mantenedor &rarr;</a>
-          </div>
-
-          <div class="data-table-wrapper">
-            <table class="data-table" aria-label="Tabla de stock crítico">
-              <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Producto</th>
-                  <th>Stock Actual</th>
-                  <th>Umbral Crítico</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody id="tabla-admin-criticos">
-                <!-- Renderizado dinámico desde admin.js -->
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-      </section>
-
-    </div>
-
-  </main>
-
-  <!-- Pie de Página -->
-  <footer class="main-footer">
-    <div class="container footer-bottom">
-      <p>&copy; 2026 Sonido Vivo — Panel de Gestión Administrativo. DSY1104 Duoc UC.</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="../../js/catalogo.js"></script>
-  <script src="../../js/admin.js"></script>
+    <!-- Scripts -->
+    <script src="../../js/catalogo.js"></script>
+    <script src="../../js/admin.js"></script>
 </body>
+
 </html>
