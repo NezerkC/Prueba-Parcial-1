@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creá tu cuenta de cliente en Sonido Vivo Viña del Mar para comprar online instrumentos musicales.">
+  <title>Sonido Vivo | Registro de Cliente</title>
+  
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <!-- Cabecera Principal -->
+  <header class="main-header">
+    <div class="container header-content">
+      <a href="../index.html" class="logo" aria-label="Ir a inicio">
+        <img src="../assets/img/logo.svg" alt="Sonido Vivo">
+      </a>
+
+      <button type="button" class="menu-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" aria-label="Navegación">
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="productos.html">Catálogo</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-secondary btn-sm">Ingresar</a>
+        <a href="carrito.html" class="cart-btn" aria-label="Ver carrito">
+          <svg class="cart-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="container page-content">
+    
+    <div class="form-card">
+      <header class="section-header" style="text-align: center; margin-bottom: 24px;">
+        <span style="font-size: 2.5rem; display: block; margin-bottom: 8px;">📝</span>
+        <h1>Crear Cuenta de Cliente</h1>
+        <p>Registrate para recibir despachos rápidos en Viña del Mar y todo Chile.</p>
+      </header>
+
+      <!-- Formulario con novalidate para validación JS personalizada -->
+      <form id="form-registro" novalidate>
+        
+        <!-- RUN / RUT Chileno -->
+        <div class="form-group">
+          <label for="reg-rut">RUN / RUT (sin puntos ni guión):</label>
+          <input type="text" id="reg-rut" name="rut" placeholder="Ej: 19011022K" maxlength="9" required autocomplete="off">
+          <small class="error-msg" id="error-rut">Debe tener 7 a 9 caracteres y dígito verificador válido (Módulo 11).</small>
+        </div>
+
+        <!-- Nombre y Apellidos (en dos columnas responsivas) -->
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="reg-nombre">Nombre:</label>
+            <input type="text" id="reg-nombre" name="nombre" placeholder="Tu nombre" maxlength="50" required>
+            <small class="error-msg" id="error-nombre">El nombre es obligatorio (máximo 50 caracteres).</small>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-apellidos">Apellidos:</label>
+            <input type="text" id="reg-apellidos" name="apellidos" placeholder="Tus apellidos" maxlength="100" required>
+            <small class="error-msg" id="error-apellidos">Los apellidos son obligatorios (máximo 100 caracteres).</small>
+          </div>
+        </div>
+
+        <!-- Correo Electrónico Institucional / Gmail -->
+        <div class="form-group">
+          <label for="reg-correo">Correo Electrónico:</label>
+          <input type="email" id="reg-correo" name="correo" placeholder="usuario@duoc.cl o usuario@gmail.com" maxlength="100" required autocomplete="email">
+          <small class="error-msg" id="error-correo">Solo dominios autorizados: @duoc.cl, @profesor.duoc.cl o @gmail.com.</small>
+        </div>
+
+        <!-- Fecha de Nacimiento (Opcional según requerimientos) -->
+        <div class="form-group">
+          <label for="reg-fecha">Fecha de Nacimiento (Opcional):</label>
+          <input type="date" id="reg-fecha" name="fechaNacimiento">
+        </div>
+
+        <!-- Cascada dinámica de Región y Comuna (regiones-comunas.js) -->
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="select-region">Región:</label>
+            <select id="select-region" name="region" required>
+              <option value="">-- Selecciona Región --</option>
+            </select>
+            <small class="error-msg" id="error-region">Debes seleccionar una región.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="select-comuna">Comuna:</label>
+            <select id="select-comuna" name="comuna" required disabled>
+              <option value="">-- Primero elige una región --</option>
+            </select>
+            <small class="error-msg" id="error-comuna">Debes seleccionar una comuna.</small>
+          </div>
+        </div>
+
+        <!-- Dirección de Despacho -->
+        <div class="form-group">
+          <label for="reg-direccion">Dirección de Despacho:</label>
+          <input type="text" id="reg-direccion" name="direccion" placeholder="Calle, número, depto, villa o sector" maxlength="300" required>
+          <small class="error-msg" id="error-direccion">La dirección es obligatoria (máximo 300 caracteres).</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 12px;">
+          Completar Registro
+        </button>
+
+        <div style="margin-top: 20px; text-align: center; font-size: 0.9rem; color: var(--color-text-muted);">
+          ¿Ya tenés cuenta? 
+          <a href="login.html" style="color: var(--color-primary); font-weight: 700;">Iniciá sesión aquí &rarr;</a>
+        </div>
+
+      </form>
+    </div>
+
+  </main>
+
+  <!-- Pie de Página -->
+  <footer class="main-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Sonido Vivo Instrumentos Musicales — Viña del Mar, Chile.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/regiones-comunas.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script src="../js/validaciones.js"></script>
+</body>
+</html>

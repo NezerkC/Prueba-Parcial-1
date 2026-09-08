@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mantenedor y CRUD de productos e instrumentos musicales en Sonido Vivo Viña del Mar.">
+  <title>Sonido Vivo | Mantenedor de Productos</title>
+  
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+  <!-- Cabecera Superior del Administrador -->
+  <header class="main-header" style="background: #0f172a; border-bottom: 2px solid #581c87;">
+    <div class="container header-content">
+      <a href="home.html" class="logo" style="display: flex; align-items: center; gap: 12px;">
+        <img src="../../assets/img/logo.svg" alt="Sonido Vivo Admin">
+        <span class="badge" style="background: #581c87; color: #d8b4fe;">PANEL ADMIN</span>
+      </a>
+
+      <div class="header-actions">
+        <a href="../../index.html" class="btn btn-secondary btn-sm">Ir a Tienda Pública &rarr;</a>
+        <a href="../login.html" class="btn btn-danger btn-sm">Cerrar Sesión</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="container page-content">
+    
+    <div class="admin-layout">
+      
+      <!-- Menú Lateral -->
+      <aside class="admin-sidebar" aria-label="Navegación del panel">
+        <div class="admin-sidebar-header">
+          <h3>Menú de Gestión</h3>
+          <small style="color: var(--color-text-muted);">Administración General</small>
+        </div>
+
+        <nav class="admin-nav">
+          <ul>
+            <li>
+              <a href="home.html">Dashboard General</a>
+            </li>
+            <li>
+              <a href="productos.html" class="active">Mantenedor Productos</a>
+            </li>
+            <li>
+              <a href="usuarios.html">Mantenedor Usuarios</a>
+            </li>
+            <li>
+              <a href="../../index.html">Ver Tienda Pública</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Área de Contenido: CRUD de Productos -->
+      <section class="admin-main" aria-label="Gestión de inventario de productos">
+        
+        <header class="section-header">
+          <h1>Mantenedor de Productos &amp; Control de Stock</h1>
+          <p>Creá, editá y supervisá los niveles de inventario crítico de Sonido Vivo.</p>
+        </header>
+
+        <!-- Formulario de Nuevo Producto / Edición -->
+        <div class="form-card" style="max-width: 100%; margin-bottom: 32px;">
+          <h2 style="font-size: 1.2rem; margin-bottom: 16px;">Registrar o Modificar Instrumento</h2>
+          
+          <form id="form-producto-admin" novalidate>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="prod-codigo">Código del Producto (* min. 3 caracteres):</label>
+                <input type="text" id="prod-codigo" name="codigo" placeholder="Ej: GA006, MI005, TC008" minlength="3" required>
+              </div>
+
+              <div class="form-group">
+                <label for="prod-nombre">Nombre Comercial (* máx. 100 caracteres):</label>
+                <input type="text" id="prod-nombre" name="nombre" placeholder="Ej: Guitarra Electroacústica Cutaway" maxlength="100" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="prod-categoria">Categoría (* Requerido):</label>
+                <select id="prod-categoria" name="categoria" required>
+                  <option value="">-- Seleccionar Categoría --</option>
+                  <option value="Guitarras Acústicas">Guitarras Acústicas</option>
+                  <option value="Guitarras Eléctricas">Guitarras Eléctricas</option>
+                  <option value="Bajos Eléctricos">Bajos Eléctricos</option>
+                  <option value="Baterías">Baterías</option>
+                  <option value="Teclados y Pianos">Teclados y Pianos</option>
+                  <option value="Amplificadores">Amplificadores</option>
+                  <option value="Micrófonos">Micrófonos</option>
+                  <option value="Pedales de Efectos">Pedales de Efectos</option>
+                  <option value="Accesorios">Accesorios</option>
+                  <option value="Estudio y Grabación">Estudio y Grabación</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="prod-precio">Precio CLP (* mín. 0 = FREE):</label>
+                <input type="number" id="prod-precio" name="precio" placeholder="129990" min="0" step="10" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="prod-stock">Stock Físico en Bodega (* Entero >= 0):</label>
+                <input type="number" id="prod-stock" name="stock" placeholder="10" min="0" step="1" required>
+              </div>
+
+              <div class="form-group">
+                <label for="prod-critico">Umbral de Stock Crítico (Alerta si stock &le; umbral):</label>
+                <input type="number" id="prod-critico" name="stockCritico" placeholder="3" min="0" step="1">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="prod-descripcion">Descripción del Instrumento (Opcional, máx. 500 caracteres):</label>
+              <textarea id="prod-descripcion" name="descripcion" rows="3" placeholder="Detalles de maderas, pickups, accesorios incluidos..." maxlength="500"></textarea>
+            </div>
+
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <button type="submit" class="btn btn-primary">
+                💾 Guardar Instrumento en Inventario
+              </button>
+              <button type="reset" class="btn btn-secondary" onclick="document.getElementById('prod-codigo').removeAttribute('readonly');">
+                Limpiar Formulario
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Tabla de Productos Existentes -->
+        <div class="data-table-wrapper">
+          <table id="tabla-crud-productos" class="data-table" aria-label="Inventario completo de productos">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre del Producto</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Estado Inventario</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Renderizado dinámico desde admin.js -->
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Pie de Página -->
+  <footer class="main-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Sonido Vivo — Panel de Gestión Administrativo. DSY1104 Duoc UC.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../../js/catalogo.js"></script>
+  <script src="../../js/admin.js"></script>
+</body>
+</html>
