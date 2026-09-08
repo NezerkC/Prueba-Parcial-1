@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mantenedor y control de usuarios, permisos y roles en Sonido Vivo Viña del Mar.">
+  <title>Sonido Vivo | Mantenedor de Usuarios &amp; Roles</title>
+  
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+  <!-- Cabecera Superior del Administrador -->
+  <header class="main-header" style="background: #0f172a; border-bottom: 2px solid #581c87;">
+    <div class="container header-content">
+      <a href="home.html" class="logo" style="display: flex; align-items: center; gap: 12px;">
+        <img src="../../assets/img/logo.svg" alt="Sonido Vivo Admin">
+        <span class="badge" style="background: #581c87; color: #d8b4fe;">PANEL ADMIN</span>
+      </a>
+
+      <div class="header-actions">
+        <a href="../../index.html" class="btn btn-secondary btn-sm">Ir a Tienda Pública &rarr;</a>
+        <a href="../login.html" class="btn btn-danger btn-sm">Cerrar Sesión</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="container page-content">
+    
+    <div class="admin-layout">
+      
+      <!-- Menú Lateral -->
+      <aside class="admin-sidebar" aria-label="Navegación del panel">
+        <div class="admin-sidebar-header">
+          <h3>Menú de Gestión</h3>
+          <small style="color: var(--color-text-muted);">Administración General</small>
+        </div>
+
+        <nav class="admin-nav">
+          <ul>
+            <li>
+              <a href="home.html">Dashboard General</a>
+            </li>
+            <li>
+              <a href="productos.html">Mantenedor Productos</a>
+            </li>
+            <li>
+              <a href="usuarios.html" class="active">Mantenedor Usuarios</a>
+            </li>
+            <li>
+              <a href="../../index.html">Ver Tienda Pública</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Área de Contenido: CRUD de Usuarios -->
+      <section class="admin-main" aria-label="Gestión de usuarios y asignación de roles">
+        
+        <header class="section-header">
+          <h1>Mantenedor de Usuarios &amp; Asignación de Roles</h1>
+          <p>Gestioná perfiles de acceso (Administrador, Vendedor, Cliente) con validación de RUN chileno y comunas.</p>
+        </header>
+
+        <!-- Formulario de Nuevo Usuario / Edición -->
+        <div class="form-card" style="max-width: 100%; margin-bottom: 32px;">
+          <h2 style="font-size: 1.2rem; margin-bottom: 16px;">Registrar o Modificar Perfil de Usuario</h2>
+          
+          <form id="form-usuario-admin" novalidate>
+            
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="admin-user-rut">RUN / RUT (* sin puntos ni guión, 7 a 9 caracteres):</label>
+                <input type="text" id="admin-user-rut" name="rut" placeholder="Ej: 19011022K" maxlength="9" required>
+              </div>
+
+              <div class="form-group">
+                <label for="admin-user-rol">Rol del Sistema (* Requerido):</label>
+                <select id="admin-user-rol" name="rol" required>
+                  <option value="">-- Seleccionar Rol --</option>
+                  <option value="Administrador">Administrador (Acceso total)</option>
+                  <option value="Vendedor">Vendedor (Productos y pedidos)</option>
+                  <option value="Cliente">Cliente (Compras en tienda)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="admin-user-nombre">Nombre (* máx. 50 caracteres):</label>
+                <input type="text" id="admin-user-nombre" name="nombre" placeholder="Nombre" maxlength="50" required>
+              </div>
+
+              <div class="form-group">
+                <label for="admin-user-apellidos">Apellidos (* máx. 100 caracteres):</label>
+                <input type="text" id="admin-user-apellidos" name="apellidos" placeholder="Apellidos" maxlength="100" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="admin-user-correo">Correo Electrónico (* Solo @duoc.cl, @profesor.duoc.cl o @gmail.com):</label>
+              <input type="email" id="admin-user-correo" name="correo" placeholder="ejemplo@duoc.cl" maxlength="100" required>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="admin-user-region">Región (* Requerido):</label>
+                <select id="admin-user-region" name="region" required>
+                  <option value="">-- Seleccionar Región --</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="admin-user-comuna">Comuna (* Requerido):</label>
+                <select id="admin-user-comuna" name="comuna" required disabled>
+                  <option value="">-- Primero elija una región --</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="admin-user-direccion">Dirección Domiciliaria (* máx. 300 caracteres):</label>
+              <input type="text" id="admin-user-direccion" name="direccion" placeholder="Calle, número, departamento o sector" maxlength="300" required>
+            </div>
+
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <button type="submit" class="btn btn-primary">
+                💾 Guardar Usuario en el Sistema
+              </button>
+              <button type="reset" class="btn btn-secondary" onclick="document.getElementById('admin-user-rut').removeAttribute('readonly');">
+                Limpiar Formulario
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Tabla de Usuarios Registrados -->
+        <div class="data-table-wrapper">
+          <table id="tabla-crud-usuarios" class="data-table" aria-label="Lista de usuarios del sistema">
+            <thead>
+              <tr>
+                <th>RUN</th>
+                <th>Nombre Completo</th>
+                <th>Correo Electrónico</th>
+                <th>Rol</th>
+                <th>Ubicación</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Renderizado dinámico desde admin.js -->
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Pie de Página -->
+  <footer class="main-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Sonido Vivo — Panel de Gestión Administrativo. DSY1104 Duoc UC.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../../js/regiones-comunas.js"></script>
+  <script src="../../js/validaciones.js"></script>
+  <script src="../../js/admin.js"></script>
+</body>
+</html>
