@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 64" width="350" height="64" fill="none">
   <!-- Definición de gradientes -->
   <defs>
     <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#fbbf24" />
-      <stop offset="100%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#D49B28" />
     </linearGradient>
     <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#38bdf8" />
@@ -26,10 +26,10 @@
 
   <!-- Tipografía: SONIDO VIVO -->
   <text x="70" y="34" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="24" font-weight="900" letter-spacing="1.5" fill="#f8fafc">
-    SONIDO<tspan fill="#f59e0b">VIVO</tspan>
+    SONIDO<tspan fill="#D49B28">VIVO</tspan>
   </text>
   <!-- Subtítulo institucional -->
-  <text x="72" y="49" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" letter-spacing="2.8" fill="#94a3b8">
+  <text x="70" y="49" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="600" letter-spacing="2" fill="#94a3b8">
     INSTRUMENTOS &amp; AUDIO • VIÑA DEL MAR
   </text>
 </svg>
