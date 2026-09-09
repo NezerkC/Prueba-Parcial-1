@@ -139,10 +139,22 @@ textarea {
     gap: 20px;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .logo img {
     height: 62px;
     width: auto;
     display: block;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .menu-toggle {
@@ -425,8 +437,11 @@ textarea {
 }
 
 .badge-admin {
-    background-color: #ede9fe;
-    color: #6d28d9;
+    background-color: rgba(212, 155, 40, 0.2);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: 2px 8px;
+    letter-spacing: 0.08em;
 }
 
 /* ==========================================================================
@@ -1242,6 +1257,24 @@ textarea.input-error {
 /* ==========================================================================
    PANEL DE ADMINISTRACIÓN (DASHBOARD & CRUDS)
    ========================================================================== */
+.admin-header {
+    background-color: var(--color-dark);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.admin-user-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-bg);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
 .admin-layout {
     display: grid;
     grid-template-columns: 1fr;
@@ -1338,6 +1371,25 @@ textarea.input-error {
     font-size: 0.8rem;
     color: var(--color-text-muted);
     font-weight: 600;
+}
+
+.admin-sidebar-info {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+}
+
+.admin-valuation-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
 }
 
 .data-table-wrapper {
