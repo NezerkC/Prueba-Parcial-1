@@ -1,35 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64" fill="none">
-  <!-- Definición de gradientes -->
-  <defs>
-    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fbbf24" />
-      <stop offset="100%" stop-color="#f59e0b" />
-    </linearGradient>
-    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="100%" stop-color="#0284c7" />
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 190" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">Sonido Vivo</title>
+  <desc id="logoDesc">Logo de Sonido Vivo con icono amarillo y texto oscuro.</desc>
 
-  <!-- Isotipo: Púa / Pick con ondas de sonido y diapasón estilizado -->
-  <g transform="translate(8, 6)">
-    <!-- Forma de Púa de Guitarra -->
-    <path d="M 26 2 C 40 2, 50 12, 46 28 C 42 42, 26 50, 26 50 C 26 50, 10 42, 6 28 C 2 12, 12 2, 26 2 Z" 
-          fill="url(#amberGrad)" />
-    <!-- Hueco central / boca de guitarra -->
-    <circle cx="26" cy="22" r="10" fill="#0b0f19" />
-    <!-- Cuerdas vibrantes / ondas sonoras -->
-    <path d="M 20 16 Q 26 20 20 28" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" fill="none" />
-    <path d="M 26 14 Q 32 20 26 30" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" fill="none" />
-    <path d="M 32 16 Q 38 20 32 28" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" fill="none" />
+  <g transform="translate(16,18)">
+    <circle cx="60" cy="60" r="54" fill="#F3C12C"/>
+    <circle cx="60" cy="60" r="24" fill="#0C7FC7"/>
+
+    <path d="M43 56c7-6 13-8 19-8 8 0 15 6 15 15 0 4-1 8-5 11-3 2-7 3-11 3-6 0-10-4-13-9-3-2-5-4-5-12z" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M58 43c8-7 14-9 20-9 7 0 13 5 13 13 0 4-2 8-5 10-3 2-7 3-11 3-6 0-11-3-15-8-2-2-4-4-2-9z" fill="none" stroke="#4FC0F0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M30 68c8 8 14 11 22 11 9 0 18-7 18-18 0-4-2-7-5-10-3-2-7-3-11-3-8 0-15 5-18 12-2 5-3 5-6 8z" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M20 94c13 13 25 19 40 19 16 0 29-8 40-25" fill="none" stroke="#0D5EA8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M35 104c10 9 19 14 28 14 12 0 23-6 32-18" fill="none" stroke="#1FA2E5" stroke-width="5" stroke-linecap="round"/>
   </g>
 
-  <!-- Tipografía: SONIDO VIVO -->
-  <text x="70" y="34" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="24" font-weight="900" letter-spacing="1.5" fill="#f8fafc">
-    SONIDO<tspan fill="#f59e0b">VIVO</tspan>
-  </text>
-  <!-- Subtítulo institucional -->
-  <text x="72" y="49" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" letter-spacing="2.8" fill="#94a3b8">
-    INSTRUMENTOS &amp; AUDIO • VIÑA DEL MAR
-  </text>
+  <g transform="translate(170,20)">
+    <text x="0" y="74" font-family="'Segoe UI', 'Arial Black', sans-serif" font-size="86" font-weight="900" letter-spacing="0" fill="#111827">SONIDOVIVO</text>
+    <text x="3" y="112" font-family="'Segoe UI', 'Arial', sans-serif" font-size="22" font-weight="700" letter-spacing="5" fill="#111827">INSTRUMENTOS &amp; AUDIO</text>
+  </g>
 </svg>

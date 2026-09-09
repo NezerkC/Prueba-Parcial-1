@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Nota musical</title>
+  <desc id="desc">Icono de una nota musical para Sonido Vivo</desc>
+  <path fill="#e85d04" d="M39 10v31.5a10.5 10.5 0 1 1-4-8.2V18.6l18-4.5v22.4a10.5 10.5 0 1 1-4-8.2V10H39Zm-4 35.5a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Zm18-5a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"/>
+</svg>
