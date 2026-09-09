@@ -142,8 +142,9 @@ textarea {
 }
 
 .logo img {
-    height: 40px;
+    height: 62px;
     width: auto;
+    display: block;
 }
 
 .menu-toggle {
