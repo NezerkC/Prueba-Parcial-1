@@ -372,8 +372,8 @@ textarea {
    ========================================================================== */
 .badge {
     display: inline-block;
-    padding: 3px 10px;
-    font-size: 0.75rem;
+    padding: 1px 5px;
+    font-size: 0.70rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
