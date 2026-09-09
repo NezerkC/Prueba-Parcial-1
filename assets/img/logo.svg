@@ -25,11 +25,11 @@
   </g>
 
   <!-- Tipografía: SONIDO VIVO -->
-  <text x="70" y="34" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="24" font-weight="900" letter-spacing="1.5" fill="#0f172a">
-    SONIDO<tspan fill="#f59e0b">VIVO</tspan>
+  <text x="70" y="34" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="24" font-weight="900" letter-spacing="1.5" fill="#000000">
+    SONIDO<tspan fill="#000000">VIVO</tspan>
   </text>
   <!-- Subtítulo institucional -->
-  <text x="72" y="49" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" letter-spacing="2.8" fill="#334155">
-    INSTRUMENTOS &amp; AUDIO • VIÑA DEL MAR
+  <text x="72" y="49" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" letter-spacing="2.8" fill="#000000">
+    INSTRUMENTOS &amp; AUDIO
   </text>
 </svg>
