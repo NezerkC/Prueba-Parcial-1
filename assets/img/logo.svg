@@ -2,22 +2,22 @@
   <title id="title">Sonido Vivo</title>
   <desc id="description">Logo de Sonido Vivo, instrumentos y audio</desc>
   <defs>
-    <linearGradient id="sound-blue" x1="10" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#409CFF"/>
-      <stop offset="1" stop-color="#0A70E8"/>
+    <linearGradient id="sound-gold" x1="10" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3C766"/>
+      <stop offset="1" stop-color="#D49B28"/>
     </linearGradient>
   </defs>
 
-  <rect x="8" y="8" width="48" height="48" rx="14" fill="url(#sound-blue)"/>
-  <path d="M40 15V37.5M40 15L23 20V38.5" fill="none" stroke="#FFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="36.5" cy="39.5" rx="6.5" ry="5.2" transform="rotate(-20 36.5 39.5)" fill="#FFF"/>
-  <ellipse cx="19.5" cy="40.5" rx="6.5" ry="5.2" transform="rotate(-20 19.5 40.5)" fill="#FFF"/>
-  <path d="M16 49H48" stroke="#BFDBFE" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+  <rect x="8" y="8" width="48" height="48" rx="14" fill="url(#sound-gold)"/>
+  <path d="M40 15V37.5M40 15L23 20V38.5" fill="none" stroke="#1A2413" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="36.5" cy="39.5" rx="6.5" ry="5.2" transform="rotate(-20 36.5 39.5)" fill="#1A2413"/>
+  <ellipse cx="19.5" cy="40.5" rx="6.5" ry="5.2" transform="rotate(-20 19.5 40.5)" fill="#1A2413"/>
+  <path d="M16 49H48" stroke="#1A2413" stroke-width="2" stroke-linecap="round" opacity=".6"/>
 
-  <text x="70" y="34" fill="#0F172A" font-family="Outfit, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing=".4">
-    SONIDO<tspan fill="#1D4ED8"> VIVO</tspan>
+  <text x="70" y="34" fill="#FAF8F2" font-family="Outfit, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing=".4">
+    SONIDO<tspan fill="#D49B28"> VIVO</tspan>
   </text>
-  <text x="72" y="49" fill="#475569" font-family="Plus Jakarta Sans, Segoe UI, Arial, sans-serif" font-size="8.5" font-weight="700" letter-spacing="2.35">
+  <text x="72" y="49" fill="#E2DDD0" font-family="Plus Jakarta Sans, Segoe UI, Arial, sans-serif" font-size="8.5" font-weight="700" letter-spacing="2.35">
     INSTRUMENTOS · AUDIO · MÚSICA
   </text>
 </svg>
