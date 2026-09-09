@@ -32,6 +32,9 @@ function agregarProductoAlCarrito(producto) {
 
     if (index !== -1) {
         carrito[index].cantidad += 1;
+        if (!carrito[index].imagen && (producto.imagen || producto.codigo)) {
+            carrito[index].imagen = producto.imagen || `${producto.codigo}.jpg`;
+        }
     } else {
         carrito.push({
             codigo: producto.codigo,
@@ -39,6 +42,7 @@ function agregarProductoAlCarrito(producto) {
             precio: Number(producto.precio) || 0,
             categoria: producto.categoria || 'Instrumentos',
             icono: producto.icono || '🎵',
+            imagen: producto.imagen || `${producto.codigo}.jpg`,
             cantidad: 1
         });
     }
@@ -182,11 +186,24 @@ function renderizarTablaCarrito() {
         const precioStr = item.precio === 0 ? '¡GRATIS!' : '$' + item.precio.toLocaleString('es-CL');
         const subtotalStr = subtotalItem === 0 ? '¡GRATIS!' : '$' + subtotalItem.toLocaleString('es-CL');
 
+        const imgHtml = (typeof generarImgProductoHtml === 'function')
+            ? generarImgProductoHtml(item, {
+                style: 'width: 48px; height: 48px; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--color-border); padding: 2px; background: #fff;',
+                fallbackSize: '1.6rem'
+              })
+            : (function () {
+                const baseImg = window.location.pathname.includes('/pages/') ? '../assets/img/' : 'assets/img/';
+                const foto = item.imagen || (item.codigo ? `${item.codigo}.jpg` : '');
+                return foto
+                    ? `<img src="${baseImg}${foto}" alt="${item.nombre}" style="width: 48px; height: 48px; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--color-border); padding: 2px; background: #fff;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><span style="display:none; font-size: 1.6rem;">${item.icono || '🎵'}</span>`
+                    : `<span style="font-size: 1.6rem;">${item.icono || '🎵'}</span>`;
+            })();
+
         return `
       <tr>
         <td>
           <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="font-size: 2rem;">${item.icono || '🎵'}</span>
+            ${imgHtml}
             <div>
               <strong>${item.nombre}</strong>
               <div style="font-size: 0.75rem; color: var(--color-text-muted);">Cód: ${item.codigo} | ${item.categoria}</div>
