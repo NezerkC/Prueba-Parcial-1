@@ -1,0 +1,41 @@
+name: CI / Quality Assurance Pipeline
+
+on:
+  push:
+    branches: [ main, componentes, test, desing ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  audit-and-test:
+    name: Verificación, Linter y Pruebas Unitarias
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./fullstack-react-parcial-1
+
+    steps:
+      - name: Descargar Código Fuente
+        uses: actions/checkout@v4
+
+      - name: Configurar Entorno Node.js (v20 LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: fullstack-react-parcial-1/package-lock.json
+
+      - name: Instalación Limpia de Dependencias
+        run: npm ci
+
+      - name: Auditoría de Linter (ESLint)
+        run: npm run lint
+
+      - name: Suite de Pruebas Unitarias e Integración (Vitest)
+        run: npm run test:run
+
+      - name: Verificación de Cobertura de Código
+        run: npm run coverage
+
+      - name: Compilación de Producción (Vite Build)
+        run: npm run build
