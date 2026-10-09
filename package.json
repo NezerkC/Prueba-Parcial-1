@@ -6,12 +6,12 @@
     "fullstack-react-parcial-1"
   ],
   "scripts": {
-    "dev": "npm --prefix fullstack-react-parcial-1 run dev",
-    "build": "npm --prefix fullstack-react-parcial-1 run build",
-    "test": "npm --prefix fullstack-react-parcial-1 run test",
-    "test:run": "npm --prefix fullstack-react-parcial-1 run test:run",
-    "coverage": "npm --prefix fullstack-react-parcial-1 run coverage",
-    "lint": "npm --prefix fullstack-react-parcial-1 run lint",
-    "preview": "npm --prefix fullstack-react-parcial-1 run preview"
+    "dev": "npm run dev -w fullstack-react-parcial-1",
+    "build": "npm run build -w fullstack-react-parcial-1",
+    "test": "npm run test -w fullstack-react-parcial-1",
+    "test:run": "npm run test:run -w fullstack-react-parcial-1",
+    "coverage": "npm run coverage -w fullstack-react-parcial-1",
+    "lint": "npm run lint -w fullstack-react-parcial-1",
+    "preview": "npm run preview -w fullstack-react-parcial-1"
   }
 }
