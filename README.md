@@ -1,5 +1,18 @@
 # Guía de Estructura y Flujo de Trabajo — Prueba Parcial 1
 
+> [!IMPORTANT]
+> ### 🚀 Etapa 2: Migración a React + Atomic Design + Vitest
+> Toda la planificación arquitectónica, descomposición de componentes y la guía operativa de ramas para el trabajo en equipo están centralizadas en `docs/migracion/`:
+> 1. [01 · Auditoría Arquitectónica Base HTML vs Entorno de Pruebas](docs/migracion/01-auditoria-arquitectura-base-html-vs-entorno-pruebas.md)
+> 2. [02 · Descomposición Atomic Design](docs/migracion/02-descomposicion-atomic-design.md)
+> 3. [03 · Guía de Migración TDD con Vitest](docs/migracion/03-guia-migracion-tdd-vitest.md)
+> 4. [04 · Testing y Cobertura Vitest](docs/migracion/04-testing-y-cobertura-vitest.md)
+> 5. [05 · Estrategia Git, CI/CD y Supabase](docs/migracion/05-estrategia-git-cicd-cloud-y-base-de-datos.md)
+> 6. [06 · Flujo de Trabajo Colaborativo en Git y Guía de Ramas](docs/migracion/06-flujo-colaborativo-git-ramas-y-trabajo-en-equipo.md)
+
+---
+
+
 Documento de referencia para el equipo de desarrollo. Define la arquitectura del proyecto, la convención de ramas, el protocolo de sincronización y el estándar de commits para garantizar orden, trazabilidad e integración limpia.
 
 ---
