@@ -37,3 +37,9 @@ pnpm-debug.log*
 *.sw?
 .DS_Store
 Thumbs.db
+
+# Carpetas de referencia local (el proyecto HTML vive en la rama proyecto-html-base)
+base html/
+mi-proyecto-pruebas/
+docs/guias-instituto/
+docs/entregables/
