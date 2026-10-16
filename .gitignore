@@ -43,3 +43,6 @@ base html/
 mi-proyecto-pruebas/
 docs/guias-instituto/
 docs/entregables/
+
+# Archivos comprimidos de release
+*.zip
