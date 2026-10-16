@@ -56,3 +56,28 @@ export function validarClave(clave) {
   if (!clave || typeof clave !== 'string') return false;
   return clave.length >= 4 && clave.length <= 10;
 }
+
+// Formulario de Contacto (portado desde base html/js/validaciones.js)
+export const LIMITE_NOMBRE_CONTACTO = 100;
+export const LIMITE_COMENTARIO_CONTACTO = 500;
+
+export function validarFormularioContacto({ nombre = '', correo = '', comentario = '' } = {}) {
+  const errores = {};
+
+  const nombreLimpio = nombre.trim();
+  if (!nombreLimpio || nombreLimpio.length > LIMITE_NOMBRE_CONTACTO) {
+    errores.nombre = 'Nombre requerido (máximo 100 caracteres).';
+  }
+
+  if (!validarEmailInstitucional(correo)) {
+    errores.correo =
+      'Solo correos autorizados (@duoc.cl, @profesor.duoc.cl o @gmail.com).';
+  }
+
+  const comentarioLimpio = comentario.trim();
+  if (!comentarioLimpio || comentarioLimpio.length > LIMITE_COMENTARIO_CONTACTO) {
+    errores.comentario = 'Comentario requerido (máximo 500 caracteres).';
+  }
+
+  return errores;
+}
