@@ -1726,3 +1726,155 @@ textarea.input-error {
     flex-wrap: wrap;
     gap: 12px;
 }
+
+
+/* ===== Detalle de producto (migrado desde estilos en línea de producto-detalle.html) ===== */
+.detalle-breadcrumb {
+    margin-bottom: 24px;
+}
+
+.detalle-breadcrumb p {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.detalle-breadcrumb-actual {
+    color: var(--color-primary);
+}
+
+.detalle-icono {
+    font-size: 3.5rem;
+}
+
+.detalle-codigo {
+    font-size: 0.9rem;
+    padding: 4px 10px;
+}
+
+.detalle-garantia {
+    margin-top: 24px;
+}
+
+.detalle-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.detalle-precio-label {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    display: block;
+}
+
+.detalle-descripcion {
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.detalle-especificaciones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 16px;
+    margin-bottom: 0;
+}
+
+.detalle-especificacion dt {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+}
+
+.detalle-especificacion dd {
+    margin-bottom: 0;
+    font-weight: 600;
+    color: var(--color-text-main);
+}
+
+.detalle-acciones {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.detalle-btn-agregar {
+    flex: 1;
+    min-width: 200px;
+}
+
+.detalle-enlaces {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+}
+
+.selector-cantidad-label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.selector-cantidad-controles {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.selector-cantidad-btn {
+    width: 40px;
+    height: 42px;
+    border: 0;
+    background: transparent;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+.selector-cantidad-btn:disabled {
+    background: transparent !important;
+}
+
+.selector-cantidad-valor {
+    min-width: 44px;
+    text-align: center;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+.producto-no-encontrado {
+    text-align: center;
+}
+
+.producto-no-encontrado-icono {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.producto-no-encontrado p {
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
+}
+
+/* Aviso flotante del carrito (mismos colores que el toast de carrito.js) */
+.cart-toast-container {
+    position: fixed !important;
+    z-index: 9999;
+}
+
+.cart-toast {
+    background: #1A2413;
+    color: #FAF8F2;
+    border: 1px solid #D49B28;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
