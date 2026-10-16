@@ -1,8 +1,9 @@
-﻿import { Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navigation from './components/Navbar';
 import Home from './pages/Home';
+import Productos from './pages/Productos';
 import { CartProvider } from './context/CartContext';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Container as="main" className="page-content flex-grow-1 py-4">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/productos" element={<Productos />} />
           </Routes>
         </Container>
 
