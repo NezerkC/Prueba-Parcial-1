@@ -105,7 +105,7 @@ $tasks = @(
         Id = 11
         Tag = "Tarea 11"
         Title = "Modulo Administrativo (Dashboard y CRUD de Inventario)"
-        Responsable = "NezerkC"
+        Responsable = "dysandoval"
         Check = { ((Test-FileRel "src/pages/Admin.jsx") -or (Test-FileRel "src/pages/admin/AdminDashboard.jsx") -or (Test-FileRel "src/pages/admin/AdminProductos.jsx")) -and ((Test-ContentRel "src/App.jsx" "Admin") -or (Test-ContentRel "src/App.jsx" "admin")) }
         Tip = "Construye el panel administrativo con metricas de catalogo, stock critico y tabla CRUD interactiva para administrar productos."
     },

@@ -95,9 +95,9 @@ npm run coverage
 
 | Integrante | Rol Principal | Ramas de Trabajo | Entregables en React |
 | :--- | :--- | :--- | :--- |
-| **NezerkC** | *Arquitectura, Router & Admin* | `feat/routing-navegacion`<br>`feat/auth-login`<br>`feat/panel-admin` | Rutas en `App.jsx`, vista de Login (`/login`) y Dashboard/CRUD Administrativo (`/admin`). |
+| **NezerkC** | *Arquitectura, Auth & Carrito* | `feat/routing-navegacion`<br>`feat/auth-login-registro`<br>`feat/carrito-compras` | Rutas en `App.jsx`, Setup Vite/Vitest, Login (`/login`), Registro (`/registro`) y Carrito de compras (`/carrito`). |
 | **Daakhen** | *Catálogo, Vistas & Diseño* | `desing`<br>`feat/catalogo-productos`<br>`feat/producto-detalle` | Catálogo con filtros (`/productos`), detalle de producto (`/producto/:codigo`), Nosotros y Blogs. |
-| **dysandoval** | *Carrito, Validación & TDD* | `test`<br>`feat/carrito-checkout`<br>`feat/validaciones-registro` | Vista de Carrito/Checkout (`/carrito`), formulario de Registro (`/registro`), Contacto y pruebas TDD. |
+| **dysandoval** | *Admin, Validación & TDD* | `test`<br>`feat/panel-admin`<br>`feat/validaciones-test` | Dashboard y mantenedor CRUD Administrativo (`/admin`), utilidades y suite de pruebas TDD. |
 
 ---
 
