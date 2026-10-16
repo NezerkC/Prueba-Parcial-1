@@ -2,6 +2,7 @@ import { Container } from 'react-bootstrap';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navigation from './components/Navbar';
+import Nosotros from './pages/Nosotros';
 import Home from './pages/Home';
 import Productos from './pages/Productos';
 import { CartProvider } from './context/CartContext';
@@ -13,9 +14,10 @@ function App() {
         <Navigation />
 
         <Container as="main" className="page-content flex-grow-1 py-4">
-          <Routes>
+           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/productos" element={<Productos />} />
+            <Route path="/nosotros" element={<Nosotros />} />
           </Routes>
         </Container>
 
