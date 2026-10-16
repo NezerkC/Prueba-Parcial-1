@@ -733,3 +733,9 @@ export function obtenerCatalogoActivo() {
   }
   return PRODUCTOS_SONIDO_VIVO
 }
+
+// Búsqueda sin distinguir mayúsculas, igual que inicializarDetalleProducto() de catalogo.js (ga001 = GA001)
+export function buscarProductoPorCodigo(catalogo, codigo = '') {
+  if (!Array.isArray(catalogo) || !codigo) return undefined
+  return catalogo.find((item) => item.codigo.toUpperCase() === codigo.toUpperCase())
+}
