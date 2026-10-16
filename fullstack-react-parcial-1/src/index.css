@@ -1457,3 +1457,91 @@ textarea.input-error {
     align-items: center;
     justify-content: center;
 }
+
+/* ===== Página Nosotros (migrada desde estilos en línea de nosotros.html) ===== */
+.nosotros-hero {
+    padding: 36px 24px;
+    margin-bottom: 32px;
+}
+
+.nosotros-identidad {
+    margin-bottom: 40px;
+}
+
+.nosotros-card {
+    text-align: left;
+}
+
+.nosotros-card-icon {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.nosotros-card-title {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.nosotros-text {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.nosotros-panel {
+    max-width: 100%;
+    margin-bottom: 40px;
+}
+
+.nosotros-panel--destacado {
+    padding: 36px 28px;
+}
+
+.nosotros-solucion-badge {
+    margin-bottom: 12px;
+}
+
+.nosotros-solucion-title {
+    font-size: 1.7rem;
+    margin-bottom: 14px;
+    color: var(--color-text-main);
+}
+
+.nosotros-sellos {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.nosotros-video {
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-card);
+}
+
+.nosotros-video-caption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+.valor-item {
+    height: 100%;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-primary);
+}
+
+.valor-item strong {
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+}
+
+.valor-item span {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
