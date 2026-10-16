@@ -1545,3 +1545,19 @@ textarea.input-error {
     color: var(--color-text-muted);
     font-size: 0.9rem;
 }
+
+
+/* ===== Header con React-Bootstrap (reemplaza el menú JS de la versión HTML) ===== */
+.navbar.main-header {
+    --bs-navbar-color: var(--color-border);
+    --bs-navbar-hover-color: var(--color-accent);
+    --bs-navbar-active-color: var(--color-accent);
+}
+
+.main-header .navbar-nav.main-nav {
+    display: flex;
+}
+
+.main-header .navbar-nav .nav-link.active {
+    font-weight: 600;
+}
