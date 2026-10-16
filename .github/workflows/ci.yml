@@ -15,10 +15,10 @@ jobs:
       - name: Descargar Código Fuente
         uses: actions/checkout@v4
 
-      - name: Configurar Entorno Node.js (v20 LTS)
+      - name: Configurar Entorno Node.js (v22 LTS)
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Instalación Limpia de Dependencias (Workspaces)
