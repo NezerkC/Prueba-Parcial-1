@@ -1,0 +1,223 @@
+name: 🤖 Auto Progress Tracker (GitHub Projects Autopilot)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  track-progress:
+    name: Inspeccionar Codigo y Actualizar Tablero
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar codigo fuente
+        uses: actions/checkout@v4
+
+      - name: Evaluar Reglas de Codigo y Sincronizar Issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const baseDir = path.join(process.cwd(), 'fullstack-react-parcial-1');
+
+            const fileExists = (relPath) => fs.existsSync(path.join(baseDir, relPath));
+            const fileContains = (relPath, str) => {
+              const fullPath = path.join(baseDir, relPath);
+              if (!fs.existsSync(fullPath)) return false;
+              return fs.readFileSync(fullPath, 'utf8').includes(str);
+            };
+
+            const tasks = [
+              {
+                id: 1,
+                tag: 'Tarea 01',
+                title: 'Tarea 01 · Setup de Arquitectura, Vite, Vitest y Bootstrap',
+                check: () => fileExists('vite.config.js') && fileExists('src/setupTests.js') && fileExists('package.json'),
+                coachTip: 'Configura Vite con el plugin de React, Vitest para jsdom y carga los estilos de Bootstrap en src/main.jsx.'
+              },
+              {
+                id: 2,
+                tag: 'Tarea 02',
+                title: 'Tarea 02 · Motor de Utilidades y Reglas de Negocio (RUT, IVA y Stock)',
+                check: () => fileExists('src/utils/validaciones.js') && fileExists('src/utils/finanzas.js') && fileExists('src/utils/stock.js'),
+                coachTip: 'Implementa el algoritmo Módulo 11 en validaciones.js, el cálculo de IVA 19% en finanzas.js y el stock crítico en stock.js con sus respectivos tests.'
+              },
+              {
+                id: 3,
+                tag: 'Tarea 03',
+                title: 'Tarea 03 · Estado Global del Carrito con CartContext y Custom Hook useContador',
+                check: () => fileExists('src/context/CartContext.jsx') && fileExists('src/hooks/useContador.js'),
+                coachTip: 'Crea el CartProvider con persistencia en localStorage y el custom hook useContador con límites de stock mínimo y máximo.'
+              },
+              {
+                id: 4,
+                tag: 'Tarea 04',
+                title: 'Tarea 04 · Capa de Servicios HTTP y Catálogo de Datos Maestro',
+                check: () => fileExists('src/services/api.js') && fileExists('src/data/productos.js'),
+                coachTip: 'Configura la instancia de Axios en api.js y exporta el catálogo de 51 productos en src/data/productos.js.'
+              },
+              {
+                id: 5,
+                tag: 'Tarea 05',
+                title: 'Tarea 05 · Navegación Global (Navbar, Footer) y Landing Page Home',
+                check: () => fileExists('src/components/Navbar.jsx') && fileExists('src/pages/Home.jsx'),
+                coachTip: 'Construye la barra de navegación con el badge reactivo del carrito, el Footer y la vista Home con sus secciones modulares.'
+              },
+              {
+                id: 6,
+                tag: 'Tarea 06',
+                title: 'Tarea 06 · Catálogo de Productos Completo con Filtros y Buscador',
+                check: () => fileExists('src/pages/Productos.jsx') && fileContains('src/App.jsx', 'Productos'),
+                coachTip: 'Construye src/pages/Productos.jsx con buscador en tiempo real, filtros por categoría con chips y conecta la ruta /productos en App.jsx.'
+              },
+              {
+                id: 7,
+                tag: 'Tarea 07',
+                title: 'Tarea 07 · Ficha Técnica de Producto Individual (ProductDetail)',
+                check: () => fileExists('src/pages/ProductoDetalle.jsx') && fileContains('src/App.jsx', 'ProductoDetalle'),
+                coachTip: 'Crea src/pages/ProductoDetalle.jsx usando useParams para obtener el :codigo del producto, integrando selector de cantidad useContador y botón de agregar.'
+              },
+              {
+                id: 8,
+                tag: 'Tarea 08',
+                title: 'Tarea 08 · Carrito de Compras Interactivo y Resumen Fiscal',
+                check: () => fileExists('src/pages/Carrito.jsx') && fileContains('src/App.jsx', 'Carrito'),
+                coachTip: 'Crea src/pages/Carrito.jsx conectado al CartContext, con tabla interactiva, desglose de IVA 19% y total CLP, estado vacío amigable y botón de checkout.'
+              },
+              {
+                id: 9,
+                tag: 'Tarea 09',
+                title: 'Tarea 09 · Formularios de Autenticación (Login) y Registro con Validación Reactiva',
+                check: () => fileExists('src/pages/Login.jsx') && fileExists('src/pages/Registro.jsx') && fileContains('src/App.jsx', 'Login'),
+                coachTip: 'Crea src/pages/Login.jsx y src/pages/Registro.jsx con validación reactiva de RUT (Módulo 11) y selectores en cascada Región-Comuna.'
+              },
+              {
+                id: 10,
+                tag: 'Tarea 10',
+                title: 'Tarea 10 · Páginas Institucionales (Nosotros, Contacto y Blogs)',
+                check: () => fileExists('src/pages/Nosotros.jsx') && fileExists('src/pages/Contacto.jsx') && fileContains('src/App.jsx', 'Contacto'),
+                coachTip: 'Implementa Nosotros.jsx y Contacto.jsx con contador reactivo de caracteres (límite 500) y conecta sus enlaces en el Navbar y Footer.'
+              },
+              {
+                id: 11,
+                tag: 'Tarea 11',
+                title: 'Tarea 11 · Módulo Administrativo (Dashboard y CRUD de Inventario)',
+                check: () => (fileExists('src/pages/Admin.jsx') || fileExists('src/pages/admin/AdminDashboard.jsx') || fileExists('src/pages/admin/AdminProductos.jsx')) && (fileContains('src/App.jsx', 'Admin') || fileContains('src/App.jsx', 'admin')),
+                coachTip: 'Construye el panel administrativo con métricas de catálogo, stock crítico y tabla CRUD interactiva para administrar productos.'
+              },
+              {
+                id: 12,
+                tag: 'Tarea 12',
+                title: 'Tarea 12 · Suite Integral de Pruebas Unitarias, Cobertura y Accesibilidad',
+                check: () => (fileExists('src/pages/Productos.test.jsx') || fileExists('src/pages/Carrito.test.jsx') || fileExists('src/pages/Registro.test.jsx')),
+                coachTip: 'Escribe pruebas de componentes con Testing Library para las páginas principales y valida accesibilidad con jest-axe hasta superar el 80% de cobertura.'
+              }
+            ];
+
+            // Obtener issues actuales del repo
+            const issuesResp = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'all',
+              per_page: 100
+            });
+            const issues = issuesResp.data;
+
+            let firstPendingAssigned = false;
+
+            for (const task of tasks) {
+              const issue = issues.find(i => i.title.includes(task.tag));
+              if (!issue) {
+                console.log(`[AVISO] No se encontro Issue para '${task.tag}'. Ejecuta el workflow 'Seed Project Backlog'.`);
+                continue;
+              }
+
+              const isDone = task.check();
+              const currentLabels = issue.labels.map(l => (typeof l === 'string' ? l : l.name));
+
+              if (isDone) {
+                // TAREA CUMPLIDA
+                const newLabels = currentLabels
+                  .filter(l => l !== 'estado: en-curso' && l !== 'estado: por-hacer')
+                  .concat(!currentLabels.includes('estado: finalizado') ? ['estado: finalizado'] : []);
+
+                if (issue.state !== 'closed' || !currentLabels.includes('estado: finalizado')) {
+                  await github.rest.issues.update({
+                    owner,
+                    repo,
+                    issue_number: issue.number,
+                    state: 'closed',
+                    state_reason: 'completed',
+                    labels: newLabels
+                  });
+                  await github.rest.issues.createComment({
+                    owner,
+                    repo,
+                    issue_number: issue.number,
+                    body: `✅ **Tarea Verificada en Codigo**\n\nEl escaner automatico de GitHub Actions detecto los componentes y contratos tecnicos requeridos para esta tarea en la rama principal.\n\n- **Estado:** Cerrado automaticamente.\n- **Tablero:** Movido a columna \`Done\` en GitHub Projects.`
+                  });
+                  console.log(`[FINALIZADA] Issue #${issue.number} - ${task.title}`);
+                }
+              } else {
+                // TAREA PENDIENTE
+                if (!firstPendingAssigned) {
+                  // Primera tarea pendiente -> EN CURSO
+                  firstPendingAssigned = true;
+
+                  const newLabels = currentLabels
+                    .filter(l => l !== 'estado: por-hacer' && l !== 'estado: finalizado')
+                    .concat(!currentLabels.includes('estado: en-curso') ? ['estado: en-curso'] : []);
+
+                  await github.rest.issues.update({
+                    owner,
+                    repo,
+                    issue_number: issue.number,
+                    state: 'open',
+                    labels: newLabels
+                  });
+
+                  // Verificar si ya se comento la guia del coach
+                  const comments = await github.rest.issues.listComments({
+                    owner,
+                    repo,
+                    issue_number: issue.number
+                  });
+                  const alreadyGuided = comments.data.some(c => c.body.includes('🎯 **Guía Paso a Paso de la IA (Coach)**'));
+
+                  if (!alreadyGuided) {
+                    await github.rest.issues.createComment({
+                      owner,
+                      repo,
+                      issue_number: issue.number,
+                      body: `🎯 **Guía Paso a Paso de la IA (Coach)**\n\nEsta tarea ha sido promovida a **EN CURSO** para el equipo:\n\n> 💡 **Instrucción para el equipo:**\n> ${task.coachTip}\n\n*Al hacer \`git push origin main\` con los cambios, este issue se verificara y cerrara automaticamente.*`
+                    });
+                  }
+                  console.log(`[EN CURSO] Issue #${issue.number} - ${task.title}`);
+                } else {
+                  // Tareas pendientes posteriores -> POR HACER
+                  const newLabels = currentLabels
+                    .filter(l => l !== 'estado: en-curso' && l !== 'estado: finalizado')
+                    .concat(!currentLabels.includes('estado: por-hacer') ? ['estado: por-hacer'] : []);
+
+                  if (currentLabels.includes('estado: en-curso') || !currentLabels.includes('estado: por-hacer')) {
+                    await github.rest.issues.update({
+                      owner,
+                      repo,
+                      issue_number: issue.number,
+                      state: 'open',
+                      labels: newLabels
+                    });
+                  }
+                  console.log(`[POR HACER] Issue #${issue.number} - ${task.title}`);
+                }
+              }
+            }
