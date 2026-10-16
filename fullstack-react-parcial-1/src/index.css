@@ -1645,3 +1645,84 @@ textarea.input-error {
     margin-top: 6px;
     margin-bottom: 0;
 }
+
+
+/* ===== Blogs (migrado desde estilos en línea de blogs.html y blog-detalle.html) ===== */
+.blog-card-thumb--video {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    height: 180px;
+}
+
+.blog-card-thumb--video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-video-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.blog-card-action {
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+.blog-breadcrumb {
+    margin-bottom: 24px;
+}
+
+.blog-breadcrumb p {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.blog-breadcrumb-actual {
+    color: var(--color-primary);
+}
+
+.blog-detail-badge {
+    margin-bottom: 12px;
+}
+
+.blog-detail-video {
+    margin: 24px 0 28px;
+}
+
+.blog-video-caption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+.blog-detail-content h3.blog-detail-subtitle {
+    margin: 24px 0 12px;
+    color: var(--color-primary);
+}
+
+.blog-detail-nav {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}

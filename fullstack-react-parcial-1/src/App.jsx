@@ -4,6 +4,8 @@ import Footer from './components/Footer';
 import Navigation from './components/Navbar';
 import Nosotros from './pages/Nosotros';
 import Contacto from './pages/Contacto';
+import Blogs from './pages/Blogs';
+import BlogDetalle from './pages/BlogDetalle';
 import Home from './pages/Home';
 import { CartProvider } from './context/CartContext';
 
@@ -18,6 +20,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/contacto" element={<Contacto />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:id" element={<BlogDetalle />} />
           </Routes>
         </Container>
 
