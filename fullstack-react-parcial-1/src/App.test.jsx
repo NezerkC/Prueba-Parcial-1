@@ -11,7 +11,7 @@ describe('<App /> (Integración del Layout y Home)', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByRole('link', { name: /ir a pagina de inicio/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /ir a página de inicio/i })).toBeInTheDocument();
     expect(screen.getByTestId('navbar-cart-count')).toHaveTextContent('0');
   });
 
