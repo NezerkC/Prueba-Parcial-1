@@ -2,6 +2,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navigation from './components/Navbar';
+import Nosotros from './pages/Nosotros';
 import Home from './pages/Home';
 import { CartProvider } from './context/CartContext';
 
@@ -14,6 +15,7 @@ function App() {
         <Container as="main" className="page-content flex-grow-1 py-4">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/nosotros" element={<Nosotros />} />
           </Routes>
         </Container>
 
