@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navigation from './components/Navbar';
 import Nosotros from './pages/Nosotros';
+import Contacto from './pages/Contacto';
 import Home from './pages/Home';
 import { CartProvider } from './context/CartContext';
 
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/contacto" element={<Contacto />} />
           </Routes>
         </Container>
 

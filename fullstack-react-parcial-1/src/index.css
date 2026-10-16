@@ -1561,3 +1561,87 @@ textarea.input-error {
 .main-header .navbar-nav .nav-link.active {
     font-weight: 600;
 }
+
+
+/* ===== Página Contacto (migrada desde estilos en línea de contacto.html) ===== */
+.contacto-form-card {
+    margin: 0;
+    max-width: 100%;
+}
+
+.contacto-form-title {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+}
+
+.contacto-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.form-group .contacto-label-row label {
+    margin-bottom: 0;
+}
+
+.contacto-contador {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.contacto-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contacto-card {
+    text-align: left;
+}
+
+.contacto-card h3 {
+    color: var(--color-primary);
+    margin-bottom: 12px;
+}
+
+.contacto-dato {
+    color: var(--color-text-main);
+    margin-bottom: 8px;
+}
+
+.contacto-dato:last-child {
+    margin-bottom: 0;
+}
+
+.contacto-horarios {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.contacto-mapa {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+}
+
+.contacto-mapa-etiqueta {
+    font-family: monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.contacto-mapa p {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin-top: 6px;
+    margin-bottom: 0;
+}
