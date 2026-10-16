@@ -1,9 +1,11 @@
-﻿import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 function Navigation() {
   const { totalUnidades } = useCart();
+  const { usuario, isAuthenticated, isAdmin, logout } = useAuth();
 
   return (
     <Navbar expand="lg" className="main-header py-2">
@@ -41,10 +43,36 @@ function Navigation() {
             </Nav.Link>
           </Nav>
 
-          <div className="header-actions mt-3 mt-lg-0">
-            <Link to="/login" className="btn btn-secondary btn-sm">
-              Ingresar
-            </Link>
+          <div className="header-actions mt-3 mt-lg-0 d-flex align-items-center">
+            {isAuthenticated ? (
+              <div className="d-flex align-items-center me-2">
+                {isAdmin && (
+                  <Link
+                    to="/admin"
+                    className="btn btn-outline-warning btn-sm me-2 fw-semibold"
+                    data-testid="navbar-admin-link"
+                  >
+                    Panel Admin
+                  </Link>
+                )}
+                <span className="me-2 small fw-semibold text-dark" data-testid="navbar-user-greeting">
+                  Hola, {usuario?.nombre}
+                </span>
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="btn btn-outline-secondary btn-sm"
+                  data-testid="navbar-logout-btn"
+                >
+                  Salir
+                </button>
+              </div>
+            ) : (
+              <Link to="/login" className="btn btn-secondary btn-sm me-2" data-testid="navbar-login-link">
+                Ingresar
+              </Link>
+            )}
+
             <Link
               to="/carrito"
               className="cart-btn"
