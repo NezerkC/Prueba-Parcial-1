@@ -8,13 +8,13 @@ function Navigation() {
   const { usuario, isAuthenticated, isAdmin, logout } = useAuth();
 
   return (
-    <Navbar expand="lg" className="main-header py-2">
+    <Navbar expand="lg" data-bs-theme="dark" className="main-header py-2">
       <Container className="header-content">
         <Navbar.Brand
           as={Link}
           to="/"
           className="logo"
-          aria-label="Ir a pagina de inicio de Sonido Vivo"
+          aria-label="Ir a página de inicio de Sonido Vivo"
         >
           <img
             src="/assets/img/logo.svg"
@@ -30,7 +30,7 @@ function Navigation() {
               Inicio
             </Nav.Link>
             <Nav.Link as={NavLink} to="/productos">
-              Catalogo
+              Catálogo
             </Nav.Link>
             <Nav.Link as={NavLink} to="/nosotros">
               Nosotros
