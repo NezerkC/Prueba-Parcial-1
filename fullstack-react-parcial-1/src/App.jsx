@@ -7,6 +7,7 @@ import Productos from './pages/Productos';
 import Nosotros from './pages/Nosotros';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
+import Carrito from './pages/Carrito';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 
@@ -24,6 +25,7 @@ function App() {
               <Route path="/nosotros" element={<Nosotros />} />
               <Route path="/login" element={<Login />} />
               <Route path="/registro" element={<Registro />} />
+              <Route path="/carrito" element={<Carrito />} />
             </Routes>
           </Container>
 

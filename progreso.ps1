@@ -81,7 +81,7 @@ $tasks = @(
         Id = 8
         Tag = "Tarea 08"
         Title = "Carrito de Compras Interactivo y Resumen Fiscal"
-        Responsable = "dysandoval"
+        Responsable = "NezerkC"
         Check = { (Test-FileRel "src/pages/Carrito.jsx") -and (Test-ContentRel "src/App.jsx" "Carrito") }
         Tip = "Crea src/pages/Carrito.jsx conectado al CartContext, con tabla interactiva, desglose de IVA 19% y total CLP, estado vacio amigable y boton de checkout."
     },
