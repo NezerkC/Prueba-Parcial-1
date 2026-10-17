@@ -16,6 +16,9 @@ import BlogDetalle from './pages/BlogDetalle';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
 import Carrito from './pages/Carrito';
+import Checkout from './pages/Checkout';
+import CompraExitosa from './pages/CompraExitosa';
+import PagoFallido from './pages/PagoFallido';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProductos from './pages/admin/AdminProductos';
 import { CartProvider } from './context/CartContext';
@@ -49,6 +52,9 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/registro" element={<Registro />} />
               <Route path="/carrito" element={<Carrito />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/compra-exitosa" element={<CompraExitosa />} />
+              <Route path="/pago-fallido" element={<PagoFallido />} />
               <Route path="/admin" element={<RutaAdmin><AdminDashboard /></RutaAdmin>} />
               <Route path="/admin/productos" element={<RutaAdmin><AdminProductos /></RutaAdmin>} />
             </Routes>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
 import { formatearPrecioCLP } from '../utils/finanzas';
@@ -15,22 +15,19 @@ function Carrito() {
     totalConIva,
   } = useCart();
 
+  const navigate = useNavigate();
   const [showVaciarModal, setShowVaciarModal] = useState(false);
-  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
-  const [checkoutCompletado, setCheckoutCompletado] = useState(false);
 
   const handleConfirmarVaciar = () => {
     clearCart();
     setShowVaciarModal(false);
   };
 
-  const handleSimularCheckout = () => {
-    setCheckoutCompletado(true);
-    setShowCheckoutModal(true);
-    clearCart();
+  const handleIrAlCheckout = () => {
+    navigate('/checkout');
   };
 
-  if (items.length === 0 && !checkoutCompletado) {
+  if (items.length === 0) {
     return (
       <div className="cart-empty-state text-center py-5" data-testid="cart-empty-view">
         <div className="empty-icon fs-1 mb-3" aria-hidden="true">
@@ -55,24 +52,6 @@ function Carrito() {
           Los artículos se mantienen guardados en tu navegador de forma segura.
         </p>
       </header>
-
-      {checkoutCompletado && (
-        <div
-          className="alert alert-success d-flex align-items-center justify-content-between p-3 mb-4"
-          role="alert"
-          data-testid="alert-checkout-exitoso"
-        >
-          <div>
-            <h2 className="alert-heading h5 mb-1">¡Gracias por tu compra en Sonido Vivo!</h2>
-            <p className="mb-0 small">
-              Tu orden ha sido procesada exitosamente en modo simulación. Despacho coordinado para Viña del Mar y Valparaíso.
-            </p>
-          </div>
-          <Link to="/productos" className="btn btn-success btn-sm ms-3">
-            Comprar más
-          </Link>
-        </div>
-      )}
 
       {items.length > 0 && (
         <div className="cart-layout">
@@ -218,15 +197,15 @@ function Carrito() {
             <button
               type="button"
               className="btn btn-primary w-100 py-2 fw-semibold"
-              onClick={handleSimularCheckout}
+              onClick={handleIrAlCheckout}
               data-testid="btn-finalizar-compra"
             >
-              💳 Finalizar Compra
+              💳 Continuar al Checkout
             </button>
 
             <div className="mt-3 text-center">
               <small className="text-muted">
-                🔒 Transacción simulada mediante Web Storage local para la evaluación DSY1104.
+                🔒 En el siguiente paso ingresas tus datos de envío. El pago es simulado.
               </small>
             </div>
           </aside>
@@ -247,21 +226,6 @@ function Carrito() {
           </Button>
           <Button variant="danger" onClick={handleConfirmarVaciar} data-testid="btn-confirmar-vaciar">
             Sí, Vaciar Carro
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* Modal Informativo de Checkout */}
-      <Modal show={showCheckoutModal} onHide={() => setShowCheckoutModal(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title className="h5">🎉 ¡Orden Confirmada!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          ¡Felicitaciones! Tu orden ha sido registrada exitosamente. En una aplicación en producción, serías redirigido a la pasarela de pago (Webpay Plus).
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={() => setShowCheckoutModal(false)} data-testid="btn-cerrar-checkout">
-            Entendido
           </Button>
         </Modal.Footer>
       </Modal>
