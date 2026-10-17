@@ -1,4 +1,4 @@
-﻿import { render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, it, expect } from 'vitest';
 import App from './App';
@@ -12,6 +12,8 @@ describe('<App /> (Integración del Layout y Home)', () => {
     );
 
     expect(screen.getByRole('link', { name: /ir a página de inicio/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /categorías/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /ofertas/i })).toBeInTheDocument();
     expect(screen.getByTestId('navbar-cart-count')).toHaveTextContent('0');
   });
 

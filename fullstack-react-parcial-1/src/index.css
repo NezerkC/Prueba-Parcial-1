@@ -1878,3 +1878,115 @@ textarea.input-error {
     font-size: 0.9rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
+
+/* ==========================================================================
+   VISTAS DE CATEGORIAS Y OFERTAS (TAREA 13 / ANEXO 1)
+   ========================================================================== */
+.product-thumb-badge-oferta {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    background: #d32f2f;
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 4px rgba(211, 47, 47, 0.3);
+    z-index: 2;
+}
+
+.category-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-accent);
+}
+
+.category-thumb {
+    height: 180px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding: 20px;
+    overflow: hidden;
+}
+
+.category-thumb img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.35s ease;
+}
+
+.category-card:hover .category-thumb img {
+    transform: scale(1.08);
+}
+
+.category-count-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(26, 36, 19, 0.85);
+    color: #FAF8F2;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.category-info {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.category-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--color-text-main);
+}
+
+.ofertas-banner {
+    background: linear-gradient(135deg, #1A2413 0%, #2A3B1E 60%, #94783B 100%);
+    color: #FAF8F2;
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.ofertas-badge {
+    background: #D49B28;
+    color: #1A2413;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+

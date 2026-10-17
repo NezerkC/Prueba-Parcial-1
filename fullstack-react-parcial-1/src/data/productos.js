@@ -36,6 +36,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'CD-60S',
     stock: 5,
     precio: 189990,
+    precioOriginal: 229990,
+    enOferta: true,
+    descuento: 17,
     descripcion: 'Tapa de abeto macizo, brazo de caoba. Sonido cálido y proyectado.',
     icono: '🎸',
     stockCritico: 3,
@@ -88,6 +91,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'Affinity Strat',
     stock: 5,
     precio: 249990,
+    precioOriginal: 299990,
+    enOferta: true,
+    descuento: 17,
     descripcion: 'Cuerpo de álamo, mástil de arce, pastillas SSS.',
     icono: '⚡🎸',
     stockCritico: 3,
@@ -166,6 +172,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'Player Jazz',
     stock: 2,
     precio: 699990,
+    precioOriginal: 799990,
+    enOferta: true,
+    descuento: 13,
     descripcion: 'Alder body, 2 Alnico V Jazz single-coil.',
     icono: '🎸',
     stockCritico: 3,
@@ -205,6 +214,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'TD-02KV',
     stock: 2,
     precio: 799990,
+    precioOriginal: 949990,
+    enOferta: true,
+    descuento: 16,
     descripcion: 'Módulo TD-02, 8 pads de goma, pedal hi-hat.',
     icono: '🥁',
     stockCritico: 3,
@@ -257,6 +269,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'PSR-E373',
     stock: 4,
     precio: 249990,
+    precioOriginal: 289990,
+    enOferta: true,
+    descuento: 14,
     descripcion: '61 teclas sensibles al tacto, 622 voces.',
     icono: '🎹',
     stockCritico: 3,
@@ -309,6 +324,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'Frontman 15G',
     stock: 5,
     precio: 99990,
+    precioOriginal: 119990,
+    enOferta: true,
+    descuento: 17,
     descripcion: '15W, distorsión incorporada, entrada auxiliar.',
     icono: '🔊',
     stockCritico: 3,
@@ -361,6 +379,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'SM58',
     stock: 8,
     precio: 149990,
+    precioOriginal: 179990,
+    enOferta: true,
+    descuento: 17,
     descripcion: 'Estándar industria para voz en vivo.',
     icono: '🎙️',
     stockCritico: 3,
@@ -426,6 +447,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'RV-6',
     stock: 4,
     precio: 179990,
+    precioOriginal: 209990,
+    enOferta: true,
+    descuento: 14,
     descripcion: '8 modos de reverb, control de shimmer.',
     icono: '🎛️',
     stockCritico: 3,
@@ -491,6 +515,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'Super Slinky',
     stock: 25,
     precio: 8990,
+    precioOriginal: 11990,
+    enOferta: true,
+    descuento: 25,
     descripcion: 'Juego 6 cuerdas, calibre ligero.',
     icono: '🎼',
     stockCritico: 3,
@@ -621,6 +648,9 @@ export const PRODUCTOS_SONIDO_VIVO = [
     modelo: 'Scarlett Solo',
     stock: 4,
     precio: 149990,
+    precioOriginal: 179990,
+    enOferta: true,
+    descuento: 17,
     descripcion: '1 entrada XLR+instrumento, 2 salidas, 24bit/192kHz.',
     icono: '🎧',
     stockCritico: 3,
@@ -738,4 +768,35 @@ export function obtenerCatalogoActivo() {
 export function buscarProductoPorCodigo(catalogo, codigo = '') {
   if (!Array.isArray(catalogo) || !codigo) return undefined
   return catalogo.find((item) => item.codigo.toUpperCase() === codigo.toUpperCase())
+}
+
+export function obtenerCategoriasConMetadata(catalogo = null) {
+  const lista = catalogo || obtenerCatalogoActivo()
+  return CATEGORIAS_SONIDO_VIVO.map((nombre) => {
+    const productos = lista.filter(
+      (p) => (p.categoria || '').trim().toLowerCase() === nombre.trim().toLowerCase()
+    )
+    const primerConImagen = productos.find((p) => p.imagen) || productos[0]
+    return {
+      nombre,
+      totalProductos: productos.length,
+      imagen: primerConImagen?.imagen || '',
+      icono: primerConImagen?.icono || '🎵',
+      slug: encodeURIComponent(nombre),
+    }
+  })
+}
+
+export function obtenerProductosPorCategoria(categoria = '', catalogo = null) {
+  if (!categoria) return []
+  const lista = catalogo || obtenerCatalogoActivo()
+  const decoded = decodeURIComponent(categoria).trim().toLowerCase()
+  return lista.filter(
+    (p) => (p.categoria || '').trim().toLowerCase() === decoded
+  )
+}
+
+export function obtenerProductosEnOferta(catalogo = null) {
+  const lista = catalogo || obtenerCatalogoActivo()
+  return lista.filter((p) => Boolean(p.enOferta))
 }

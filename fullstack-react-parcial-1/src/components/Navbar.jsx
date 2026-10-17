@@ -32,6 +32,12 @@ function Navigation() {
             <Nav.Link as={NavLink} to="/productos">
               Catálogo
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/categorias">
+              Categorías
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/ofertas">
+              Ofertas
+            </Nav.Link>
             <Nav.Link as={NavLink} to="/nosotros">
               Nosotros
             </Nav.Link>
