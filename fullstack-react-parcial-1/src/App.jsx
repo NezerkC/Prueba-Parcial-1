@@ -6,6 +6,9 @@ import CartToast from './components/CartToast';
 import Home from './pages/Home';
 import Productos from './pages/Productos';
 import ProductoDetalle from './pages/ProductoDetalle';
+import Categorias from './pages/Categorias';
+import CategoriaDetalle from './pages/CategoriaDetalle';
+import Ofertas from './pages/Ofertas';
 import Nosotros from './pages/Nosotros';
 import Contacto from './pages/Contacto';
 import Blogs from './pages/Blogs';
@@ -27,6 +30,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Productos />} />
+              <Route path="/categorias" element={<Categorias />} />
+              <Route path="/categorias/:categoria" element={<CategoriaDetalle />} />
+              <Route path="/ofertas" element={<Ofertas />} />
               <Route path="/producto/:codigo" element={<ProductoDetalle />} />
               <Route path="/nosotros" element={<Nosotros />} />
               <Route path="/contacto" element={<Contacto />} />
