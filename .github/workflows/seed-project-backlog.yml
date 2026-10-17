@@ -1,0 +1,201 @@
+name: 🚀 Seed Project Backlog (GitHub Projects Autopilot)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  seed-backlog:
+    name: Inicializar Backlog y Etiquetas
+    runs-on: ubuntu-latest
+    steps:
+      - name: Crear Etiquetas y Tareas en GitHub Issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // 1. Configuración de Etiquetas Estándar
+            const labels = [
+              { name: 'estado: finalizado', color: '0E8A16', description: 'Tarea completada y verificada en codigo' },
+              { name: 'estado: en-curso', color: 'FBCA04', description: 'Tarea activa actualmente en desarrollo' },
+              { name: 'estado: por-hacer', color: '1D76DB', description: 'Tarea pendiente de inicio' },
+              { name: 'prioridad: alta', color: 'D93F0B', description: 'Bloqueante para el flujo principal' },
+              { name: 'prioridad: media', color: '0075CA', description: 'Requerimiento funcional regular' },
+              { name: 'modulo: arquitectura', color: '5319E7', description: 'Setup, configuracion y tooling' },
+              { name: 'modulo: catalogo', color: 'C2E0C6', description: 'Vistas de productos y detalle' },
+              { name: 'modulo: carrito', color: 'BFDADC', description: 'Flujo de compra y calculo fiscal' },
+              { name: 'modulo: auth', color: 'D4C5F9', description: 'Login y Registro de usuarios' },
+              { name: 'modulo: admin', color: 'F9D0C4', description: 'Dashboard y mantenedores CRUD' }
+            ];
+
+            for (const lbl of labels) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name: lbl.name,
+                  color: lbl.color,
+                  description: lbl.description
+                });
+                console.log(`Etiqueta creada: ${lbl.name}`);
+              } catch (err) {
+                if (err.status === 422) {
+                  // Ya existe, actualizar si fuera necesario
+                  await github.rest.issues.updateLabel({
+                    owner,
+                    repo,
+                    name: lbl.name,
+                    color: lbl.color,
+                    description: lbl.description
+                  });
+                  console.log(`Etiqueta actualizada: ${lbl.name}`);
+                } else {
+                  console.warn(`Error con etiqueta ${lbl.name}:`, err.message);
+                }
+              }
+            }
+
+            // 2. Obtener Issues existentes para garantizar idempotencia
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'all',
+              per_page: 100
+            });
+            const existingTitles = new Set(existingIssues.data.map(i => i.title.trim()));
+
+            // 3. Definición del Backlog Oficial (12 tareas secuenciales)
+            const tasks = [
+              {
+                title: 'Tarea 01 · Setup de Arquitectura, Vite, Vitest y Bootstrap',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: arquitectura'],
+                body: `### Criterios de Aceptación
+- [x] Configuración de Vite con React 19 y plugin react.
+- [x] Entorno de pruebas Vitest con jsdom y globals activos.
+- [x] Soporte de React-Bootstrap y hojas de estilos base Olivini Gold.
+- [x] Scripts npm para dev, build, test y coverage configurados.`
+              },
+              {
+                title: 'Tarea 02 · Motor de Utilidades y Reglas de Negocio (RUT, IVA y Stock)',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: arquitectura'],
+                body: `### Criterios de Aceptación
+- [x] Implementar algoritmo Módulo 11 en \`src/utils/validaciones.js\`.
+- [x] Validación de dominios institucionales duoc.cl / gmail.com.
+- [x] Cálculo fiscal de IVA 19% y formateo de moneda CLP en \`src/utils/finanzas.js\`.
+- [x] Determinación de stock crítico y estados de disponibilidad en \`src/utils/stock.js\`.
+- [x] Cobertura de pruebas unitarias al 100% en las utilidades.`
+              },
+              {
+                title: 'Tarea 03 · Estado Global del Carrito con CartContext y Custom Hook useContador',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: carrito'],
+                body: `### Criterios de Aceptación
+- [x] Crear \`CartContext\` con persistencia automática en \`window.localStorage\`.
+- [x] Acciones: agregar item, modificar cantidad, eliminar y vaciar carro.
+- [x] Custom hook \`useContador\` con validación de límite de stock disponible.
+- [x] Pruebas unitarias para el contexto y el hook.`
+              },
+              {
+                title: 'Tarea 04 · Capa de Servicios HTTP y Catálogo de Datos Maestro',
+                labels: ['estado: por-hacer', 'prioridad: media', 'modulo: catalogo'],
+                body: `### Criterios de Aceptación
+- [x] Estructurar catálogo de 51 instrumentos en \`src/data/productos.js\`.
+- [x] Diccionario de regiones y comunas de Chile en \`src/data/regiones.js\`.
+- [x] Cliente HTTP Axios configurado en \`src/services/api.js\`.
+- [x] Servicio desacoplado \`ServicioAPI.js\` con mocks y manejo de errores.`
+              },
+              {
+                title: 'Tarea 05 · Navegación Global (Navbar, Footer) y Landing Page Home',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: catalogo'],
+                body: `### Criterios de Aceptación
+- [x] Barra de navegación reactiva con badge de cantidad en el carrito.
+- [x] Pie de página institucional con enlaces y branding de Sonido Vivo.
+- [x] Vista \`Home.jsx\` con HeroSection, categorías destacadas y beneficios.
+- [x] Enrutamiento base configurado en \`App.jsx\`.`
+              },
+              {
+                title: 'Tarea 06 · Catálogo de Productos Completo con Filtros y Buscador',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: catalogo'],
+                body: `### Criterios de Aceptación
+- [ ] Vista \`src/pages/Productos.jsx\` con buscador en tiempo real por texto.
+- [ ] Filtro por chips/categorías dinámicas (Guitarras, Baterías, Teclados, etc.).
+- [ ] Selector de ordenamiento por precio (ascendente / descendente).
+- [ ] Renderizado de tarjetas \`ProductCard\` con badge de stock y botón de añadir.
+- [ ] Ruta \`/productos\` conectada en \`App.jsx\` y en la navegación.`
+              },
+              {
+                title: 'Tarea 07 · Ficha Técnica de Producto Individual (ProductDetail)',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: catalogo'],
+                body: `### Criterios de Aceptación
+- [ ] Vista \`src/pages/ProductoDetalle.jsx\` consumiendo el parámetro \`:codigo\` vía \`useParams()\`.
+- [ ] Galería de imágenes, especificaciones técnicas y badge de disponibilidad.
+- [ ] Selector de cantidad integrado con \`useContador\` respetando el stock máximo.
+- [ ] Botón interactivo "Añadir al Carrito" con feedback de confirmación.
+- [ ] Manejo de producto no encontrado (vista 404 de producto).`
+              },
+              {
+                title: 'Tarea 08 · Carrito de Compras Interactivo y Resumen Fiscal',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: carrito'],
+                body: `### Criterios de Aceptación
+- [ ] Vista \`src/pages/Carrito.jsx\` conectada al \`CartContext\`.
+- [ ] Tabla responsive con lista de items, control de cantidad (+ / -) y botón eliminar.
+- [ ] Desglose financiero en tiempo real: Subtotal neto, IVA 19% y Total CLP.
+- [ ] Estado vacío amigable con botón para explorar catálogo.
+- [ ] Modal de confirmación para vaciar carro y botón de simulación de Checkout.`
+              },
+              {
+                title: 'Tarea 09 · Formularios de Autenticación (Login) y Registro con Validación Reactiva',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: auth'],
+                body: `### Criterios de Aceptación
+- [ ] Vista \`src/pages/Login.jsx\` con validación de correo institucional y password.
+- [ ] Vista \`src/pages/Registro.jsx\` con validación en vivo del RUT (Módulo 11).
+- [ ] Selectores en cascada Región -> Comunas consumiendo \`regiones.js\`.
+- [ ] Mensajes de error accesibles y bloqueo de envío si el formulario es inválido.
+- [ ] Simulación de sesión con almacenamiento en \`localStorage\` / \`sessionStorage\`.`
+              },
+              {
+                title: 'Tarea 10 · Páginas Institucionales (Nosotros, Contacto y Blogs)',
+                labels: ['estado: por-hacer', 'prioridad: media', 'modulo: catalogo'],
+                body: `### Criterios de Aceptación
+- [ ] Vista \`src/pages/Nosotros.jsx\` con historia institucional y equipo.
+- [ ] Vista \`src/pages/Contacto.jsx\` con textarea reactiva y contador (máximo 500 caracteres).
+- [ ] Vistas \`src/pages/Blogs.jsx\` y detalle de artículo con contenido técnico musical.
+- [ ] Enlaces vinculados en el Navbar y Footer.`
+              },
+              {
+                title: 'Tarea 11 · Módulo Administrativo (Dashboard y CRUD de Inventario)',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: admin'],
+                body: `### Criterios de Aceptación
+- [ ] Vista \`src/pages/admin/AdminDashboard.jsx\` con KPIs: valoración total, alertas de stock crítico y usuarios.
+- [ ] Vista \`src/pages/admin/AdminProductos.jsx\` con tabla CRUD interactiva.
+- [ ] Formulario modal para crear y editar productos (código, nombre, categoría, precio, stock).
+- [ ] Eliminación de producto con confirmación y sincronización en estado local.`
+              },
+              {
+                title: 'Tarea 12 · Suite Integral de Pruebas Unitarias, Cobertura y Accesibilidad',
+                labels: ['estado: por-hacer', 'prioridad: alta', 'modulo: arquitectura'],
+                body: `### Criterios de Aceptación
+- [ ] Pruebas unitarias de vistas críticas (\`Productos.test.jsx\`, \`Carrito.test.jsx\`, \`Registro.test.jsx\`).
+- [ ] Auditoría de accesibilidad con \`jest-axe\` en tarjetas y formularios.
+- [ ] Cobertura global de pruebas superior al 80% (\`npm run coverage\`).
+- [ ] Verificación de pipeline CI en verde en GitHub Actions.`
+              }
+            ];
+
+            for (const task of tasks) {
+              if (existingTitles.has(task.title)) {
+                console.log(`Tarea ya existe (omitida): ${task.title}`);
+                continue;
+              }
+              const created = await github.rest.issues.create({
+                owner,
+                repo,
+                title: task.title,
+                labels: task.labels,
+                body: task.body
+              });
+              console.log(`Tarea creada: #${created.data.number} - ${task.title}`);
+            }

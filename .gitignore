@@ -1,0 +1,48 @@
+# Dependencias
+node_modules/
+**/node_modules/
+
+# Compilaciones y builds
+dist/
+**/dist/
+dist-ssr/
+**/dist-ssr/
+
+# Cobertura y reportes
+coverage/
+**/coverage/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# IDEs y Editores
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# Carpetas de referencia local (el proyecto HTML vive en la rama proyecto-html-base)
+base html/
+mi-proyecto-pruebas/
+docs/guias-instituto/
+docs/entregables/
+
+# Archivos comprimidos de release
+*.zip

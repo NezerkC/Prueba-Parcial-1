@@ -1,0 +1,17 @@
+{
+  "name": "sonido-vivo-monorepo",
+  "private": true,
+  "description": "Sonido Vivo - Plataforma Web E-commerce (Base HTML + Migración FullStack React)",
+  "workspaces": [
+    "fullstack-react-parcial-1"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w fullstack-react-parcial-1",
+    "build": "npm run build -w fullstack-react-parcial-1",
+    "test": "npm run test -w fullstack-react-parcial-1",
+    "test:run": "npm run test:run -w fullstack-react-parcial-1",
+    "coverage": "npm run coverage -w fullstack-react-parcial-1",
+    "lint": "npm run lint -w fullstack-react-parcial-1",
+    "preview": "npm run preview -w fullstack-react-parcial-1"
+  }
+}
