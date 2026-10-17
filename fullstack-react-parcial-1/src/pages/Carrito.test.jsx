@@ -19,6 +19,7 @@ function renderCarrito(initialItems = []) {
         <Routes>
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/productos" element={<div>Página de Catálogo Mock</div>} />
+          <Route path="/checkout" element={<div>Checkout Mock</div>} />
         </Routes>
       </CartProvider>
     </MemoryRouter>
@@ -140,7 +141,7 @@ describe('<Carrito />', () => {
     });
   });
 
-  it('simula la finalización de compra con feedback amigable', async () => {
+  it('lleva al checkout al hacer clic en Continuar al Checkout', async () => {
     const productosDemo = [
       {
         codigo: 'MI001',
@@ -153,12 +154,10 @@ describe('<Carrito />', () => {
 
     renderCarrito(productosDemo);
 
-    expect(screen.getByTestId('btn-finalizar-compra')).toBeInTheDocument();
     fireEvent.click(screen.getByTestId('btn-finalizar-compra'));
 
     await waitFor(() => {
-      expect(screen.getByTestId('alert-checkout-exitoso')).toBeInTheDocument();
-      expect(screen.getByText(/¡Gracias por tu compra en Sonido Vivo!/i)).toBeInTheDocument();
+      expect(screen.getByText('Checkout Mock')).toBeInTheDocument();
     });
   });
 });
