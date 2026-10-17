@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { Badge, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { formatearPrecioCLP, obtenerRutaImagen } from '../data/productos';
@@ -40,6 +40,14 @@ function ProductCard({ producto, onAddToCart }) {
             {producto.icono || '🎵'}
           </div>
         )}
+        {producto.enOferta && (
+          <span
+            className="product-thumb-badge-oferta"
+            data-testid={`badge-oferta-${producto.codigo}`}
+          >
+            {producto.descuento ? `-${producto.descuento}%` : '¡OFERTA!'}
+          </span>
+        )}
         <span className="product-thumb-indicator">
           {(producto.categoria || 'Instrumento').toUpperCase()}
         </span>
@@ -61,9 +69,19 @@ function ProductCard({ producto, onAddToCart }) {
               {producto.categoria}
             </Badge>
           </div>
-          <span className={esGratis ? 'product-price free' : 'product-price'}>
-            {formatearPrecioCLP(producto.precio)}
-          </span>
+          <div className="text-end">
+            {producto.enOferta && producto.precioOriginal && (
+              <span
+                className="product-price-original text-muted text-decoration-line-through d-block"
+                style={{ fontSize: '0.82rem', lineHeight: '1.2' }}
+              >
+                {formatearPrecioCLP(producto.precioOriginal)}
+              </span>
+            )}
+            <span className={esGratis ? 'product-price free' : 'product-price'}>
+              {formatearPrecioCLP(producto.precio)}
+            </span>
+          </div>
         </div>
 
         <div className="product-actions mt-3">
