@@ -27,10 +27,15 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
 
   const validar = () => {
     const e = {};
-    if (!form.codigo.trim()) e.codigo = 'Requerido';
-    if (!form.nombre.trim()) e.nombre = 'Requerido';
+    const codigo = form.codigo.trim();
+    const nombre = form.nombre.trim();
+    const precio = form.precio.toString().trim();
+    if (!codigo) e.codigo = 'Requerido';
+    else if (codigo.length < 3) e.codigo = 'Mínimo 3 caracteres';
+    if (!nombre) e.nombre = 'Requerido';
+    else if (nombre.length > 100) e.nombre = 'Máximo 100 caracteres';
     if (!form.categoria) e.categoria = 'Requerido';
-    if (!form.precio || isNaN(Number(form.precio)) || Number(form.precio) <= 0)
+    if (!precio || isNaN(Number(precio)) || Number(precio) < 0)
       e.precio = 'Precio inválido';
     if (!form.stock.toString().trim() || isNaN(Number(form.stock)) || Number(form.stock) < 0)
       e.stock = 'Stock inválido';
