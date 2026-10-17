@@ -4,6 +4,7 @@ import {
   validarEmailInstitucional,
   formatearRutChileno,
   validarClave,
+  validarFormularioContacto,
 } from './validaciones';
 
 describe('Motor de Validaciones - Reglas de Negocio Chilenas', () => {
@@ -61,6 +62,26 @@ describe('Motor de Validaciones - Reglas de Negocio Chilenas', () => {
       expect(validarClave('1234')).toBe(true);
       expect(validarClave('123')).toBe(false);
       expect(validarClave('12345678901')).toBe(false);
+    });
+  });
+
+  describe('validarFormularioContacto()', () => {
+    it('no devuelve errores cuando los tres campos son válidos', () => {
+      const errores = validarFormularioContacto({
+        nombre: 'Danilo',
+        correo: 'danilo@duoc.cl',
+        comentario: 'Consulta por stock',
+      });
+      expect(errores).toEqual({});
+    });
+
+    it('devuelve un error por cada campo vacío, inválido o demasiado largo', () => {
+      const errores = validarFormularioContacto({
+        nombre: '   ',
+        correo: 'danilo@hotmail.com',
+        comentario: 'a'.repeat(501),
+      });
+      expect(Object.keys(errores)).toEqual(['nombre', 'correo', 'comentario']);
     });
   });
 });
