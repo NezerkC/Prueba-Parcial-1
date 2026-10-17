@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Badge, Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { obtenerCategoriasConMetadata, obtenerRutaImagen } from '../data/productos';
 

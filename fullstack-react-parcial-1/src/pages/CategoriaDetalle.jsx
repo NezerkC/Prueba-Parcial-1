@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import ProductGrid from '../components/ProductGrid';
 import { useCart } from '../context/CartContext';
