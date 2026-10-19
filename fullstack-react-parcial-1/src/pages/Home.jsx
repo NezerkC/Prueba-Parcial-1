@@ -1,4 +1,4 @@
-﻿import HeroSection from '../components/home/HeroSection';
+import HeroSection from '../components/home/HeroSection';
 import BenefitsSection from '../components/home/BenefitsSection';
 import FeaturedProducts from '../components/home/FeaturedProducts';
 import CustomObjectsSection from '../components/home/CustomObjectsSection';
@@ -26,7 +26,11 @@ function Home() {
         totalCatalogo={catalogo.length}
         onAddToCart={addToCart}
       />
-      <CustomObjectsSection objetos={OBJETOS_CREADOS_POR_PROGRAMADOR} />
+      <CustomObjectsSection
+        objetos={OBJETOS_CREADOS_POR_PROGRAMADOR}
+        onAddToCart={addToCart}
+      />
+
       <PromoDuocBanner />
     </>
   );
