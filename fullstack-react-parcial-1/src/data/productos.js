@@ -711,13 +711,26 @@ export const PRODUCTOS_SONIDO_VIVO = [
 
 export const OBJETOS_CREADOS_POR_PROGRAMADOR = [
   {
-    id: 'OBJ-001',
-    nombre: 'Objeto Base de Demostración',
-    categoria: 'Módulo Propio',
+    id: 'SRV-001',
+    codigo: 'SRV-001',
+    nombre: 'Calibración y Mantención de Guitarras / Bajos',
+    categoria: 'Servicios de Luthier',
     descripcion:
-      'Instancia de ejemplo inicial para verificar la estructura normalizada en el DOM.',
-    precio: 0,
-    estado: 'Activo',
+      'Ajuste de alma, calibración de octavas, limpieza profunda del diapasón y cambio de cuerdas profesional.',
+    precio: 25000,
+    estado: 'Disponible',
+    icono: '🛠️',
+  },
+  {
+    id: 'SRV-002',
+    codigo: 'SRV-002',
+    nombre: 'Instalación y Blindaje de Cápsulas',
+    categoria: 'Servicios de Taller',
+    descripcion:
+      'Instalación de set de pastillas/micrófonos, apantallado de cobre anti-ruido y ruteo electrónico premium.',
+    precio: 35000,
+    estado: 'Disponible',
+    icono: '⚡',
   },
 ]
 
