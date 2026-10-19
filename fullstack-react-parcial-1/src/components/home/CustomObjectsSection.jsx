@@ -59,8 +59,8 @@ function CustomObjectsSection({ objetos = OBJETOS_CREADOS_POR_PROGRAMADOR, onAdd
   return (
     <section className="custom-objects-section" id="seccion-objetos-propios" aria-label="Servicios y Objetos de Taller">
       <SectionHeader
-        title="Servicios de Taller & Objetos Especiales"
-        subtitle="Módulo oficial de objetos personalizados de Sonido Vivo creados y administrados con soporte para carrito."
+        title="Servicios Especializados de Taller & Luthier"
+        subtitle="Mantenciones profesionales, calibración y personalización para tus instrumentos musicales con garantía Sonido Vivo."
       />
 
       {notificacion && (
@@ -86,29 +86,21 @@ function CustomObjectsSection({ objetos = OBJETOS_CREADOS_POR_PROGRAMADOR, onAdd
           />
         ))}
 
-        {isAdmin ? (
+        {isAdmin && (
           <button
             type="button"
             className="custom-card-slot active-admin-slot"
             onClick={() => setModalAbierto(true)}
             data-testid="btn-abrir-modal-crear-objeto"
-            aria-label="Crear nuevo servicio u objeto como Administrador"
+            aria-label="Agregar nuevo servicio"
           >
             <span className="slot-icon">+</span>
-            <strong className="slot-title">Crear Nuevo Servicio u Objeto</strong>
-            <span className="slot-subtitle">Haz clic para registrarlo en el catálogo</span>
-            <span className="badge bg-warning text-dark mt-2">Acceso Exclusivo Admin</span>
+            <strong className="slot-title">Agregar Nuevo Servicio</strong>
+            <span className="slot-subtitle">Añadir otra prestación al catálogo</span>
           </button>
-        ) : (
-          <article className="custom-card-slot read-only-slot" data-testid="custom-card-slot-readonly">
-            <span className="slot-icon">🛡️</span>
-            <strong className="slot-title">Servicios Gestionados por Admin</strong>
-            <span className="slot-subtitle">
-              Inicia sesión como administrador para registrar o modificar servicios de taller.
-            </span>
-          </article>
         )}
       </div>
+
 
       {modalAbierto && (
         <ModalCrearObjeto
