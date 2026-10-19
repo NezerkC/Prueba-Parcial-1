@@ -1,25 +1,134 @@
-﻿import SectionHeader from '../SectionHeader';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import SectionHeader from '../SectionHeader';
 import CustomObjectCard from './CustomObjectCard';
+import ModalCrearObjeto from './ModalCrearObjeto';
+import { useAuth } from '../../context/AuthContext';
+import { OBJETOS_CREADOS_POR_PROGRAMADOR } from '../../data/productos';
 
-function CustomObjectsSection({ objetos = [] }) {
+const STORAGE_KEY_OBJETOS = 'sonido_vivo_objetos_admin_v1';
+
+function CustomObjectsSection({ objetos = OBJETOS_CREADOS_POR_PROGRAMADOR, onAddToCart }) {
+  const { isAdmin } = useAuth();
+  const [modalAbierto, setModalAbierto] = useState(false);
+  const [notificacion, setNotificacion] = useState(null);
+
+  const [listaObjetos, setListaObjetos] = useState(() => {
+    try {
+      const guardados = localStorage.getItem(STORAGE_KEY_OBJETOS);
+      return guardados ? JSON.parse(guardados) : objetos;
+    } catch (error) {
+      console.error('Error al cargar objetos propios desde localStorage:', error);
+      return objetos;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY_OBJETOS, JSON.stringify(listaObjetos));
+    } catch (error) {
+      console.error('Error al persistir objetos propios:', error);
+    }
+  }, [listaObjetos]);
+
+  const handleGuardarObjeto = (datosNuevo) => {
+    const siguienteNumero = listaObjetos.length + 1;
+    const nuevoId = `SRV-${String(siguienteNumero).padStart(3, '0')}`;
+
+    const objetoCompleto = {
+      id: nuevoId,
+      codigo: nuevoId,
+      ...datosNuevo,
+    };
+
+    setListaObjetos((prev) => [...prev, objetoCompleto]);
+    setModalAbierto(false);
+    setNotificacion(`¡Servicio "${objetoCompleto.nombre}" registrado exitosamente como ${nuevoId}!`);
+    setTimeout(() => setNotificacion(null), 4000);
+  };
+
+  const handleEliminarObjeto = (id) => {
+    const confirmacion = window.confirm(`¿Estás seguro de eliminar el objeto/servicio con código ${id}?`);
+    if (confirmacion) {
+      setListaObjetos((prev) => prev.filter((item) => item.id !== id));
+      setNotificacion(`El objeto ${id} fue eliminado correctamente.`);
+      setTimeout(() => setNotificacion(null), 3000);
+    }
+  };
+
   return (
-    <section className="custom-objects-section" id="seccion-objetos-propios">
+    <section className="custom-objects-section" id="seccion-objetos-propios" aria-label="Servicios y Objetos de Taller">
       <SectionHeader
-        title="Objetos Creados por el Usuario"
-        subtitle="Espacio normalizado para que el desarrollador inserte sus propios componentes, modelos o colecciones."
+        title="Servicios de Taller & Objetos Especiales"
+        subtitle="Módulo oficial de objetos personalizados de Sonido Vivo creados y administrados con soporte para carrito."
       />
 
+      {notificacion && (
+        <div className="alert alert-success alert-dismissible fade show mb-4" role="alert">
+          {notificacion}
+          <button
+            type="button"
+            className="btn-close"
+            onClick={() => setNotificacion(null)}
+            aria-label="Cerrar notificación"
+          />
+        </div>
+      )}
+
       <div className="custom-objects-grid" id="grid-objetos-propios">
-        {objetos.map((objeto) => (
-          <CustomObjectCard key={objeto.id} objeto={objeto} />
+        {listaObjetos.map((objeto) => (
+          <CustomObjectCard
+            key={objeto.id}
+            objeto={objeto}
+            onAddToCart={onAddToCart}
+            isAdmin={isAdmin}
+            onEliminar={handleEliminarObjeto}
+          />
         ))}
 
-        <article className="custom-card placeholder">
-          <span>+ Espacio disponible para tu siguiente objeto</span>
-        </article>
+        {isAdmin ? (
+          <button
+            type="button"
+            className="custom-card-slot active-admin-slot"
+            onClick={() => setModalAbierto(true)}
+            data-testid="btn-abrir-modal-crear-objeto"
+            aria-label="Crear nuevo servicio u objeto como Administrador"
+          >
+            <span className="slot-icon">+</span>
+            <strong className="slot-title">Crear Nuevo Servicio u Objeto</strong>
+            <span className="slot-subtitle">Haz clic para registrarlo en el catálogo</span>
+            <span className="badge bg-warning text-dark mt-2">Acceso Exclusivo Admin</span>
+          </button>
+        ) : (
+          <article className="custom-card-slot read-only-slot" data-testid="custom-card-slot-readonly">
+            <span className="slot-icon">🛡️</span>
+            <strong className="slot-title">Servicios Gestionados por Admin</strong>
+            <span className="slot-subtitle">
+              Inicia sesión como administrador para registrar o modificar servicios de taller.
+            </span>
+          </article>
+        )}
       </div>
+
+      {modalAbierto && (
+        <ModalCrearObjeto
+          onGuardar={handleGuardarObjeto}
+          onCerrar={() => setModalAbierto(false)}
+        />
+      )}
     </section>
   );
 }
+
+CustomObjectsSection.propTypes = {
+  objetos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      nombre: PropTypes.string.isRequired,
+      precio: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    })
+  ),
+  onAddToCart: PropTypes.func,
+};
 
 export default CustomObjectsSection;
