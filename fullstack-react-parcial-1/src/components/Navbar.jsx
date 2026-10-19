@@ -61,9 +61,10 @@ function Navigation() {
                     Panel Admin
                   </Link>
                 )}
-                <span className="me-2 small fw-semibold text-dark" data-testid="navbar-user-greeting">
-                  Hola, {usuario?.nombre}
+                <span className="me-2 small fw-semibold text-light" data-testid="navbar-user-greeting">
+                  Hola, <span style={{ color: 'var(--color-accent, #D49B28)' }}>{usuario?.nombre}</span>
                 </span>
+
                 <button
                   type="button"
                   onClick={logout}
