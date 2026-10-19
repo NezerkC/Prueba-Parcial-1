@@ -62,23 +62,31 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
 
   const inputStyle = (campo) => ({
     width: '100%',
-    background: 'rgba(255,255,255,0.06)',
-    border: `1px solid ${errores[campo] ? '#f87171' : 'rgba(255,255,255,0.12)'}`,
-    borderRadius: '8px',
-    padding: '0.6rem 0.9rem',
-    color: '#f1f5f9',
+    background: '#ffffff',
+    border: `1px solid ${errores[campo] ? 'var(--color-danger, #A33A3A)' : 'var(--color-border, #E2DDD0)'}`,
+    borderRadius: 'var(--radius-sm, 4px)',
+    padding: '0.65rem 0.9rem',
+    color: 'var(--color-text-main, #1A2413)',
     fontSize: '0.9rem',
     outline: 'none',
     boxSizing: 'border-box',
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
   });
 
-  const labelStyle = { color: '#94a3b8', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.3rem', display: 'block' };
+  const labelStyle = {
+    color: 'var(--color-text-main, #1A2413)',
+    fontSize: '0.82rem',
+    fontWeight: 700,
+    marginBottom: '0.35rem',
+    display: 'block',
+  };
 
   return (
     <div
       id="modal-producto-overlay"
       style={{
-        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)',
+        position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.65)',
+        backdropFilter: 'blur(3px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         zIndex: 9999, padding: '1rem',
       }}
@@ -86,20 +94,23 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
     >
       <div
         style={{
-          background: '#1e293b', borderRadius: '16px', padding: '2rem',
+          background: 'var(--color-surface, #ffffff)',
+          borderRadius: 'var(--radius-lg, 12px)',
+          padding: '2rem',
           width: '100%', maxWidth: '560px', maxHeight: '90vh', overflowY: 'auto',
-          boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
-          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: 'var(--shadow-elevated, 0 20px 40px rgba(18, 25, 13, 0.25))',
+          border: '1px solid var(--color-border, #E2DDD0)',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-          <h2 style={{ margin: 0, color: '#f1f5f9', fontSize: '1.2rem', fontWeight: 700 }}>
-            {esNuevo ? '➕ Nuevo Producto' : '✏️ Editar Producto'}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid var(--color-border, #E2DDD0)', paddingBottom: '0.75rem' }}>
+          <h2 style={{ margin: 0, color: 'var(--color-text-main, #1A2413)', fontSize: '1.25rem', fontWeight: 800 }}>
+            {esNuevo ? '➕ Registrar Nuevo Producto' : '✏️ Editar Producto'}
           </h2>
           <button
             id="btn-cerrar-modal"
             onClick={onCerrar}
-            style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '1.4rem', lineHeight: 1 }}
+            style={{ background: 'none', border: 'none', color: 'var(--color-text-muted, #615E54)', cursor: 'pointer', fontSize: '1.4rem', lineHeight: 1 }}
+            aria-label="Cerrar modal"
           >×</button>
         </div>
 
@@ -114,9 +125,9 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
                 onChange={(e) => handleChange('codigo', e.target.value.toUpperCase())}
                 disabled={!esNuevo}
                 placeholder="GA001"
-                style={{ ...inputStyle('codigo'), opacity: !esNuevo ? 0.5 : 1 }}
+                style={{ ...inputStyle('codigo'), opacity: !esNuevo ? 0.6 : 1, background: !esNuevo ? 'var(--color-surface-hover, #F3EFE3)' : '#ffffff' }}
               />
-              {errores.codigo && <span style={{ color: '#f87171', fontSize: '0.75rem' }}>{errores.codigo}</span>}
+              {errores.codigo && <span style={{ color: 'var(--color-danger, #A33A3A)', fontSize: '0.75rem', fontWeight: 600 }}>{errores.codigo}</span>}
             </div>
             {/* Icono */}
             <div>
@@ -139,7 +150,7 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
                 placeholder="Guitarra Acústica Folk"
                 style={inputStyle('nombre')}
               />
-              {errores.nombre && <span style={{ color: '#f87171', fontSize: '0.75rem' }}>{errores.nombre}</span>}
+              {errores.nombre && <span style={{ color: 'var(--color-danger, #A33A3A)', fontSize: '0.75rem', fontWeight: 600 }}>{errores.nombre}</span>}
             </div>
             {/* Marca */}
             <div>
@@ -158,14 +169,14 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
                 id="select-categoria"
                 value={form.categoria}
                 onChange={(e) => handleChange('categoria', e.target.value)}
-                style={{ ...inputStyle('categoria'), appearance: 'none' }}
+                style={inputStyle('categoria')}
               >
-                <option value="">Seleccionar categoría...</option>
+                <option value="">Selecciona una categoría...</option>
                 {CATEGORIAS_SONIDO_VIVO.map((c) => (
                   <option key={c} value={c}>{c}</option>
                 ))}
               </select>
-              {errores.categoria && <span style={{ color: '#f87171', fontSize: '0.75rem' }}>{errores.categoria}</span>}
+              {errores.categoria && <span style={{ color: 'var(--color-danger, #A33A3A)', fontSize: '0.75rem', fontWeight: 600 }}>{errores.categoria}</span>}
             </div>
             {/* Precio */}
             <div>
@@ -174,16 +185,17 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
                 id="input-precio"
                 type="number"
                 min="0"
+                step="500"
                 value={form.precio}
                 onChange={(e) => handleChange('precio', e.target.value)}
                 placeholder="129990"
                 style={inputStyle('precio')}
               />
-              {errores.precio && <span style={{ color: '#f87171', fontSize: '0.75rem' }}>{errores.precio}</span>}
+              {errores.precio && <span style={{ color: 'var(--color-danger, #A33A3A)', fontSize: '0.75rem', fontWeight: 600 }}>{errores.precio}</span>}
             </div>
             {/* Stock */}
             <div>
-              <label style={labelStyle}>Stock *</label>
+              <label style={labelStyle}>Stock Unidades *</label>
               <input
                 id="input-stock"
                 type="number"
@@ -193,11 +205,11 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
                 placeholder="10"
                 style={inputStyle('stock')}
               />
-              {errores.stock && <span style={{ color: '#f87171', fontSize: '0.75rem' }}>{errores.stock}</span>}
+              {errores.stock && <span style={{ color: 'var(--color-danger, #A33A3A)', fontSize: '0.75rem', fontWeight: 600 }}>{errores.stock}</span>}
             </div>
-            {/* Stock crítico */}
-            <div>
-              <label style={labelStyle}>Stock Crítico</label>
+            {/* Stock Crítico */}
+            <div style={{ gridColumn: '1 / -1' }}>
+              <label style={labelStyle}>Umbral de Stock Crítico (Alerta)</label>
               <input
                 id="input-stock-critico"
                 type="number"
@@ -220,15 +232,15 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
+          <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.75rem', justifyContent: 'flex-end', borderTop: '1px solid var(--color-border, #E2DDD0)', paddingTop: '1rem' }}>
             <button
               type="button"
               id="btn-cancelar-modal"
               onClick={onCerrar}
               style={{
-                padding: '0.65rem 1.25rem', borderRadius: '8px',
-                background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)',
-                color: '#94a3b8', cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem',
+                padding: '0.7rem 1.4rem', borderRadius: 'var(--radius-sm, 4px)',
+                background: 'var(--color-surface, #ffffff)', border: '1px solid var(--color-border, #E2DDD0)',
+                color: 'var(--color-text-muted, #615E54)', cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem',
               }}
             >
               Cancelar
@@ -237,13 +249,13 @@ function ModalProducto({ producto, onGuardar, onCerrar }) {
               type="submit"
               id="btn-guardar-modal"
               style={{
-                padding: '0.65rem 1.25rem', borderRadius: '8px',
-                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                border: 'none', color: '#fff', cursor: 'pointer',
-                fontWeight: 700, fontSize: '0.9rem',
+                padding: '0.7rem 1.5rem', borderRadius: 'var(--radius-sm, 4px)',
+                background: 'var(--color-primary, #1A2413)',
+                border: 'none', color: 'var(--color-bg, #FAF8F2)', cursor: 'pointer',
+                fontWeight: 700, fontSize: '0.9rem', boxShadow: 'var(--shadow-sm)',
               }}
             >
-              {esNuevo ? 'Crear Producto' : 'Guardar Cambios'}
+              {esNuevo ? '💾 Crear Producto' : '💾 Guardar Cambios'}
             </button>
           </div>
         </form>
@@ -257,23 +269,24 @@ function ModalConfirmarEliminar({ producto, onConfirmar, onCerrar }) {
     <div
       id="modal-confirmar-overlay"
       style={{
-        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)',
+        position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.65)',
+        backdropFilter: 'blur(3px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         zIndex: 9999, padding: '1rem',
       }}
     >
       <div style={{
-        background: '#1e293b', borderRadius: '16px', padding: '2rem',
+        background: 'var(--color-surface, #ffffff)', borderRadius: 'var(--radius-lg, 12px)', padding: '2rem',
         width: '100%', maxWidth: '420px',
-        border: '1px solid rgba(248,113,113,0.3)',
-        boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
+        border: '1px solid var(--color-border, #E2DDD0)',
+        boxShadow: 'var(--shadow-elevated)',
       }}>
         <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
           <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🗑️</div>
-          <h2 style={{ color: '#f1f5f9', fontSize: '1.15rem', margin: '0 0 0.5rem' }}>Eliminar Producto</h2>
-          <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0 }}>
+          <h2 style={{ color: 'var(--color-danger, #A33A3A)', fontSize: '1.25rem', fontWeight: 800, margin: '0 0 0.5rem' }}>Eliminar Producto</h2>
+          <p style={{ color: 'var(--color-text-muted, #615E54)', fontSize: '0.92rem', margin: 0, lineHeight: 1.5 }}>
             ¿Estás seguro de que deseas eliminar{' '}
-            <strong style={{ color: '#fca5a5' }}>{producto?.nombre}</strong>?
+            <strong style={{ color: 'var(--color-text-main, #1A2413)' }}>{producto?.nombre}</strong>?
             Esta acción no se puede deshacer.
           </p>
         </div>
@@ -282,9 +295,9 @@ function ModalConfirmarEliminar({ producto, onConfirmar, onCerrar }) {
             id="btn-cancelar-eliminar"
             onClick={onCerrar}
             style={{
-              padding: '0.65rem 1.5rem', borderRadius: '8px',
-              background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)',
-              color: '#94a3b8', cursor: 'pointer', fontWeight: 600,
+              padding: '0.65rem 1.4rem', borderRadius: 'var(--radius-sm, 4px)',
+              background: 'var(--color-surface, #ffffff)', border: '1px solid var(--color-border, #E2DDD0)',
+              color: 'var(--color-text-muted, #615E54)', cursor: 'pointer', fontWeight: 600,
             }}
           >
             Cancelar
@@ -293,9 +306,9 @@ function ModalConfirmarEliminar({ producto, onConfirmar, onCerrar }) {
             id="btn-confirmar-eliminar"
             onClick={() => onConfirmar(producto)}
             style={{
-              padding: '0.65rem 1.5rem', borderRadius: '8px',
-              background: 'linear-gradient(135deg, #ef4444, #dc2626)',
-              border: 'none', color: '#fff', cursor: 'pointer', fontWeight: 700,
+              padding: '0.65rem 1.5rem', borderRadius: 'var(--radius-sm, 4px)',
+              background: 'var(--color-danger, #A33A3A)',
+              border: 'none', color: '#ffffff', cursor: 'pointer', fontWeight: 700,
             }}
           >
             Sí, eliminar
@@ -310,42 +323,41 @@ export default function AdminProductos() {
   const [inventario, setInventario] = useState(() => {
     try {
       const guardado = localStorage.getItem(CLAVE_INVENTARIO_STORAGE);
-      if (guardado) {
-        const lista = JSON.parse(guardado);
-        if (Array.isArray(lista) && lista.length > 0) return lista;
-      }
-    } catch { /* vacío */ }
-    return PRODUCTOS_SONIDO_VIVO;
+      return guardado ? JSON.parse(guardado) : PRODUCTOS_SONIDO_VIVO;
+    } catch {
+      return PRODUCTOS_SONIDO_VIVO;
+    }
   });
 
   const [busqueda, setBusqueda] = useState('');
   const [filtroCategoria, setFiltroCategoria] = useState('');
-  const [modalProducto, setModalProducto] = useState(null); // null | { producto, _esNuevo }
+  const [modalProducto, setModalProducto] = useState(null);
   const [modalEliminar, setModalEliminar] = useState(null);
-  const [toastMsg, setToastMsg] = useState('');
+  const [toastMsg, setToastMsg] = useState(null);
+
+  const persistir = useCallback((nuevaLista) => {
+    setInventario(nuevaLista);
+    try {
+      localStorage.setItem(CLAVE_INVENTARIO_STORAGE, JSON.stringify(nuevaLista));
+    } catch {
+      // Ignorar error de cuota en entornos restringidos
+    }
+  }, []);
 
   const mostrarToast = useCallback((msg) => {
     setToastMsg(msg);
-    setTimeout(() => setToastMsg(''), 3000);
-  }, []);
-
-  const persistir = useCallback((nuevaLista) => {
-    try {
-      localStorage.setItem(CLAVE_INVENTARIO_STORAGE, JSON.stringify(nuevaLista));
-    } catch { /* vacío */ }
-    setInventario(nuevaLista);
+    setTimeout(() => setToastMsg(null), 3500);
   }, []);
 
   const productosFiltrados = useMemo(() => {
-    const q = busqueda.toLowerCase();
     return inventario.filter((p) => {
       const coincideBusqueda =
-        !q ||
-        p.nombre.toLowerCase().includes(q) ||
-        p.codigo.toLowerCase().includes(q) ||
-        (p.marca || '').toLowerCase().includes(q);
-      const coincideCategoria = !filtroCategoria || p.categoria === filtroCategoria;
-      return coincideBusqueda && coincideCategoria;
+        !busqueda.trim() ||
+        p.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+        p.codigo.toLowerCase().includes(busqueda.toLowerCase()) ||
+        (p.marca && p.marca.toLowerCase().includes(busqueda.toLowerCase()));
+      const coincideCat = !filtroCategoria || p.categoria === filtroCategoria;
+      return coincideBusqueda && coincideCat;
     });
   }, [inventario, busqueda, filtroCategoria]);
 
@@ -357,7 +369,7 @@ export default function AdminProductos() {
         : inventario.map((p) => (p.codigo === productoEditado.codigo ? productoEditado : p));
       persistir(nuevaLista);
       setModalProducto(null);
-      mostrarToast(esNuevo ? `✅ "${productoEditado.nombre}" creado` : `✅ "${productoEditado.nombre}" actualizado`);
+      mostrarToast(esNuevo ? `✅ "${productoEditado.nombre}" creado exitosamente` : `✅ "${productoEditado.nombre}" actualizado`);
     },
     [inventario, persistir, mostrarToast]
   );
@@ -373,29 +385,30 @@ export default function AdminProductos() {
   );
 
   const thStyle = {
-    padding: '0.75rem 1rem', textAlign: 'left', color: '#64748b',
-    fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase',
-    letterSpacing: '0.05em', borderBottom: '1px solid rgba(255,255,255,0.07)',
+    padding: '0.85rem 1rem', textAlign: 'left', color: 'var(--color-text-muted, #615E54)',
+    fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
+    letterSpacing: '0.05em', borderBottom: '1px solid var(--color-border, #E2DDD0)',
+    background: 'var(--color-surface-hover, #F3EFE3)',
     whiteSpace: 'nowrap',
   };
 
   const tdStyle = {
-    padding: '0.8rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.05)',
-    color: '#e2e8f0', fontSize: '0.88rem', verticalAlign: 'middle',
+    padding: '0.85rem 1rem', borderBottom: '1px solid var(--color-border, #E2DDD0)',
+    color: 'var(--color-text-main, #1A2413)', fontSize: '0.9rem', verticalAlign: 'middle',
   };
 
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif", padding: '1rem 0' }}>
+    <div style={{ fontFamily: 'var(--font-family)', padding: '1rem 0' }}>
       {/* Toast */}
       {toastMsg && (
         <div
           id="toast-admin"
           style={{
             position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 10000,
-            background: '#1e293b', border: '1px solid rgba(99,102,241,0.5)',
-            borderRadius: '12px', padding: '1rem 1.5rem', color: '#e2e8f0',
-            fontWeight: 600, fontSize: '0.9rem',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+            background: 'var(--color-primary, #1A2413)', border: '1px solid var(--color-accent, #D49B28)',
+            borderRadius: 'var(--radius-sm, 4px)', padding: '1rem 1.5rem', color: 'var(--color-bg, #FAF8F2)',
+            fontWeight: 700, fontSize: '0.9rem',
+            boxShadow: 'var(--shadow-elevated)',
             animation: 'slideIn 0.3s ease',
           }}
         >
@@ -404,23 +417,33 @@ export default function AdminProductos() {
       )}
 
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <h1 style={{ margin: 0, color: '#f1f5f9', fontSize: '1.6rem', fontWeight: 700 }}>
+          <h1 style={{ margin: 0, color: 'var(--color-text-main, #1A2413)', fontSize: '1.85rem', fontWeight: 800 }}>
             📋 Gestión de Inventario
           </h1>
-          <p style={{ margin: '0.25rem 0 0', color: '#64748b', fontSize: '0.85rem' }}>
-            {inventario.length} productos · {productosFiltrados.length} visibles
+          <p style={{ margin: '0.25rem 0 0', color: 'var(--color-text-muted, #615E54)', fontSize: '0.92rem' }}>
+            {inventario.length} productos registrados · {productosFiltrados.length} visibles en catálogo
           </p>
         </div>
         <button
           id="btn-nuevo-producto"
           onClick={() => setModalProducto({ ...PRODUCTO_VACIO, _esNuevo: true })}
           style={{
-            background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-            border: 'none', color: '#fff', padding: '0.7rem 1.3rem',
-            borderRadius: '10px', fontWeight: 700, cursor: 'pointer',
-            fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem',
+            background: 'var(--color-primary, #1A2413)',
+            border: 'none', color: 'var(--color-bg, #FAF8F2)', padding: '0.75rem 1.5rem',
+            borderRadius: 'var(--radius-sm, 4px)', fontWeight: 700, cursor: 'pointer',
+            fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
+            boxShadow: 'var(--shadow-sm)',
+            transition: 'background-color 0.2s ease, transform 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'var(--color-primary-hover, #29381E)';
+            e.currentTarget.style.transform = 'translateY(-1px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'var(--color-primary, #1A2413)';
+            e.currentTarget.style.transform = 'translateY(0)';
           }}
         >
           ➕ Nuevo Producto
@@ -437,8 +460,8 @@ export default function AdminProductos() {
           onChange={(e) => setBusqueda(e.target.value)}
           style={{
             flex: '1', minWidth: '220px',
-            background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '8px', padding: '0.6rem 1rem', color: '#f1f5f9',
+            background: '#ffffff', border: '1px solid var(--color-border, #E2DDD0)',
+            borderRadius: 'var(--radius-sm, 4px)', padding: '0.65rem 1rem', color: 'var(--color-text-main, #1A2413)',
             fontSize: '0.9rem', outline: 'none',
           }}
         />
@@ -447,9 +470,9 @@ export default function AdminProductos() {
           value={filtroCategoria}
           onChange={(e) => setFiltroCategoria(e.target.value)}
           style={{
-            background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '8px', padding: '0.6rem 1rem', color: '#f1f5f9',
-            fontSize: '0.9rem', outline: 'none', appearance: 'none', minWidth: '180px',
+            background: '#ffffff', border: '1px solid var(--color-border, #E2DDD0)',
+            borderRadius: 'var(--radius-sm, 4px)', padding: '0.65rem 1rem', color: 'var(--color-text-main, #1A2413)',
+            fontSize: '0.9rem', outline: 'none', minWidth: '180px',
           }}
         >
           <option value="">Todas las categorías</option>
@@ -460,108 +483,129 @@ export default function AdminProductos() {
       </div>
 
       {/* Tabla */}
-      <div style={{ overflowX: 'auto', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.07)' }}>
-        <table id="tabla-inventario" style={{ width: '100%', borderCollapse: 'collapse', background: 'rgba(30,41,59,0.6)' }}>
-          <thead>
-            <tr>
-              <th style={thStyle}>Producto</th>
-              <th style={thStyle}>Categoría</th>
-              <th style={thStyle}>Precio</th>
-              <th style={thStyle}>Stock</th>
-              <th style={{ ...thStyle, textAlign: 'right' }}>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productosFiltrados.length === 0 ? (
+      <div
+        style={{
+          background: 'var(--color-surface, #ffffff)',
+          borderRadius: 'var(--radius-md, 8px)',
+          border: '1px solid var(--color-border, #E2DDD0)',
+          overflow: 'hidden',
+          boxShadow: 'var(--shadow-card)',
+        }}
+      >
+        <div style={{ overflowX: 'auto' }}>
+          <table id="tabla-inventario" style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
               <tr>
-                <td colSpan={5} style={{ ...tdStyle, textAlign: 'center', color: '#475569', padding: '3rem' }}>
-                  Sin resultados para la búsqueda actual
-                </td>
+                <th style={thStyle}>Producto</th>
+                <th style={thStyle}>Categoría</th>
+                <th style={thStyle}>Precio</th>
+                <th style={thStyle}>Stock</th>
+                <th style={{ ...thStyle, textAlign: 'right' }}>Acciones</th>
               </tr>
-            ) : (
-              productosFiltrados.map((p) => {
-                const critico = p.stock <= (p.stockCritico ?? 3);
-                return (
-                  <tr
-                    key={p.codigo}
-                    id={`fila-${p.codigo}`}
-                    style={{ transition: 'background 0.15s' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
-                  >
-                    <td style={tdStyle}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <img
-                          src={obtenerRutaImagen(p)}
-                          alt={p.nombre}
-                          onError={(e) => { e.target.style.display = 'none'; }}
-                          style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '8px', background: 'rgba(255,255,255,0.05)' }}
-                        />
-                        <div>
-                          <div style={{ fontWeight: 600, color: '#f1f5f9' }}>{p.nombre}</div>
-                          <div style={{ color: '#64748b', fontSize: '0.78rem' }}>
-                            {p.codigo} · {p.marca}
+            </thead>
+            <tbody>
+              {productosFiltrados.length === 0 ? (
+                <tr>
+                  <td colSpan={5} style={{ ...tdStyle, textAlign: 'center', color: 'var(--color-text-muted, #615E54)', padding: '3rem' }}>
+                    Sin resultados para la búsqueda actual
+                  </td>
+                </tr>
+              ) : (
+                productosFiltrados.map((p) => {
+                  const critico = p.stock <= (p.stockCritico ?? 3);
+                  return (
+                    <tr
+                      key={p.codigo}
+                      id={`fila-${p.codigo}`}
+                      style={{ transition: 'background-color 0.15s ease' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--color-surface-hover, #F3EFE3)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                    >
+                      <td style={tdStyle}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                          <img
+                            src={obtenerRutaImagen(p)}
+                            alt={p.nombre}
+                            onError={(e) => { e.target.style.display = 'none'; }}
+                            style={{
+                              width: '42px', height: '42px', objectFit: 'cover',
+                              borderRadius: 'var(--radius-sm, 4px)',
+                              border: '1px solid var(--color-border, #E2DDD0)',
+                              background: 'var(--color-surface-hover, #F3EFE3)',
+                            }}
+                          />
+                          <div>
+                            <div style={{ fontWeight: 600, color: 'var(--color-text-main, #1A2413)', fontSize: '0.92rem' }}>
+                              {p.nombre}
+                            </div>
+                            <div style={{ color: 'var(--color-text-muted, #615E54)', fontSize: '0.8rem' }}>
+                              {p.codigo} · {p.marca}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td style={tdStyle}>
-                      <span style={{
-                        background: 'rgba(99,102,241,0.15)', color: '#a5b4fc',
-                        padding: '0.25rem 0.7rem', borderRadius: '20px', fontSize: '0.78rem', fontWeight: 600,
-                      }}>
-                        {p.categoria}
-                      </span>
-                    </td>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#4ade80' }}>
-                      {formatearPrecioCLP(p.precio)}
-                    </td>
-                    <td style={tdStyle}>
-                      <span style={{
-                        background: critico ? 'rgba(248,113,113,0.15)' : 'rgba(74,222,128,0.1)',
-                        color: critico ? '#f87171' : '#4ade80',
-                        padding: '0.25rem 0.7rem', borderRadius: '20px',
-                        fontWeight: 700, fontSize: '0.85rem',
-                      }}>
-                        {critico ? '⚠️ ' : ''}{p.stock}
-                      </span>
-                    </td>
-                    <td style={{ ...tdStyle, textAlign: 'right' }}>
-                      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
-                        <button
-                          id={`btn-editar-${p.codigo}`}
-                          onClick={() => setModalProducto({ ...p })}
-                          style={{
-                            background: 'rgba(99,102,241,0.15)', border: '1px solid rgba(99,102,241,0.3)',
-                            color: '#a5b4fc', borderRadius: '7px', padding: '0.4rem 0.75rem',
-                            cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, transition: 'background 0.2s',
-                          }}
-                          onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(99,102,241,0.3)')}
-                          onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(99,102,241,0.15)')}
-                        >
-                          ✏️ Editar
-                        </button>
-                        <button
-                          id={`btn-eliminar-${p.codigo}`}
-                          onClick={() => setModalEliminar(p)}
-                          style={{
-                            background: 'rgba(248,113,113,0.1)', border: '1px solid rgba(248,113,113,0.3)',
-                            color: '#f87171', borderRadius: '7px', padding: '0.4rem 0.75rem',
-                            cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, transition: 'background 0.2s',
-                          }}
-                          onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(248,113,113,0.25)')}
-                          onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(248,113,113,0.1)')}
-                        >
-                          🗑️ Eliminar
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
+                      </td>
+                      <td style={tdStyle}>
+                        <span style={{
+                          background: 'var(--color-surface-hover, #F3EFE3)',
+                          color: 'var(--color-text-main, #1A2413)',
+                          border: '1px solid var(--color-border, #E2DDD0)',
+                          padding: '0.25rem 0.65rem', borderRadius: '14px', fontSize: '0.78rem', fontWeight: 600,
+                        }}>
+                          {p.categoria}
+                        </span>
+                      </td>
+                      <td style={{ ...tdStyle, fontWeight: 800, color: 'var(--color-accent, #D49B28)', fontSize: '0.95rem' }}>
+                        {formatearPrecioCLP(p.precio)}
+                      </td>
+                      <td style={tdStyle}>
+                        <span style={{
+                          background: critico ? 'var(--color-danger-bg, #FDF0F0)' : 'var(--color-success-bg, #EEF4E6)',
+                          color: critico ? 'var(--color-danger, #A33A3A)' : 'var(--color-success, #4E632E)',
+                          border: `1px solid ${critico ? 'rgba(163, 58, 58, 0.25)' : 'rgba(78, 99, 46, 0.25)'}`,
+                          padding: '0.25rem 0.65rem', borderRadius: '20px',
+                          fontWeight: 700, fontSize: '0.85rem',
+                          display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
+                        }}>
+                          {critico ? '⚠️ ' : ''}{p.stock}
+                        </span>
+                      </td>
+                      <td style={{ ...tdStyle, textAlign: 'right' }}>
+                        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+                          <button
+                            id={`btn-editar-${p.codigo}`}
+                            onClick={() => setModalProducto({ ...p })}
+                            style={{
+                              background: 'var(--color-surface, #ffffff)', border: '1px solid var(--color-border, #E2DDD0)',
+                              color: 'var(--color-text-main, #1A2413)', borderRadius: 'var(--radius-sm, 4px)', padding: '0.45rem 0.8rem',
+                              cursor: 'pointer', fontSize: '0.82rem', fontWeight: 600, transition: 'background-color 0.2s',
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--color-surface-hover, #F3EFE3)')}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--color-surface, #ffffff)')}
+                          >
+                            ✏️ Editar
+                          </button>
+                          <button
+                            id={`btn-eliminar-${p.codigo}`}
+                            onClick={() => setModalEliminar(p)}
+                            style={{
+                              background: 'var(--color-danger-bg, #FDF0F0)', border: '1px solid rgba(163, 58, 58, 0.3)',
+                              color: 'var(--color-danger, #A33A3A)', borderRadius: 'var(--radius-sm, 4px)', padding: '0.45rem 0.8rem',
+                              cursor: 'pointer', fontSize: '0.82rem', fontWeight: 600, transition: 'background-color 0.2s',
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.background = '#fee2e2')}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--color-danger-bg, #FDF0F0)')}
+                          >
+                            🗑️ Eliminar
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Modales */}
