@@ -23,7 +23,7 @@ describe('<CustomObjectsSection />', () => {
     vi.restoreAllMocks();
   });
 
-  it('renderiza la lista de servicios y ranura de sólo lectura para visitantes', () => {
+  it('renderiza la lista de servicios limpia sin ranuras de administrador para visitantes', () => {
     render(
       <AuthProvider>
         <CustomObjectsSection objetos={objetosMock} />
@@ -33,9 +33,10 @@ describe('<CustomObjectsSection />', () => {
     expect(screen.getByText(/Calibración de Guitarras/i)).toBeInTheDocument();
     expect(screen.getByText(/SRV-001/i)).toBeInTheDocument();
     expect(screen.getByText('$25.000')).toBeInTheDocument();
-    expect(screen.getByTestId('custom-card-slot-readonly')).toBeInTheDocument();
+    expect(screen.queryByTestId('custom-card-slot-readonly')).not.toBeInTheDocument();
     expect(screen.queryByTestId('btn-abrir-modal-crear-objeto')).not.toBeInTheDocument();
   });
+
 
   it('permite agregar un servicio al carrito llamando a onAddToCart', async () => {
     const user = userEvent.setup();
