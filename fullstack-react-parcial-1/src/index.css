@@ -418,6 +418,17 @@ textarea {
     color: var(--color-danger);
 }
 
+.badge-filter-count {
+    background-color: var(--color-surface);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    display: inline-block;
+}
+
 @keyframes pulseCritical {
     0% {
         box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6);
@@ -824,9 +835,25 @@ textarea {
     padding-top: 12px;
     border-top: 1px solid var(--color-border-subtle);
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     margin-bottom: 14px;
+}
+
+.product-price-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    min-height: 42px;
+}
+
+.product-price-original {
+    font-size: 0.82rem;
+    line-height: 1.2;
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    display: block;
 }
 
 .product-price {
@@ -834,6 +861,10 @@ textarea {
     font-weight: 800;
     font-family: var(--font-heading);
     color: var(--color-text-main);
+}
+
+.product-price.on-sale {
+    color: var(--color-accent);
 }
 
 .product-price.free {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Badge, Button, Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { formatearPrecioCLP, obtenerRutaImagen } from '../data/productos';
 import { useCart } from '../context/CartContext';
@@ -65,20 +65,25 @@ function ProductCard({ producto, onAddToCart }) {
 
         <div className="product-meta mt-auto">
           <div>
-            <Badge bg="light" text="dark" className="badge badge-category">
+            <span className="badge badge-category">
               {producto.categoria}
-            </Badge>
+            </span>
           </div>
-          <div className="text-end">
+          <div className="product-price-box text-end">
             {producto.enOferta && producto.precioOriginal && (
-              <span
-                className="product-price-original text-muted text-decoration-line-through d-block"
-                style={{ fontSize: '0.82rem', lineHeight: '1.2' }}
-              >
+              <span className="product-price-original">
                 {formatearPrecioCLP(producto.precioOriginal)}
               </span>
             )}
-            <span className={esGratis ? 'product-price free' : 'product-price'}>
+            <span
+              className={
+                esGratis
+                  ? 'product-price free'
+                  : producto.enOferta
+                    ? 'product-price on-sale'
+                    : 'product-price'
+              }
+            >
               {formatearPrecioCLP(producto.precio)}
             </span>
           </div>

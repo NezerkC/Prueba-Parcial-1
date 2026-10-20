@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Badge, Button, Form, InputGroup } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { CATEGORIAS_SONIDO_VIVO } from '../data/productos';
 
 function FiltrosCatalogo({
@@ -87,9 +87,9 @@ function FiltrosCatalogo({
 
       {/* Contador de resultados */}
       <div className="mt-3 d-flex justify-content-between align-items-center">
-        <Badge bg="light" text="dark" className="border px-2 py-1">
+        <span className="badge-filter-count" data-testid="total-resultados-badge">
           {totalResultados} {totalResultados === 1 ? 'producto encontrado' : 'productos encontrados'}
-        </Badge>
+        </span>
         {(busqueda || categoriaSeleccionada !== 'Todas') && (
           <Button
             variant="link"
