@@ -21,6 +21,7 @@ import CompraExitosa from './pages/CompraExitosa';
 import PagoFallido from './pages/PagoFallido';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProductos from './pages/admin/AdminProductos';
+import AdminUsuarios from './pages/admin/AdminUsuarios';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
@@ -57,6 +58,7 @@ function App() {
               <Route path="/pago-fallido" element={<PagoFallido />} />
               <Route path="/admin" element={<RutaAdmin><AdminDashboard /></RutaAdmin>} />
               <Route path="/admin/productos" element={<RutaAdmin><AdminProductos /></RutaAdmin>} />
+              <Route path="/admin/usuarios" element={<RutaAdmin><AdminUsuarios /></RutaAdmin>} />
             </Routes>
           </Container>
 
@@ -69,4 +71,3 @@ function App() {
 }
 
 export default App;
-
