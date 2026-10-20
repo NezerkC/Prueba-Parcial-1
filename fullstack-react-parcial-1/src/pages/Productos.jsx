@@ -49,7 +49,7 @@ function Productos() {
   return (
     <Container className="py-4 catalogo-page" as="section" aria-label="Catálogo completo de productos">
       <header className="mb-4">
-        <h1 className="h2 fw-bold text-dark">Catálogo de Instrumentos y Audio</h1>
+        <h1 className="h2 fw-bold">Catálogo de Instrumentos y Audio</h1>
         <p className="text-muted mb-0">
           Explora nuestra selección completa de guitarras, teclados, amplificadores y accesorios con garantía oficial.
         </p>
