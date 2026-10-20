@@ -174,6 +174,35 @@ export default function AdminDashboard() {
             📋 Gestionar Inventario
           </Link>
           <Link
+            to="/admin/usuarios"
+            id="btn-ir-usuarios"
+            style={{
+              background: 'var(--color-surface, #FFFFFF)',
+              color: 'var(--color-text-main, #1A2413)',
+              padding: '0.75rem 1.5rem',
+              borderRadius: 'var(--radius-sm, 4px)',
+              textDecoration: 'none',
+              fontWeight: 600,
+              fontSize: '0.9rem',
+              border: '1px solid var(--color-border, #E2DDD0)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              boxShadow: 'var(--shadow-sm)',
+              transition: 'background-color 0.2s ease, transform 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--color-surface-hover, #F3EFE3)';
+              e.currentTarget.style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--color-surface, #FFFFFF)';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
+            👥 Mantenedor de Usuarios
+          </Link>
+          <Link
             to="/productos"
             id="btn-ir-catalogo"
             style={{
