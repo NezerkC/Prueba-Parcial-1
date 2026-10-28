@@ -7,12 +7,21 @@ import CompraExitosa from './CompraExitosa';
 import PagoFallido from './PagoFallido';
 import { AuthProvider } from '../context/AuthContext';
 import { CartProvider } from '../context/CartContext';
+import { ORDENES_STORAGE_KEY } from '../utils/checkout';
 
 const CLAVE_CARRITO = 'sonido_vivo_carrito_v1';
 const CLAVE_SESION = 'sonido_vivo_auth_v1';
 const CARRITO_PRUEBA = [
   { codigo: 'GE001', nombre: 'Guitarra Eléctrica Stratocaster', precio: 100000, cantidad: 1 },
 ];
+
+const USUARIO_SESION_BASE = {
+  rut: '19011022-K',
+  nombre: '',
+  apellidos: '',
+  correo: '',
+  rol: 'cliente',
+};
 
 function renderCheckout() {
   return render(
@@ -22,6 +31,7 @@ function renderCheckout() {
           <Routes>
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/carrito" element={<div>Carrito Mock</div>} />
+            <Route path="/login" element={<div>Login Mock</div>} />
             <Route path="/compra-exitosa" element={<CompraExitosa />} />
             <Route path="/pago-fallido" element={<PagoFallido />} />
           </Routes>
@@ -44,6 +54,7 @@ describe('<Checkout />', () => {
   beforeEach(() => {
     localStorage.clear();
     localStorage.setItem(CLAVE_CARRITO, JSON.stringify(CARRITO_PRUEBA));
+    localStorage.setItem(CLAVE_SESION, JSON.stringify(USUARIO_SESION_BASE));
   });
 
   it('redirige al carrito cuando no hay productos', () => {
@@ -51,6 +62,13 @@ describe('<Checkout />', () => {
     renderCheckout();
 
     expect(screen.getByText('Carrito Mock')).toBeInTheDocument();
+  });
+
+  it('redirige a /login cuando el usuario no está autenticado', () => {
+    localStorage.removeItem(CLAVE_SESION);
+    renderCheckout();
+
+    expect(screen.getByText('Login Mock')).toBeInTheDocument();
   });
 
   it('muestra el formulario y el resumen del pedido con los totales', () => {
@@ -127,6 +145,14 @@ describe('<Checkout />', () => {
       'Av. Libertad 1234, Viña del Mar, Valparaíso'
     );
     expect(JSON.parse(localStorage.getItem(CLAVE_CARRITO))).toEqual([]);
+
+    // Verifica persistencia en localStorage de la orden asociada al cliente
+    const ordenesGuardadas = JSON.parse(localStorage.getItem(ORDENES_STORAGE_KEY));
+    expect(ordenesGuardadas).toHaveLength(1);
+    expect(ordenesGuardadas[0].usuario.rut).toBe('19011022-K');
+    expect(screen.getByTestId('confirmacion-cuenta-asociada')).toHaveTextContent(
+      '19011022-K'
+    );
   });
 
   it('con pago rechazado muestra el pago fallido y conserva el carrito', async () => {

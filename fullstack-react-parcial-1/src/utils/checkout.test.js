@@ -1,5 +1,13 @@
-import { describe, it, expect } from 'vitest';
-import { TIPOS_ENTREGA, crearOrden, generarNumeroOrden, validarDatosEnvio } from './checkout';
+import { describe, it, expect, beforeEach } from 'vitest';
+import {
+  TIPOS_ENTREGA,
+  ORDENES_STORAGE_KEY,
+  crearOrden,
+  generarNumeroOrden,
+  validarDatosEnvio,
+  guardarOrdenStorage,
+  obtenerOrdenesStorage,
+} from './checkout';
 
 const DATOS_VALIDOS = {
   nombre: 'Danilo',
@@ -13,6 +21,10 @@ const DATOS_VALIDOS = {
 };
 
 describe('Reglas del checkout', () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   it('no devuelve errores con datos de envío completos', () => {
     expect(validarDatosEnvio(DATOS_VALIDOS)).toEqual({});
   });
@@ -41,5 +53,59 @@ describe('Reglas del checkout', () => {
     expect(orden.entrega.comuna).toBe('Viña del Mar');
     expect(orden.items).toEqual([{ codigo: 'GE001', nombre: 'Guitarra', precio: 1000, cantidad: 2 }]);
     expect(orden.total).toBe(2380);
+  });
+
+  it('asocia la orden al usuario autenticado (RUT y correo)', () => {
+    const items = [{ codigo: 'GE001', nombre: 'Guitarra', precio: 1000, cantidad: 1 }];
+    const usuarioAuth = {
+      rut: '19011022-K',
+      correo: 'cliente@duoc.cl',
+      nombre: 'Sebastián',
+      apellidos: 'Valenzuela',
+      rol: 'cliente',
+    };
+
+    const orden = crearOrden({
+      datos: DATOS_VALIDOS,
+      items,
+      subtotal: 1000,
+      iva: 190,
+      total: 1190,
+      usuario: usuarioAuth,
+    });
+
+    expect(orden.cliente.rut).toBe('19011022-K');
+    expect(orden.usuario).toEqual({
+      rut: '19011022-K',
+      correo: 'cliente@duoc.cl',
+      nombre: 'Sebastián Valenzuela',
+      rol: 'cliente',
+    });
+  });
+
+  it('persiste y recupera órdenes en localStorage asociadas al cliente', () => {
+    const orden1 = {
+      numero: 'SV-100001',
+      usuario: { rut: '19011022-K', correo: 'cliente@duoc.cl' },
+      total: 50000,
+    };
+    const orden2 = {
+      numero: 'SV-100002',
+      usuario: { rut: '12345678-5', correo: 'otro@duoc.cl' },
+      total: 80000,
+    };
+
+    guardarOrdenStorage(orden1);
+    guardarOrdenStorage(orden2);
+
+    const todas = obtenerOrdenesStorage();
+    expect(todas).toHaveLength(2);
+
+    const filtradasPorRut = obtenerOrdenesStorage('19011022-K');
+    expect(filtradasPorRut).toHaveLength(1);
+    expect(filtradasPorRut[0].numero).toBe('SV-100001');
+
+    const raw = JSON.parse(localStorage.getItem(ORDENES_STORAGE_KEY));
+    expect(raw).toHaveLength(2);
   });
 });

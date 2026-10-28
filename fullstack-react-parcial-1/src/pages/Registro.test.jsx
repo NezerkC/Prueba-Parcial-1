@@ -10,6 +10,7 @@ function renderWithProviders(initialRoute = '/registro') {
       <AuthProvider>
         <Routes>
           <Route path="/registro" element={<Registro />} />
+          <Route path="/checkout" element={<div>Checkout Mock</div>} />
           <Route path="/" element={<div>Home Mock</div>} />
         </Routes>
       </AuthProvider>
@@ -94,6 +95,9 @@ describe('<Registro />', () => {
     fireEvent.change(screen.getByTestId('input-registro-clave'), {
       target: { value: 'clave123' },
     });
+    fireEvent.change(screen.getByTestId('input-registro-confirmar-clave'), {
+      target: { value: 'clave123' },
+    });
 
     // Cascada Región -> Comuna
     fireEvent.change(screen.getByTestId('select-registro-region'), {
@@ -111,6 +115,49 @@ describe('<Registro />', () => {
 
     await waitFor(() => {
       expect(screen.getByText('Home Mock')).toBeInTheDocument();
+    });
+  });
+
+  it('tras registrarse con parámetro ?redirect=/checkout navega directamente al checkout', async () => {
+    renderWithProviders('/registro?redirect=/checkout');
+
+    expect(screen.getByTestId('alerta-registro-redirect-checkout')).toBeInTheDocument();
+
+    fireEvent.change(screen.getByTestId('input-registro-rut'), {
+      target: { value: '19011029K' },
+    });
+    fireEvent.blur(screen.getByTestId('input-registro-rut'));
+
+    fireEvent.change(screen.getByTestId('input-registro-nombre'), {
+      target: { value: 'Carlos' },
+    });
+    fireEvent.change(screen.getByTestId('input-registro-apellidos'), {
+      target: { value: 'Santana' },
+    });
+    fireEvent.change(screen.getByTestId('input-registro-correo'), {
+      target: { value: 'csantana@duoc.cl' },
+    });
+    fireEvent.change(screen.getByTestId('input-registro-clave'), {
+      target: { value: 'clave123' },
+    });
+    fireEvent.change(screen.getByTestId('input-registro-confirmar-clave'), {
+      target: { value: 'clave123' },
+    });
+
+    fireEvent.change(screen.getByTestId('select-registro-region'), {
+      target: { value: 'V' },
+    });
+    fireEvent.change(screen.getByTestId('select-registro-comuna'), {
+      target: { value: 'Viña del Mar' },
+    });
+    fireEvent.change(screen.getByTestId('input-registro-direccion'), {
+      target: { value: 'Av. Marina 400' },
+    });
+
+    fireEvent.click(screen.getByTestId('btn-registro-submit'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Checkout Mock')).toBeInTheDocument();
     });
   });
 });

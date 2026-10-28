@@ -3,8 +3,10 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import Carrito from './Carrito';
 import { CartProvider } from '../context/CartContext';
+import { AuthProvider } from '../context/AuthContext';
 
 const STORAGE_KEY = 'sonido_vivo_carrito_v1';
+const AUTH_KEY = 'sonido_vivo_auth_v1';
 
 function renderCarrito(initialItems = []) {
   if (initialItems.length > 0) {
@@ -15,13 +17,16 @@ function renderCarrito(initialItems = []) {
 
   return render(
     <MemoryRouter initialEntries={['/carrito']}>
-      <CartProvider>
-        <Routes>
-          <Route path="/carrito" element={<Carrito />} />
-          <Route path="/productos" element={<div>Página de Catálogo Mock</div>} />
-          <Route path="/checkout" element={<div>Checkout Mock</div>} />
-        </Routes>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <Routes>
+            <Route path="/carrito" element={<Carrito />} />
+            <Route path="/productos" element={<div>Página de Catálogo Mock</div>} />
+            <Route path="/checkout" element={<div>Checkout Mock</div>} />
+            <Route path="/login" element={<div>Login Mock</div>} />
+          </Routes>
+        </CartProvider>
+      </AuthProvider>
     </MemoryRouter>
   );
 }
@@ -102,12 +107,13 @@ describe('<Carrito />', () => {
 
     renderCarrito(productosDemo);
 
-    expect(screen.getByTestId('cart-item-BA001')).toBeInTheDocument();
+    expect(screen.getByText('Bajo Yamaha TRBX')).toBeInTheDocument();
 
     const btnEliminar = screen.getByTestId('btn-eliminar-BA001');
     fireEvent.click(btnEliminar);
 
     await waitFor(() => {
+      expect(screen.queryByText('Bajo Yamaha TRBX')).not.toBeInTheDocument();
       expect(screen.getByTestId('cart-empty-view')).toBeInTheDocument();
     });
   });
@@ -116,21 +122,20 @@ describe('<Carrito />', () => {
     const productosDemo = [
       {
         codigo: 'TE001',
-        nombre: 'Teclado Roland',
+        nombre: 'Teclado Roland GO:KEYS',
         marca: 'Roland',
-        precio: 300000,
+        precio: 320000,
         cantidad: 1,
       },
     ];
 
     renderCarrito(productosDemo);
 
-    expect(screen.getByTestId('btn-vaciar-carro')).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId('btn-vaciar-carro'));
+    const btnVaciar = screen.getByTestId('btn-vaciar-carro');
+    fireEvent.click(btnVaciar);
 
-    // Esperar a que el modal aparezca
     await waitFor(() => {
-      expect(screen.getByText('¿Vaciar Carrito de Compras?')).toBeInTheDocument();
+      expect(screen.getByText(/¿Vaciar Carrito de Compras\?/i)).toBeInTheDocument();
     });
 
     const btnConfirmar = screen.getByTestId('btn-confirmar-vaciar');
@@ -141,7 +146,7 @@ describe('<Carrito />', () => {
     });
   });
 
-  it('lleva al checkout al hacer clic en Continuar al Checkout', async () => {
+  it('redirige a /login cuando un usuario sin sesión intenta continuar al checkout', async () => {
     const productosDemo = [
       {
         codigo: 'MI001',
@@ -153,6 +158,35 @@ describe('<Carrito />', () => {
     ];
 
     renderCarrito(productosDemo);
+
+    expect(screen.getByTestId('aviso-auth-checkout')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId('btn-finalizar-compra'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Login Mock')).toBeInTheDocument();
+    });
+  });
+
+  it('lleva al checkout al hacer clic en Continuar al Checkout cuando el usuario tiene sesión activa', async () => {
+    localStorage.setItem(
+      AUTH_KEY,
+      JSON.stringify({ rut: '19011022-K', correo: 'cliente@duoc.cl', rol: 'cliente' })
+    );
+
+    const productosDemo = [
+      {
+        codigo: 'MI001',
+        nombre: 'Micrófono Shure SM58',
+        marca: 'Shure',
+        precio: 120000,
+        cantidad: 1,
+      },
+    ];
+
+    renderCarrito(productosDemo);
+
+    expect(screen.queryByTestId('aviso-auth-checkout')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId('btn-finalizar-compra'));
 
