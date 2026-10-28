@@ -1,4 +1,5 @@
 import { Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navigation from './components/Navbar';
@@ -31,6 +32,20 @@ function RutaAdmin({ children }) {
   return children;
 }
 
+RutaAdmin.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+function RutaCliente({ children }) {
+  const { isAuthenticated } = useAuth();
+  if (!isAuthenticated) return <Navigate to="/login?redirect=/checkout" replace />;
+  return children;
+}
+
+RutaCliente.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 function App() {
   return (
     <AuthProvider>
@@ -53,7 +68,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/registro" element={<Registro />} />
               <Route path="/carrito" element={<Carrito />} />
-              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkout" element={<RutaCliente><Checkout /></RutaCliente>} />
               <Route path="/compra-exitosa" element={<CompraExitosa />} />
               <Route path="/pago-fallido" element={<PagoFallido />} />
               <Route path="/admin" element={<RutaAdmin><AdminDashboard /></RutaAdmin>} />

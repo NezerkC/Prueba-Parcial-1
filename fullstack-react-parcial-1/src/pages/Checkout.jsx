@@ -5,7 +5,7 @@ import ResumenPedido from '../components/checkout/ResumenPedido';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { REGIONES_CHILE } from '../data/regiones';
-import { TIPOS_ENTREGA, crearOrden, validarDatosEnvio } from '../utils/checkout';
+import { TIPOS_ENTREGA, crearOrden, guardarOrdenStorage, validarDatosEnvio } from '../utils/checkout';
 
 // Si hay sesión iniciada, los datos del cliente se completan automáticamente
 function datosIniciales(usuario) {
@@ -23,7 +23,7 @@ function datosIniciales(usuario) {
 }
 
 function Checkout() {
-  const { usuario } = useAuth();
+  const { usuario, isAuthenticated } = useAuth();
   const { items, subtotal, iva, totalConIva, clearCart } = useCart();
   const navigate = useNavigate();
 
@@ -32,8 +32,14 @@ function Checkout() {
   // evita que, al vaciar el carrito tras pagar, se redirija al carrito en vez del comprobante
   const [compraConfirmada, setCompraConfirmada] = useState(false);
 
+  // Si no hay productos en el carrito (y no acabamos de comprar), volvemos al carrito
   if (items.length === 0 && !compraConfirmada) {
     return <Navigate to="/carrito" replace />;
+  }
+
+  // Tarea 19 (RF-08): Requiere que el cliente esté autenticado para comprar
+  if (!isAuthenticated) {
+    return <Navigate to="/login?redirect=/checkout" replace />;
   }
 
   const comunas = REGIONES_CHILE.find((r) => r.id === datos.region)?.comunas || [];
@@ -58,7 +64,7 @@ function Checkout() {
       return;
     }
 
-    const orden = crearOrden({ datos, items, subtotal, iva, total: totalConIva });
+    const orden = crearOrden({ datos, items, subtotal, iva, total: totalConIva, usuario });
 
     // Pago simulado: no hay pasarela real en esta etapa del proyecto
     if (datos.simularRechazo) {
@@ -66,6 +72,8 @@ function Checkout() {
       return;
     }
 
+    // Tarea 20: Persistir orden asociada al historial de órdenes del cliente
+    guardarOrdenStorage(orden);
     setCompraConfirmada(true);
     clearCart();
     navigate('/compra-exitosa', { state: { orden } });
@@ -111,7 +119,7 @@ function Checkout() {
                   <Form.Control.Feedback type="invalid">{errores.apellidos}</Form.Control.Feedback>
                 </Form.Group>
               </Col>
-              <Col xs={12}>
+              <Col md={12}>
                 <Form.Group controlId="checkout-correo">
                   <Form.Label>Correo</Form.Label>
                   <Form.Control
@@ -126,8 +134,8 @@ function Checkout() {
               </Col>
             </Row>
 
-            <h2 className="h5 fw-bold mt-4 mb-3">Entrega</h2>
-            <div className="mb-3">
+            <h2 className="h5 fw-bold mt-4 mb-3">Tipo de entrega</h2>
+            <Form.Group className="mb-3">
               <Form.Check
                 type="radio"
                 id="entrega-domicilio"
@@ -142,11 +150,11 @@ function Checkout() {
                 id="entrega-retiro"
                 name="tipoEntrega"
                 value={TIPOS_ENTREGA.RETIRO}
-                label="Retiro en tienda (Viña del Mar)"
+                label="Retiro en tienda (Sonido Vivo, Viña del Mar)"
                 checked={!esDomicilio}
                 onChange={handleChange}
               />
-            </div>
+            </Form.Group>
 
             {esDomicilio && (
               <Row className="g-3" data-testid="checkout-direccion">
@@ -163,8 +171,8 @@ function Checkout() {
                   </Form.Group>
                 </Col>
                 <Col md={4}>
-                  <Form.Group controlId="checkout-departamento">
-                    <Form.Label>Depto. (opcional)</Form.Label>
+                  <Form.Group controlId="checkout-depto">
+                    <Form.Label>Depto / Casa (opcional)</Form.Label>
                     <Form.Control
                       name="departamento"
                       value={datos.departamento}
@@ -181,7 +189,7 @@ function Checkout() {
                       onChange={handleChange}
                       isInvalid={Boolean(errores.region)}
                     >
-                      <option value="">Selecciona una región</option>
+                      <option value="">Selecciona tu región</option>
                       {REGIONES_CHILE.map((region) => (
                         <option key={region.id} value={region.id}>
                           {region.nombre}
@@ -201,7 +209,9 @@ function Checkout() {
                       disabled={!datos.region}
                       isInvalid={Boolean(errores.comuna)}
                     >
-                      <option value="">Selecciona una comuna</option>
+                      <option value="">
+                        {datos.region ? 'Selecciona tu comuna' : 'Elige una región primero'}
+                      </option>
                       {comunas.map((comuna) => (
                         <option key={comuna} value={comuna}>
                           {comuna}
@@ -214,29 +224,39 @@ function Checkout() {
               </Row>
             )}
 
-            <Form.Check
-              type="checkbox"
-              id="checkout-simular-rechazo"
-              name="simularRechazo"
-              className="mt-4"
-              label="Simular pago rechazado (modo demostración)"
-              checked={datos.simularRechazo}
-              onChange={handleChange}
-            />
+            <div className="mt-4 p-3 bg-light rounded border">
+              <Form.Check
+                type="checkbox"
+                id="simular-rechazo"
+                name="simularRechazo"
+                label="Simular pago rechazado (para probar la vista de pago fallido)"
+                checked={datos.simularRechazo}
+                onChange={handleChange}
+              />
+            </div>
 
-            <div className="d-flex flex-wrap gap-2 mt-4">
-              <button type="submit" className="btn btn-primary" data-testid="btn-confirmar-pago">
-                💳 Confirmar y Pagar
-              </button>
-              <Link to="/carrito" className="btn btn-secondary">
-                &larr; Volver al Carrito
+            <div className="d-flex justify-content-between align-items-center mt-4">
+              <Link to="/carrito" className="btn btn-outline-secondary">
+                &larr; Volver al carrito
               </Link>
+              <button
+                type="submit"
+                className="btn btn-primary px-4 py-2"
+                data-testid="btn-confirmar-pago"
+              >
+                Pagar y confirmar
+              </button>
             </div>
           </Form>
         </Col>
 
         <Col lg={5}>
-          <ResumenPedido items={items} subtotal={subtotal} iva={iva} total={totalConIva} />
+          <ResumenPedido
+            items={items}
+            subtotal={subtotal}
+            iva={iva}
+            total={totalConIva}
+          />
         </Col>
       </Row>
     </div>
