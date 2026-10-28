@@ -18,6 +18,8 @@ function CompraExitosa() {
   // Sin una orden (por ejemplo, entrando directo a la URL) no hay nada que mostrar
   if (!orden) return <Navigate to="/carrito" replace />;
 
+  const cuentaCliente = orden.usuario?.rut || orden.cliente?.rut;
+
   return (
     <div className="my-4" data-testid="compra-exitosa">
       <div className="alert alert-success p-4 mb-4" role="status">
@@ -26,7 +28,11 @@ function CompraExitosa() {
           Gracias {orden.cliente.nombre}. Tu número de orden es{' '}
           <strong data-testid="numero-orden">{orden.numero}</strong>.
         </p>
-        <p className="mb-0 small">Enviaremos el comprobante a {orden.cliente.correo}.</p>
+        <p className="mb-0 small" data-testid="confirmacion-cuenta-asociada">
+          {cuentaCliente
+            ? `Orden vinculada formalmente a la cuenta registrada (${cuentaCliente} · ${orden.cliente.correo}). Enviaremos el comprobante a tu casilla.`
+            : `Enviaremos el comprobante a ${orden.cliente.correo}.`}
+        </p>
       </div>
 
       <Row className="g-4">

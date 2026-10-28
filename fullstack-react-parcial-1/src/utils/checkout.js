@@ -6,6 +6,8 @@ export const TIPOS_ENTREGA = {
   RETIRO: 'retiro',
 };
 
+export const ORDENES_STORAGE_KEY = 'sonido_vivo_ordenes_v1';
+
 const REGEX_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function validarDatosEnvio(datos = {}) {
@@ -32,7 +34,10 @@ export function generarNumeroOrden(fecha = new Date()) {
   return `SV-${String(fecha.getTime()).slice(-6)}`;
 }
 
-export function crearOrden({ datos, items, subtotal, iva, total, fecha = new Date() }) {
+export function crearOrden({ datos, items, subtotal, iva, total, usuario = null, fecha = new Date() }) {
+  const rutUsuario = usuario?.rut || datos.rut || '';
+  const correoUsuario = usuario?.correo || datos.correo.trim();
+
   return {
     numero: generarNumeroOrden(fecha),
     fecha: fecha.toISOString(),
@@ -40,7 +45,16 @@ export function crearOrden({ datos, items, subtotal, iva, total, fecha = new Dat
       nombre: datos.nombre.trim(),
       apellidos: datos.apellidos.trim(),
       correo: datos.correo.trim(),
+      ...(rutUsuario ? { rut: rutUsuario } : {}),
     },
+    usuario: usuario
+      ? {
+          rut: usuario.rut,
+          correo: usuario.correo,
+          nombre: `${usuario.nombre || ''} ${usuario.apellidos || ''}`.trim(),
+          rol: usuario.rol || 'cliente',
+        }
+      : (datos.rut ? { rut: datos.rut, correo: correoUsuario } : null),
     entrega: {
       tipo: datos.tipoEntrega,
       direccion: datos.direccion || '',
@@ -53,4 +67,36 @@ export function crearOrden({ datos, items, subtotal, iva, total, fecha = new Dat
     iva,
     total,
   };
+}
+
+export function guardarOrdenStorage(orden) {
+  try {
+    const raw = localStorage.getItem(ORDENES_STORAGE_KEY);
+    const ordenes = raw ? JSON.parse(raw) : [];
+    ordenes.push(orden);
+    localStorage.setItem(ORDENES_STORAGE_KEY, JSON.stringify(ordenes));
+    return true;
+  } catch (error) {
+    console.error('Error al guardar la orden en localStorage:', error);
+    return false;
+  }
+}
+
+export function obtenerOrdenesStorage(identificadorUsuario = null) {
+  try {
+    const raw = localStorage.getItem(ORDENES_STORAGE_KEY);
+    const ordenes = raw ? JSON.parse(raw) : [];
+    if (!identificadorUsuario) return ordenes;
+    const filtro = String(identificadorUsuario).trim().toLowerCase();
+    return ordenes.filter(
+      (o) =>
+        (o.usuario?.rut && o.usuario.rut.toLowerCase() === filtro) ||
+        (o.usuario?.correo && o.usuario.correo.toLowerCase() === filtro) ||
+        (o.cliente?.correo && o.cliente.correo.toLowerCase() === filtro) ||
+        (o.cliente?.rut && o.cliente.rut.toLowerCase() === filtro)
+    );
+  } catch (error) {
+    console.error('Error al recuperar órdenes desde localStorage:', error);
+    return [];
+  }
 }
