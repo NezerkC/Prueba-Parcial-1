@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { REGIONES_CHILE } from '../data/regiones';
 import {
   validarRutChileno,
-  formatearRutChileno,
   validarEmailInstitucional,
   validarClave,
 } from '../utils/validaciones';
 
 function Registro() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get('redirect');
   const { registro } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -19,39 +20,17 @@ function Registro() {
     apellidos: '',
     correo: '',
     clave: '',
-    fechaNacimiento: '',
+    confirmarClave: '',
     region: '',
     comuna: '',
     direccion: '',
   });
 
-  const [errores, setErrores] = useState({});
   const [comunasDisponibles, setComunasDisponibles] = useState([]);
+  const [errores, setErrores] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleRutChange = (e) => {
-    const valorCrudo = e.target.value;
-    // Permite al usuario escribir mientras se actualiza el estado
-    setFormData((prev) => ({ ...prev, rut: valorCrudo }));
-
-    if (errores.rut) {
-      setErrores((prev) => ({ ...prev, rut: '' }));
-    }
-  };
-
-  const handleRutBlur = () => {
-    if (!formData.rut) return;
-    if (validarRutChileno(formData.rut)) {
-      setFormData((prev) => ({ ...prev, rut: formatearRutChileno(prev.rut) }));
-      setErrores((prev) => ({ ...prev, rut: '' }));
-    } else {
-      setErrores((prev) => ({
-        ...prev,
-        rut: 'Debe tener entre 7 y 9 dígitos con dígito verificador válido (Módulo 11).',
-      }));
-    }
-  };
-
+  // Manejador del cambio de región en cascada
   const handleRegionChange = (e) => {
     const regionId = e.target.value;
     const regionEncontrada = REGIONES_CHILE.find((r) => r.id === regionId);
@@ -95,16 +74,22 @@ function Registro() {
     }
 
     if (!formData.apellidos.trim() || formData.apellidos.trim().length > 100) {
-      nuevosErrores.apellidos = 'Los apellidos son obligatorios (máximo 100 caracteres).';
+      nuevosErrores.apellidos =
+        'Los apellidos son obligatorios (máximo 100 caracteres).';
     }
 
     if (!validarEmailInstitucional(formData.correo)) {
       nuevosErrores.correo =
-        'Solo se autorizan correos con dominios @duoc.cl, @profesor.duoc.cl o @gmail.com.';
+        'Ingresa un correo válido con dominio @duoc.cl, @profesor.duoc.cl o @gmail.com.';
     }
 
     if (!validarClave(formData.clave)) {
-      nuevosErrores.clave = 'La contraseña debe tener estrictamente entre 4 y 10 caracteres.';
+      nuevosErrores.clave =
+        'La contraseña debe tener estrictamente entre 4 y 10 caracteres.';
+    }
+
+    if (formData.clave !== formData.confirmarClave) {
+      nuevosErrores.confirmarClave = 'Las contraseñas no coinciden.';
     }
 
     if (!formData.region) {
@@ -115,8 +100,8 @@ function Registro() {
       nuevosErrores.comuna = 'Debes seleccionar una comuna.';
     }
 
-    if (!formData.direccion.trim() || formData.direccion.trim().length > 300) {
-      nuevosErrores.direccion = 'La dirección es obligatoria (máximo 300 caracteres).';
+    if (!formData.direccion.trim()) {
+      nuevosErrores.direccion = 'La dirección de despacho es obligatoria.';
     }
 
     setErrores(nuevosErrores);
@@ -134,7 +119,11 @@ function Registro() {
     registro(formData);
     setIsSubmitting(false);
 
-    navigate('/');
+    if (redirect) {
+      navigate(redirect);
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -149,6 +138,12 @@ function Registro() {
         </p>
       </header>
 
+      {redirect === '/checkout' && (
+        <div className="alert alert-warning py-2 px-3 mb-3 small" data-testid="alerta-registro-redirect-checkout">
+          🛒 Regístrate para completar tu orden en el Checkout. Tus productos seguirán guardados.
+        </div>
+      )}
+
       <form id="form-registro" onSubmit={handleSubmit} noValidate>
         {/* RUN / RUT */}
         <div className="form-group mb-3">
@@ -158,147 +153,146 @@ function Registro() {
             id="reg-rut"
             name="rut"
             placeholder="Ej: 19011022-K o 19011022K"
-            maxLength={12}
-            required
+            className={`form-control ${errores.rut ? 'is-invalid' : ''}`}
             value={formData.rut}
-            onChange={handleRutChange}
-            onBlur={handleRutBlur}
-            className={`form-control ${errores.rut ? 'input-error is-invalid' : ''}`}
-            aria-invalid={Boolean(errores.rut)}
-            aria-describedby={errores.rut ? 'error-rut' : undefined}
+            onChange={handleChange}
+            onBlur={() => {
+              if (formData.rut && !validarRutChileno(formData.rut)) {
+                setErrores((prev) => ({
+                  ...prev,
+                  rut: 'Debe tener entre 7 y 9 dígitos con dígito verificador válido (Módulo 11).',
+                }));
+              }
+            }}
             data-testid="input-registro-rut"
+            required
           />
           {errores.rut && (
-            <small className="error-msg show text-danger d-block mt-1" id="error-rut" role="alert">
+            <div className="invalid-feedback" data-testid="error-rut">
               {errores.rut}
-            </small>
+            </div>
           )}
         </div>
 
-        {/* Nombre y Apellidos (Bicolumnar) */}
-        <div className="form-row-2 mb-3">
-          <div className="form-group">
+        {/* Nombres y Apellidos */}
+        <div className="row g-2 mb-3">
+          <div className="col-md-6">
             <label htmlFor="reg-nombre">Nombre:</label>
             <input
               type="text"
               id="reg-nombre"
               name="nombre"
-              placeholder="Tu nombre"
-              maxLength={50}
-              required
+              placeholder="Ej: Juan"
+              className={`form-control ${errores.nombre ? 'is-invalid' : ''}`}
               value={formData.nombre}
               onChange={handleChange}
-              className={`form-control ${errores.nombre ? 'input-error is-invalid' : ''}`}
-              aria-invalid={Boolean(errores.nombre)}
               data-testid="input-registro-nombre"
+              required
             />
             {errores.nombre && (
-              <small className="error-msg show text-danger d-block mt-1" role="alert">
+              <div className="invalid-feedback" data-testid="error-nombre">
                 {errores.nombre}
-              </small>
+              </div>
             )}
           </div>
-
-          <div className="form-group">
+          <div className="col-md-6">
             <label htmlFor="reg-apellidos">Apellidos:</label>
             <input
               type="text"
               id="reg-apellidos"
               name="apellidos"
-              placeholder="Tus apellidos"
-              maxLength={100}
-              required
+              placeholder="Ej: Pérez González"
+              className={`form-control ${errores.apellidos ? 'is-invalid' : ''}`}
               value={formData.apellidos}
               onChange={handleChange}
-              className={`form-control ${errores.apellidos ? 'input-error is-invalid' : ''}`}
-              aria-invalid={Boolean(errores.apellidos)}
               data-testid="input-registro-apellidos"
+              required
             />
             {errores.apellidos && (
-              <small className="error-msg show text-danger d-block mt-1" role="alert">
+              <div className="invalid-feedback" data-testid="error-apellidos">
                 {errores.apellidos}
-              </small>
+              </div>
             )}
           </div>
         </div>
 
-        {/* Correo Electrónico Institucional / Gmail */}
+        {/* Correo Electrónico */}
         <div className="form-group mb-3">
           <label htmlFor="reg-correo">Correo Electrónico:</label>
           <input
             type="email"
             id="reg-correo"
             name="correo"
-            placeholder="usuario@duoc.cl o usuario@gmail.com"
-            maxLength={100}
-            required
-            autoComplete="email"
+            placeholder="nombre@duoc.cl"
+            className={`form-control ${errores.correo ? 'is-invalid' : ''}`}
             value={formData.correo}
             onChange={handleChange}
-            className={`form-control ${errores.correo ? 'input-error is-invalid' : ''}`}
-            aria-invalid={Boolean(errores.correo)}
             data-testid="input-registro-correo"
+            required
           />
           {errores.correo && (
-            <small className="error-msg show text-danger d-block mt-1" role="alert">
+            <div className="invalid-feedback" data-testid="error-correo">
               {errores.correo}
-            </small>
+            </div>
           )}
         </div>
 
-        {/* Contraseña */}
-        <div className="form-group mb-3">
-          <label htmlFor="reg-clave">Contraseña:</label>
-          <input
-            type="password"
-            id="reg-clave"
-            name="clave"
-            placeholder="Entre 4 y 10 caracteres"
-            maxLength={10}
-            required
-            autoComplete="new-password"
-            value={formData.clave}
-            onChange={handleChange}
-            className={`form-control ${errores.clave ? 'input-error is-invalid' : ''}`}
-            aria-invalid={Boolean(errores.clave)}
-            data-testid="input-registro-clave"
-          />
-          {errores.clave && (
-            <small className="error-msg show text-danger d-block mt-1" role="alert">
-              {errores.clave}
-            </small>
-          )}
+        {/* Contraseña y Confirmación */}
+        <div className="row g-2 mb-3">
+          <div className="col-md-6">
+            <label htmlFor="reg-clave">Contraseña (4-10 caracteres):</label>
+            <input
+              type="password"
+              id="reg-clave"
+              name="clave"
+              placeholder="Contraseña"
+              className={`form-control ${errores.clave ? 'is-invalid' : ''}`}
+              value={formData.clave}
+              onChange={handleChange}
+              data-testid="input-registro-clave"
+              required
+            />
+            {errores.clave && (
+              <div className="invalid-feedback" data-testid="error-clave">
+                {errores.clave}
+              </div>
+            )}
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="reg-confirmar-clave">Confirmar Contraseña:</label>
+            <input
+              type="password"
+              id="reg-confirmar-clave"
+              name="confirmarClave"
+              placeholder="Repetir contraseña"
+              className={`form-control ${errores.confirmarClave ? 'is-invalid' : ''}`}
+              value={formData.confirmarClave}
+              onChange={handleChange}
+              data-testid="input-registro-confirmar-clave"
+              required
+            />
+            {errores.confirmarClave && (
+              <div className="invalid-feedback" data-testid="error-confirmar-clave">
+                {errores.confirmarClave}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Fecha de Nacimiento (Opcional) */}
-        <div className="form-group mb-3">
-          <label htmlFor="reg-fecha">Fecha de Nacimiento (Opcional):</label>
-          <input
-            type="date"
-            id="reg-fecha"
-            name="fechaNacimiento"
-            value={formData.fechaNacimiento}
-            onChange={handleChange}
-            className="form-control"
-            data-testid="input-registro-fecha"
-          />
-        </div>
-
-        {/* Cascada dinámica de Región y Comuna */}
-        <div className="form-row-2 mb-3">
-          <div className="form-group">
-            <label htmlFor="select-region">Región:</label>
+        {/* Región y Comuna (Cascada Dinámica) */}
+        <div className="row g-2 mb-3">
+          <div className="col-md-6">
+            <label htmlFor="reg-region">Región:</label>
             <select
-              id="select-region"
+              id="reg-region"
               name="region"
+              className={`form-select ${errores.region ? 'is-invalid' : ''}`}
               value={formData.region}
               onChange={handleRegionChange}
-              required
-              className={`form-select ${errores.region ? 'input-error is-invalid' : ''}`}
-              aria-invalid={Boolean(errores.region)}
               data-testid="select-registro-region"
+              required
             >
-              <option value="">-- Selecciona Región --</option>
+              <option value="">Selecciona tu región</option>
               {REGIONES_CHILE.map((reg) => (
                 <option key={reg.id} value={reg.id}>
                   {reg.nombre}
@@ -306,83 +300,88 @@ function Registro() {
               ))}
             </select>
             {errores.region && (
-              <small className="error-msg show text-danger d-block mt-1" role="alert">
+              <div className="invalid-feedback" data-testid="error-region">
                 {errores.region}
-              </small>
+              </div>
             )}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="select-comuna">Comuna:</label>
+          <div className="col-md-6">
+            <label htmlFor="reg-comuna">Comuna:</label>
             <select
-              id="select-comuna"
+              id="reg-comuna"
               name="comuna"
+              className={`form-select ${errores.comuna ? 'is-invalid' : ''}`}
               value={formData.comuna}
               onChange={handleChange}
               disabled={comunasDisponibles.length === 0}
-              required
-              className={`form-select ${errores.comuna ? 'input-error is-invalid' : ''}`}
-              aria-invalid={Boolean(errores.comuna)}
               data-testid="select-registro-comuna"
+              required
             >
               <option value="">
                 {comunasDisponibles.length === 0
-                  ? '-- Primero elige una región --'
-                  : '-- Selecciona Comuna --'}
+                  ? 'Elige una región primero'
+                  : 'Selecciona tu comuna'}
               </option>
-              {comunasDisponibles.map((com) => (
-                <option key={com} value={com}>
-                  {com}
+              {comunasDisponibles.map((comuna) => (
+                <option key={comuna} value={comuna}>
+                  {comuna}
                 </option>
               ))}
             </select>
             {errores.comuna && (
-              <small className="error-msg show text-danger d-block mt-1" role="alert">
+              <div className="invalid-feedback" data-testid="error-comuna">
                 {errores.comuna}
-              </small>
+              </div>
             )}
           </div>
         </div>
 
-        {/* Dirección de Despacho */}
+        {/* Dirección de despacho */}
         <div className="form-group mb-3">
-          <label htmlFor="reg-direccion">Dirección de Despacho:</label>
+          <label htmlFor="reg-direccion">Dirección de Despacho (Calle, Número):</label>
           <input
             type="text"
             id="reg-direccion"
             name="direccion"
-            placeholder="Calle, número, depto, villa o sector"
-            maxLength={300}
-            required
+            placeholder="Ej: Av. Libertad 1234, Dpto 502"
+            className={`form-control ${errores.direccion ? 'is-invalid' : ''}`}
             value={formData.direccion}
             onChange={handleChange}
-            className={`form-control ${errores.direccion ? 'input-error is-invalid' : ''}`}
-            aria-invalid={Boolean(errores.direccion)}
             data-testid="input-registro-direccion"
+            required
           />
           {errores.direccion && (
-            <small className="error-msg show text-danger d-block mt-1" role="alert">
+            <div className="invalid-feedback" data-testid="error-direccion">
               {errores.direccion}
-            </small>
+            </div>
           )}
         </div>
 
+        {/* Botón Submit */}
         <button
           type="submit"
           className="btn btn-primary w-100 py-2 mt-2"
           disabled={isSubmitting}
           data-testid="btn-registro-submit"
         >
-          {isSubmitting ? 'Registrando...' : 'Completar Registro'}
+          {isSubmitting ? 'Registrando cuenta...' : 'Crear Cuenta'}
         </button>
-
-        <div className="mt-4 text-center text-muted small">
-          ¿Ya tienes cuenta?{' '}
-          <Link to="/login" className="fw-bold text-decoration-none">
-            Inicia sesión aquí &rarr;
-          </Link>
-        </div>
       </form>
+
+      <hr className="my-4" />
+
+      {/* Enlace a Login */}
+      <div className="text-center">
+        <p className="text-muted mb-2">¿Ya tienes una cuenta registrada?</p>
+        <Link
+          to={redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : '/login'}
+          className="btn btn-outline-primary"
+          data-testid="link-ir-login"
+        >
+          Iniciar Sesión
+        </Link>
+      </div>
     </div>
   );
 }

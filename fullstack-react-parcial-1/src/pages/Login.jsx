@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { validarEmailInstitucional, validarClave } from '../utils/validaciones';
 
 function Login() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get('redirect');
   const { login } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -59,7 +61,9 @@ function Login() {
     setIsSubmitting(false);
 
     if (resultado.exito) {
-      if (resultado.usuario.rol === 'admin') {
+      if (redirect) {
+        navigate(redirect);
+      } else if (resultado.usuario.rol === 'admin') {
         navigate('/admin');
       } else {
         navigate('/');
@@ -81,110 +85,102 @@ function Login() {
         </p>
       </header>
 
+      {redirect === '/checkout' && (
+        <div className="alert alert-warning py-2 px-3 mb-3 small" data-testid="alerta-redirect-checkout">
+          🛒 Inicia sesión para continuar con el pago de los artículos en tu carrito.
+        </div>
+      )}
+
       {errorServidor && (
         <div
-          className="alert alert-danger py-2 mb-3"
+          className="alert alert-danger"
           role="alert"
-          aria-live="polite"
           data-testid="login-server-error"
         >
           {errorServidor}
         </div>
       )}
 
-      <form id="form-login" onSubmit={handleSubmit} noValidate>
-        {/* Correo Electrónico */}
+      <form onSubmit={handleSubmit} noValidate>
+        {/* Campo Correo Electrónico */}
         <div className="form-group mb-3">
-          <label htmlFor="login-correo">Correo Electrónico:</label>
+          <label htmlFor="correo">Correo Electrónico:</label>
           <input
             type="email"
-            id="login-correo"
+            id="correo"
             name="correo"
+            className={`form-control ${errores.correo ? 'is-invalid' : ''}`}
             placeholder="ejemplo@duoc.cl"
-            maxLength={100}
-            required
-            autoComplete="username"
             value={formData.correo}
             onChange={handleChange}
-            className={`form-control ${errores.correo ? 'input-error is-invalid' : ''}`}
-            aria-invalid={Boolean(errores.correo)}
-            aria-describedby={errores.correo ? 'error-login-correo' : undefined}
             data-testid="input-correo"
+            required
           />
           {errores.correo && (
-            <small
-              className="error-msg show text-danger d-block mt-1"
-              id="error-login-correo"
-              role="alert"
-            >
+            <div className="invalid-feedback" data-testid="error-correo">
               {errores.correo}
-            </small>
+            </div>
           )}
         </div>
 
-        {/* Contraseña */}
+        {/* Campo Contraseña */}
         <div className="form-group mb-3">
-          <label htmlFor="login-pass">Contraseña:</label>
+          <label htmlFor="password">Contraseña:</label>
           <input
             type="password"
-            id="login-pass"
+            id="password"
             name="password"
+            className={`form-control ${errores.password ? 'is-invalid' : ''}`}
             placeholder="Entre 4 y 10 caracteres"
-            maxLength={10}
-            required
-            autoComplete="current-password"
             value={formData.password}
             onChange={handleChange}
-            className={`form-control ${errores.password ? 'input-error is-invalid' : ''}`}
-            aria-invalid={Boolean(errores.password)}
-            aria-describedby={errores.password ? 'error-login-pass' : undefined}
             data-testid="input-password"
+            required
           />
           {errores.password && (
-            <small
-              className="error-msg show text-danger d-block mt-1"
-              id="error-login-pass"
-              role="alert"
-            >
+            <div className="invalid-feedback" data-testid="error-password">
               {errores.password}
-            </small>
+            </div>
           )}
         </div>
 
+        {/* Botón de Envío */}
         <button
           type="submit"
           className="btn btn-primary w-100 py-2 mt-2"
           disabled={isSubmitting}
           data-testid="btn-login-submit"
         >
-          {isSubmitting ? 'Verificando...' : 'Ingresar al Sistema'}
+          {isSubmitting ? 'Iniciando sesión...' : 'Ingresar'}
         </button>
-
-        <div className="mt-4 text-center text-muted small">
-          ¿No tienes una cuenta registrada?{' '}
-          <Link to="/registro" className="fw-bold text-decoration-none">
-            Crear cuenta nueva &rarr;
-          </Link>
-        </div>
-
-        {/* Indicador de credenciales de prueba para el evaluador de Duoc UC */}
-        <div
-          className="mt-4 p-3 bg-light rounded border text-muted small"
-          data-testid="credenciales-demo"
-        >
-          <strong className="text-dark d-block mb-1">
-            Credenciales de prueba (Evaluación DSY1104):
-          </strong>
-          <div className="mb-1">
-            • <strong>Admin:</strong> <code>admin@profesor.duoc.cl</code> (Clave:{' '}
-            <code>123456</code>) &rarr; Redirige a Panel Admin.
-          </div>
-          <div>
-            • <strong>Cliente:</strong> <code>cliente@duoc.cl</code> o{' '}
-            <code>usuario@gmail.com</code> (Clave: <code>pass12</code>).
-          </div>
-        </div>
       </form>
+
+      <hr className="my-4" />
+
+      {/* Enlace a Registro */}
+      <div className="text-center">
+        <p className="text-muted mb-2">¿Aún no tienes una cuenta de cliente?</p>
+        <Link
+          to={redirect ? `/registro?redirect=${encodeURIComponent(redirect)}` : '/registro'}
+          className="btn btn-outline-primary"
+          data-testid="link-ir-registro"
+        >
+          Crear una Cuenta
+        </Link>
+      </div>
+
+      {/* Cuentas de Demostración para evaluación docente */}
+      <div className="mt-4 p-3 bg-light rounded border" data-testid="credenciales-demo">
+        <strong className="d-block mb-1 text-secondary">
+          Credenciales de Prueba (Evaluación Duoc UC):
+        </strong>
+        <small className="d-block text-muted">
+          <strong>Administrador:</strong> admin@profesor.duoc.cl / 123456
+        </small>
+        <small className="d-block text-muted">
+          <strong>Cliente:</strong> cliente@duoc.cl / pass12
+        </small>
+      </div>
     </div>
   );
 }

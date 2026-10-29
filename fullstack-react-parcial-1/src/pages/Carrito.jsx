@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { formatearPrecioCLP } from '../utils/finanzas';
 
 function Carrito() {
@@ -14,6 +15,7 @@ function Carrito() {
     iva,
     totalConIva,
   } = useCart();
+  const { isAuthenticated } = useAuth();
 
   const navigate = useNavigate();
   const [showVaciarModal, setShowVaciarModal] = useState(false);
@@ -24,7 +26,11 @@ function Carrito() {
   };
 
   const handleIrAlCheckout = () => {
-    navigate('/checkout');
+    if (!isAuthenticated) {
+      navigate('/login?redirect=/checkout');
+    } else {
+      navigate('/checkout');
+    }
   };
 
   if (items.length === 0) {
@@ -98,53 +104,45 @@ function Carrito() {
                                 alt={item.nombre}
                                 width="48"
                                 height="48"
-                                className="rounded object-fit-cover border"
+                                className="rounded object-fit-cover"
                               />
                             )}
                             <div>
-                              <strong className="d-block text-dark">{item.nombre}</strong>
-                              <small className="text-muted">
-                                {item.marca} · {item.codigo}
-                              </small>
+                              <strong className="d-block">{item.nombre}</strong>
+                              <small className="text-muted">Cód: {item.codigo}</small>
                             </div>
                           </div>
                         </td>
                         <td>{formatearPrecioCLP(item.precio)}</td>
                         <td>
-                          <div className="qty-control d-inline-flex align-items-center border rounded">
+                          <div className="d-flex align-items-center gap-2">
                             <button
                               type="button"
-                              className="qty-btn btn btn-sm px-2 py-0"
+                              className="btn btn-sm btn-outline-secondary"
                               onClick={() => updateQuantity(item.codigo, -1)}
-                              aria-label={`Disminuir cantidad de ${item.nombre}`}
+                              disabled={item.cantidad <= 1}
                               data-testid={`btn-disminuir-${item.codigo}`}
                             >
                               -
                             </button>
-                            <span
-                              className="qty-val px-2 fw-semibold"
-                              data-testid={`qty-val-${item.codigo}`}
-                            >
+                            <span className="fw-bold px-2" data-testid={`qty-val-${item.codigo}`}>
                               {item.cantidad}
                             </span>
                             <button
                               type="button"
-                              className="qty-btn btn btn-sm px-2 py-0"
+                              className="btn btn-sm btn-outline-secondary"
                               onClick={() => updateQuantity(item.codigo, 1)}
-                              aria-label={`Aumentar cantidad de ${item.nombre}`}
                               data-testid={`btn-aumentar-${item.codigo}`}
                             >
                               +
                             </button>
                           </div>
                         </td>
-                        <td className="fw-semibold text-dark">
-                          {formatearPrecioCLP(subtotalItem)}
-                        </td>
+                        <td className="fw-bold">{formatearPrecioCLP(subtotalItem)}</td>
                         <td>
                           <button
                             type="button"
-                            className="btn btn-outline-danger btn-sm"
+                            className="btn btn-link text-danger p-0"
                             onClick={() => removeFromCart(item.codigo)}
                             aria-label={`Eliminar ${item.nombre} del carrito`}
                             data-testid={`btn-eliminar-${item.codigo}`}
@@ -193,6 +191,12 @@ function Carrito() {
                 {formatearPrecioCLP(totalConIva)}
               </span>
             </div>
+
+            {!isAuthenticated && (
+              <div className="alert alert-info py-2 px-3 small mb-3" data-testid="aviso-auth-checkout">
+                ℹ️ Debes iniciar sesión para completar tu compra en el Checkout.
+              </div>
+            )}
 
             <button
               type="button"

@@ -3,16 +3,20 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import { AuthProvider } from '../context/AuthContext';
+import { CartProvider } from '../context/CartContext';
 
 function renderWithProviders(initialRoute = '/login') {
   return render(
     <MemoryRouter initialEntries={[initialRoute]}>
       <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<div>Panel Admin Mock</div>} />
-          <Route path="/" element={<div>Home Mock</div>} />
-        </Routes>
+        <CartProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={<div>Panel Admin Mock</div>} />
+            <Route path="/checkout" element={<div>Checkout Mock</div>} />
+            <Route path="/" element={<div>Home Mock</div>} />
+          </Routes>
+        </CartProvider>
       </AuthProvider>
     </MemoryRouter>
   );
@@ -83,5 +87,32 @@ describe('<Login />', () => {
         screen.getByText(/Credenciales inválidas. Verifica tu correo y contraseña/i)
       ).toBeInTheDocument();
     });
+  });
+
+  it('al iniciar sesión con parámetro ?redirect=/checkout navega al checkout con el carrito intacto', async () => {
+    localStorage.setItem(
+      'sonido_vivo_carrito_v1',
+      JSON.stringify([{ codigo: 'GE001', nombre: 'Guitarra', precio: 1000, cantidad: 1 }])
+    );
+
+    renderWithProviders('/login?redirect=/checkout');
+
+    expect(screen.getByTestId('alerta-redirect-checkout')).toBeInTheDocument();
+
+    const inputCorreo = screen.getByTestId('input-correo');
+    const inputPass = screen.getByTestId('input-password');
+    const submitBtn = screen.getByTestId('btn-login-submit');
+
+    fireEvent.change(inputCorreo, { target: { value: 'cliente@duoc.cl' } });
+    fireEvent.change(inputPass, { target: { value: 'pass12' } });
+    fireEvent.click(submitBtn);
+
+    await waitFor(() => {
+      expect(screen.getByText('Checkout Mock')).toBeInTheDocument();
+    });
+
+    const carritoGuardado = JSON.parse(localStorage.getItem('sonido_vivo_carrito_v1'));
+    expect(carritoGuardado).toHaveLength(1);
+    expect(carritoGuardado[0].codigo).toBe('GE001');
   });
 });
