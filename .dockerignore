@@ -1,0 +1,43 @@
+# Dependencias y compilados
+node_modules
+dist
+build
+coverage
+*.tsbuildinfo
+
+# Control de versiones
+.git
+.gitignore
+.github
+
+# Entornos y configuración de desarrollo
+.devcontainer
+.agents
+.vscode
+.idea
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Documentación y markdown
+docs
+*.md
+LICENSE
+
+# Scripts de automatización interna
+progreso.ps1
+
+# Logs y volcados
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Archivos de entorno local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

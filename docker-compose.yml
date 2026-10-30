@@ -1,0 +1,15 @@
+services:
+  sonido-vivo-frontend:
+    container_name: sonido-vivo-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3050:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:80/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
